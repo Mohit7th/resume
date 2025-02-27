@@ -198,7 +198,7 @@ export const resumeData = {
     workHistory: [
         {
             company: "Frooty Studios Pvt. Ltd",
-            title: "Full Stack Developer",
+            position: "Full Stack Developer",
             date: "2019 – present",
             reponsibilities: [
                 "Developed a white-labeling system to automate Chrome extension customization for clients.",
@@ -216,7 +216,7 @@ export const resumeData = {
         },
         {
             company: "Cyber Group Inc.",
-            title: "BI Engineer",
+            position: "BI Engineer",
             date: "2018 – 2019",
             reponsibilities: [
                 "Developed and optimized QlikView reports for data visualization.",
@@ -228,7 +228,7 @@ export const resumeData = {
         },
         {
             company: "Contata Solutions Pvt. Ltd",
-            title: "Jr. System Analyst",
+            position: "Jr. System Analyst",
             date: "2016 – 2018",
             reponsibilities: [
                 "Developed and managed ETL packages for data processing",

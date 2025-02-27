@@ -35,33 +35,42 @@ function Skills() {
         keyof typeof resumeData.skills
     >;
 
-    const tableHeader = header.map((header, index) => <th>{header}</th>);
-
-    const tableBody = header.map((col) =>
-        resumeData.skills[col].map((data) => (
-            <tr key={data._id}>
-                <td>{data.name}</td>
-                <td>{data.experience}</td>
-            </tr>
-        ))
-    );
-
-    return (
-        <div>
-            <table>
-                <thead>
-                    <tr>{tableHeader}</tr>
-                </thead>
-                <tbody>{tableBody}</tbody>
-            </table>
+    const tableBody = header.map((col) => (
+        <div key={col}> 
+            <h2>{col}</h2>
+            {resumeData.skills[col].map((data) => (
+                <ul key={data._id}>
+                    <li>{data.name}</li>
+                    <li>{data.experience}</li>
+                </ul>
+            ))}
         </div>
-    );
+    ));
+
+    return <div>{tableBody}</div>;
 }
 
 function Projects() {
-    return <div></div>;
+    const projects = resumeData.projects.professional.map((project: any) => (
+        <div key={project._id}>
+            <h2>{project.name}</h2>
+            <p>{project.description}</p>
+        </div>
+    ));
+    return <div>{projects}</div>;
 }
 
 function WorkHistory() {
-    return <div></div>;
+    const workHistory = resumeData.workHistory.map((work: any) => {
+        return (
+            <div key={work._id}>
+                <h2>{work.company}</h2>
+                <p><b>{work.position}</b></p>
+                {work.reponsibilities.map((resp: any) => (
+                    <p>{resp}</p>
+                ))}
+            </div>
+        );
+    });
+    return <div>{workHistory}</div>;
 }
