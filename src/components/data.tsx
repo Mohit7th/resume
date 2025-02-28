@@ -20,16 +20,19 @@ export const resumeData = {
                 name: "JavaScript",
                 experience: "5 years",
                 _id: "1",
+                image: ""
             },
             {
                 name: "TypeScript",
                 experience: "5 years",
                 _id: "2",
+                image: ""
             },
             {
                 name: "SQL",
                 experience: "5 years",
                 _id: "3",
+                image: ""
             },
         ],
         webTechnologies: [
@@ -37,26 +40,31 @@ export const resumeData = {
                 name: "HTML",
                 experience: "5 years",
                 _id: "4",
+                image: ""
             },
             {
                 name: "CSS",
                 experience: "5 years",
                 _id: "5",
+                image: ""
             },
             {
                 name: "SASS",
                 experience: "5 years",
                 _id: "6",
+                image: ""
             },
             {
                 name: "Bootstrap",
                 experience: "5 years",
                 _id: "7",
+                image: ""
             },
             {
                 name: "jQuery",
                 experience: "5 years",
                 _id: "8",
+                image: ""
             },
         ],
         frontendFrameworks: [
@@ -64,11 +72,13 @@ export const resumeData = {
                 name: "Angular",
                 experience: "5 years",
                 _id: "9",
+                image: ""
             },
             {
                 name: "React",
                 experience: "5 years",
                 _id: "10",
+                image: ""
             },
         ],
         backendFrameworks: [
@@ -76,11 +86,13 @@ export const resumeData = {
                 name: "Node.js",
                 experience: "5 years",
                 _id: "11",
+                image: ""
             },
             {
                 name: "Express.js",
                 experience: "5 years",
                 _id: "12",
+                image: ""
             },
         ],
         databases: [
@@ -88,16 +100,19 @@ export const resumeData = {
                 name: "MongoDB",
                 experience: "5 years",
                 _id: "13",
+                image: ""
             },
             {
                 name: "MySQL",
                 experience: "5 years",
                 _id: "14",
+                image: ""
             },
             {
                 name: "SQL Server",
                 experience: "5 years",
                 _id: "15",
+                image: ""
             },
         ],
         tools: [
@@ -105,21 +120,25 @@ export const resumeData = {
                 name: "Git",
                 experience: "5 years",
                 _id: "16",
+                image: ""
             },
             {
                 name: "JIRA",
                 experience: "5 years",
                 _id: "17",
+                image: ""
             },
             {
                 name: "Postman",
                 experience: "5 years",
                 _id: "18",
+                image: ""
             },
             {
                 name: "Visual Studio Code",
                 experience: "5 years",
                 _id: "19",
+                image: ""
             },
         ],
         businessIntelligence: [
@@ -127,26 +146,31 @@ export const resumeData = {
                 name: "SSIS",
                 experience: "5 years",
                 _id: "20",
+                image: ""
             },
             {
                 name: "SSRS",
                 experience: "5 years",
                 _id: "21",
+                image: ""
             },
             {
                 name: "Power BI",
                 experience: "5 years",
                 _id: "22",
+                image: ""
             },
             {
                 name: "Crystal Reports",
                 experience: "5 years",
                 _id: "23",
+                image: ""
             },
             {
                 name: "Qlik View",
                 experience: "5 years",
                 _id: "24",
+                image: ""
             },
         ],
     },
@@ -199,7 +223,9 @@ export const resumeData = {
         {
             company: "Frooty Studios Pvt. Ltd",
             position: "Full Stack Developer",
-            date: "2019 – present",
+            startDate: "2019-01-01",
+            endDate: null,
+            website: "https://www.frootystudios.com",
             reponsibilities: [
                 "Developed a white-labeling system to automate Chrome extension customization for clients.",
                 "Managed daily communication with UK-based clients for project coordination",
@@ -217,7 +243,9 @@ export const resumeData = {
         {
             company: "Cyber Group Inc.",
             position: "BI Engineer",
-            date: "2018 – 2019",
+            startDate: "2018-01-01",
+            endDate: "2019-01-01",
+            website: "https://www.cybergroup.in",
             reponsibilities: [
                 "Developed and optimized QlikView reports for data visualization.",
                 "Debugged and implemented MSBI ETL packages for efficient data processing",
@@ -229,7 +257,9 @@ export const resumeData = {
         {
             company: "Contata Solutions Pvt. Ltd",
             position: "Jr. System Analyst",
-            date: "2016 – 2018",
+            startDate: "2016-01-01",
+            endDate: "2018-01-01",
+            website: "https://www.contata.com",
             reponsibilities: [
                 "Developed and managed ETL packages for data processing",
                 "Optimized T-SQL stored procedures for improved performance",
