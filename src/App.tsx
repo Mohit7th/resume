@@ -15,11 +15,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-{
-    /* <div className="App @container">
-<header className="App-header">
-  <MainLayout/>
-</header>
-</div> */
-}
