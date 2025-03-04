@@ -1,9 +1,5 @@
 import React from "react";
-import { useContext } from "react";
-import {
-    UserDataContext,
-    UserDataDispatchContext,
-} from "../components/UserContext";
+import { useUserData, useUserDataDispatch } from "../components/UserContext";
 import { UserDataProvider } from "../components/UserContext";
 
 const AdminPanel: React.FC = () => {
@@ -21,8 +17,8 @@ const AdminPanel: React.FC = () => {
 
 function TitleHeaderBlock() {
     const [text, setText] = React.useState("");
-    const userdata = useContext(UserDataContext);
-    const dispatch = useContext(UserDataDispatchContext);
+    const userdata = useUserData();
+    const dispatch = useUserDataDispatch();
 
     function updateTitleHeader() {
         if (dispatch) {
@@ -50,8 +46,8 @@ function TitleHeaderBlock() {
 
 function SummaryBlock() {
     const [text, setText] = React.useState("");
-    const userdata = useContext(UserDataContext);
-    const dispatch = useContext(UserDataDispatchContext);
+    const userdata = useUserData();
+    const dispatch = useUserDataDispatch();
 
     function updateSummary() {
         if (dispatch) {
@@ -78,8 +74,8 @@ function SummaryBlock() {
 }
 function SkillsBlock() {
     const [text, setText] = React.useState("");
-    const userdata = useContext(UserDataContext);
-    const dispatch = useContext(UserDataDispatchContext);
+    const userdata = useUserData();
+    const dispatch = useUserDataDispatch();
 
     function updateSkills() {
         if (dispatch) {
@@ -106,8 +102,8 @@ function SkillsBlock() {
 }
 function ProjectsBlock() {
     const [text, setText] = React.useState("");
-    const userdata = useContext(UserDataContext);
-    const dispatch = useContext(UserDataDispatchContext);
+    const userdata = useUserData();
+    const dispatch = useUserDataDispatch();
 
     function updateProjects() {
         if (dispatch) {
@@ -134,8 +130,8 @@ function ProjectsBlock() {
 }
 function WorkHistoryBlock() {
     const [text, setText] = React.useState("");
-    const userdata = useContext(UserDataContext);
-    const dispatch = useContext(UserDataDispatchContext);
+    const userdata = useUserData();
+    const dispatch = useUserDataDispatch();
 
     function updateWorkHistory() {
         if (dispatch) {

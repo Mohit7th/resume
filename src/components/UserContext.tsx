@@ -1,4 +1,10 @@
-import { createContext, Dispatch, useReducer, ReactNode } from "react";
+import {
+    createContext,
+    Dispatch,
+    useReducer,
+    ReactNode,
+    useContext,
+} from "react";
 import { resumeData } from "./data";
 
 // Define action type
@@ -14,6 +20,14 @@ export const UserDataContext = createContext<UserDataState | null>(null);
 export const UserDataDispatchContext = createContext<UserDataDispatch | null>(
     null
 );
+
+export function useUserData() {
+    return useContext(UserDataContext);
+}
+
+export function useUserDataDispatch() {
+    return useContext(UserDataDispatchContext);
+}
 
 // Define props type
 interface UserDataProviderProps {
