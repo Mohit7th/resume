@@ -1,7 +1,7 @@
 import "./App.css";
 import MainLayout from "./components/MainLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminPanel from "./pages/AdminPanel";
+import AdminPanel from "./pages/Admin Panel/AdminPanel";
 
 const App: React.FC = () => {
     return (
