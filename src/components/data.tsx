@@ -7,10 +7,24 @@ export const resumeData = {
             phone: "+91 7835816795",
             address: "Dehradun, India",
         },
+        image: "https://avatars.githubusercontent.com/u/47273253?v=4",
+        socials: [
+            {
+                name: "LinkedIn",
+                url: "https://www.linkedin.com/in/mohit-uniyal-7b1b3b1a7/",
+                _id: "35",
+            },
+            {
+                name: "GitHub",
+                url: "",
+                _id: "36",
+            },
+        ],
         _id: "34",
     },
-    summary:{
-       detailed: "Full Stack Developer with 8 years of experience, including 5 years in MEAN stack (MongoDB, Express.js, Angular, Node.js) and 3 years in MSBI (Microsoft Business Intelligence). Skilled in building scalable web applications, developing RESTful APIs, browser extensions, and integrating third-party APIs. Experienced in data visualization, automation, and performance optimization. Strong in problem-solving, team mentoring, and client communication. Currently expanding expertise in React.js while thriving in agile environments.",
+    summary: {
+        detailed:
+            "Full Stack Developer with 8 years of experience, including 5 years in MEAN stack (MongoDB, Express.js, Angular, Node.js) and 3 years in MSBI (Microsoft Business Intelligence). Skilled in building scalable web applications, developing RESTful APIs, browser extensions, and integrating third-party APIs. Experienced in data visualization, automation, and performance optimization. Strong in problem-solving, team mentoring, and client communication. Currently expanding expertise in React.js while thriving in agile environments.",
         short: "",
         _id: "33",
     },
@@ -20,19 +34,19 @@ export const resumeData = {
                 name: "JavaScript",
                 experience: "5 years",
                 _id: "1",
-                image: ""
+                image: "",
             },
             {
                 name: "TypeScript",
                 experience: "5 years",
                 _id: "2",
-                image: ""
+                image: "",
             },
             {
                 name: "SQL",
                 experience: "5 years",
                 _id: "3",
-                image: ""
+                image: "",
             },
         ],
         webTechnologies: [
@@ -40,31 +54,31 @@ export const resumeData = {
                 name: "HTML",
                 experience: "5 years",
                 _id: "4",
-                image: ""
+                image: "",
             },
             {
                 name: "CSS",
                 experience: "5 years",
                 _id: "5",
-                image: ""
+                image: "",
             },
             {
                 name: "SASS",
                 experience: "5 years",
                 _id: "6",
-                image: ""
+                image: "",
             },
             {
                 name: "Bootstrap",
                 experience: "5 years",
                 _id: "7",
-                image: ""
+                image: "",
             },
             {
                 name: "jQuery",
                 experience: "5 years",
                 _id: "8",
-                image: ""
+                image: "",
             },
         ],
         frontendFrameworks: [
@@ -72,13 +86,13 @@ export const resumeData = {
                 name: "Angular",
                 experience: "5 years",
                 _id: "9",
-                image: ""
+                image: "",
             },
             {
                 name: "React",
                 experience: "5 years",
                 _id: "10",
-                image: ""
+                image: "",
             },
         ],
         backendFrameworks: [
@@ -86,13 +100,13 @@ export const resumeData = {
                 name: "Node.js",
                 experience: "5 years",
                 _id: "11",
-                image: ""
+                image: "",
             },
             {
                 name: "Express.js",
                 experience: "5 years",
                 _id: "12",
-                image: ""
+                image: "",
             },
         ],
         databases: [
@@ -100,19 +114,19 @@ export const resumeData = {
                 name: "MongoDB",
                 experience: "5 years",
                 _id: "13",
-                image: ""
+                image: "",
             },
             {
                 name: "MySQL",
                 experience: "5 years",
                 _id: "14",
-                image: ""
+                image: "",
             },
             {
                 name: "SQL Server",
                 experience: "5 years",
                 _id: "15",
-                image: ""
+                image: "",
             },
         ],
         tools: [
@@ -120,25 +134,25 @@ export const resumeData = {
                 name: "Git",
                 experience: "5 years",
                 _id: "16",
-                image: ""
+                image: "",
             },
             {
                 name: "JIRA",
                 experience: "5 years",
                 _id: "17",
-                image: ""
+                image: "",
             },
             {
                 name: "Postman",
                 experience: "5 years",
                 _id: "18",
-                image: ""
+                image: "",
             },
             {
                 name: "Visual Studio Code",
                 experience: "5 years",
                 _id: "19",
-                image: ""
+                image: "",
             },
         ],
         businessIntelligence: [
@@ -146,31 +160,31 @@ export const resumeData = {
                 name: "SSIS",
                 experience: "5 years",
                 _id: "20",
-                image: ""
+                image: "",
             },
             {
                 name: "SSRS",
                 experience: "5 years",
                 _id: "21",
-                image: ""
+                image: "",
             },
             {
                 name: "Power BI",
                 experience: "5 years",
                 _id: "22",
-                image: ""
+                image: "",
             },
             {
                 name: "Crystal Reports",
                 experience: "5 years",
                 _id: "23",
-                image: ""
+                image: "",
             },
             {
                 name: "Qlik View",
                 experience: "5 years",
                 _id: "24",
-                image: ""
+                image: "",
             },
         ],
     },
