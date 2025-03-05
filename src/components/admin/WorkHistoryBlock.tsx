@@ -4,7 +4,8 @@ import { WorkHistory } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box } from "@mui/material";
+import { Box, Divider, Stack, TextField } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
@@ -47,63 +48,76 @@ export default function WorkHistoryBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m:5, p: 2, border: "1px dashed grey" }}>
-            <h2>Work History</h2>
+        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+            <Grid container spacing={2}>
+                <Grid size={6}>
+                    <h2>Work History</h2>
+                </Grid>
+                <Grid size={6}>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={updateWorkHistory}
+                    >
+                        Update
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                {workHistory.map((detail, index) => (
+                    <Grid size={4} key={detail._id}>
+                        <Stack spacing={2} >
+                            <TextField
+                                id="outlined-basic"
+                                label="Company:"
+                                variant="outlined"
+                                size="small"
+                                value={detail.company}
+                                onChange={(e) =>
+                                    handleWorkHistoryChange(
+                                        index,
+                                        "company",
+                                        e.target.value
+                                    )
+                                }
+                            />
 
-            {workHistory.map((detail, index) => (
-                <div key={detail._id} className="work-item">
-                    <label>Company:</label>
-                    <input
-                        type="text"
-                        value={detail.company}
-                        onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "company",
-                                e.target.value
-                            )
-                        }
-                    />
+                            <TextField
+                                id="outlined-basic"
+                                label="Position:"
+                                variant="outlined"
+                                size="small"
+                                value={detail.position}
+                                onChange={(e) =>
+                                    handleWorkHistoryChange(
+                                        index,
+                                        "position",
+                                        e.target.value
+                                    )
+                                }
+                            />
 
-                    <label>Position:</label>
-                    <input
-                        type="text"
-                        value={detail.position}
-                        onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "position",
-                                e.target.value
-                            )
-                        }
-                    />
-
-                    <label>Website:</label>
-                    <input
-                        type="text"
-                        value={detail.website}
-                        onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "website",
-                                e.target.value
-                            )
-                        }
-                    />
-
-                    <IconButton aria-label="delete" color="error">
-                        <DeleteIcon />
-                    </IconButton>
-                </div>
-            ))}
-
-            <Button
-                variant="contained"
-                size="small"
-                onClick={updateWorkHistory}
-            >
-                Update
-            </Button>
+                            <TextField
+                                id="outlined-basic"
+                                label="Website:"
+                                variant="outlined"
+                                size="small"
+                                value={detail.website}
+                                onChange={(e) =>
+                                    handleWorkHistoryChange(
+                                        index,
+                                        "website",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <IconButton aria-label="delete" color="error">
+                                <DeleteIcon />
+                            </IconButton>
+                        </Stack>
+                    </Grid>
+                ))}
+            </Grid>
         </Box>
     );
 }

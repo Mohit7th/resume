@@ -4,7 +4,7 @@ import { TitleHeader } from "../../types";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 export function TitleHeaderBlock() {
@@ -58,7 +58,7 @@ export function TitleHeaderBlock() {
                 <Grid size={12}>
                     <h2>Title Header</h2>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={12}>
                     <TextField
                         id="outlined-basic"
                         label="Name:"
@@ -70,7 +70,7 @@ export function TitleHeaderBlock() {
                         }
                     />
                 </Grid>
-                <Grid size={4}>
+                <Grid size={12}>
                     <TextField
                         id="outlined-basic"
                         label="Title:"
@@ -82,7 +82,7 @@ export function TitleHeaderBlock() {
                         }
                     />
                 </Grid>
-                <Grid size={4}>
+                <Grid size={12}>
                     <Button
                         variant="contained"
                         size="small"

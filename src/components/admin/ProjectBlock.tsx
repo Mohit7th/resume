@@ -4,7 +4,7 @@ import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 export default function ProjectsBlock() {
@@ -67,14 +67,16 @@ export default function ProjectsBlock() {
                     </Button>
                 </Grid>
                 {Object.keys(projects).map((categoryKey) => (
-                    <Grid size={6} key={categoryKey}>
+                    <Grid size={{ xs: 12, md: 6 }} key={categoryKey}>
                         <h3>{categoryKey.replace("-", " ")}</h3>
                         {projects[categoryKey as ProjectCategory].map(
                             (project, index) => (
-                                <div key={project._id} className="project-item">
-                                    <label>Project Name:</label>
-                                    <input
-                                        type="text"
+                                <Stack spacing={2} key={project._id}>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Project Name:"
+                                        variant="outlined"
+                                        size="small"
                                         value={project.name}
                                         onChange={(e) =>
                                             handleProjectChange(
@@ -86,22 +88,11 @@ export default function ProjectsBlock() {
                                         }
                                     />
 
-                                    <label>Description:</label>
-                                    <textarea
-                                        value={project.description}
-                                        onChange={(e) =>
-                                            handleProjectChange(
-                                                index,
-                                                categoryKey as ProjectCategory,
-                                                "description",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-
-                                    <label>URL:</label>
-                                    <input
-                                        type="text"
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="URL:"
+                                        variant="outlined"
+                                        size="small"
                                         value={project.url}
                                         onChange={(e) =>
                                             handleProjectChange(
@@ -113,13 +104,30 @@ export default function ProjectsBlock() {
                                         }
                                     />
 
+                                    <TextField
+                                        fullWidth
+                                        label="Description: "
+                                        multiline
+                                        rows={4}
+                                        value={project.description}
+                                        margin="dense"
+                                        defaultValue="Default Value"
+                                        onChange={(e) =>
+                                            handleProjectChange(
+                                                index,
+                                                categoryKey as ProjectCategory,
+                                                "description",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
                                     <IconButton
                                         aria-label="delete"
                                         color="error"
                                     >
                                         <DeleteIcon />
                                     </IconButton>
-                                </div>
+                                </Stack>
                             )
                         )}
                     </Grid>

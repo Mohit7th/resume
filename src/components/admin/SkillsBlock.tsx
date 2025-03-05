@@ -4,7 +4,7 @@ import { Skills, Skill } from "../../types"; // Import correct types
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, InputAdornment, TextField } from "@mui/material";
+import { Box, InputAdornment, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 export default function SkillsBlock() {
@@ -61,7 +61,7 @@ export default function SkillsBlock() {
 
     return (
         <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
-            <Grid container spacing={2}>
+            <Grid container justifyContent="space-between">
                 <Grid size={6}>
                     <h2>Skills</h2>
                 </Grid>
@@ -74,12 +74,18 @@ export default function SkillsBlock() {
                         Update
                     </Button>
                 </Grid>
+            </Grid>
+            <Grid container spacing={2}>
                 {Object.keys(skills).map((skillKey) => (
-                    <Grid size={4} key={skillKey}>
+                    <Grid size={{ xs: 12, md: 4 }} key={skillKey}>
                         <h3>{skillKey.replace("-", " ")}</h3>
                         {skills[skillKey as SkillCategory].map(
                             (tech, index) => (
-                                <div key={tech._id} className="skill-item">
+                                <Stack
+                                    direction="row"
+                                    spacing={2}
+                                    key={tech._id}
+                                >
                                     <TextField
                                         id="outlined-basic"
                                         label="Name:"
@@ -95,22 +101,6 @@ export default function SkillsBlock() {
                                             )
                                         }
                                     />
-
-                                    {/* <TextField
-                                            label="Experience"
-                                            id="outlined-start-adornment"
-                                            type="number"
-                                            margin="dense"
-                                            slotProps={{
-                                                input: {
-                                                    endAdornment: (
-                                                        <InputAdornment position="start">
-                                                            Years
-                                                        </InputAdornment>
-                                                    ),
-                                                },
-                                            }}
-                                        /> */}
 
                                     <TextField
                                         id="outlined-number"
@@ -129,7 +119,7 @@ export default function SkillsBlock() {
                                     >
                                         <DeleteIcon />
                                     </IconButton>
-                                </div>
+                                </Stack>
                             )
                         )}
                     </Grid>
