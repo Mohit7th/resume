@@ -3,6 +3,7 @@ import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Summary } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
 import { Box, TextField } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 export default function SummaryBlock() {
     const userdata = useUserData();
@@ -44,33 +45,50 @@ export default function SummaryBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m:5, p: 2, border: "1px dashed grey" }}>
-            <h2>Summary</h2>
+        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+            <Grid container spacing={2}>
+                <Grid size={6}>
+                    <h2>Summary</h2>
+                </Grid>
+                <Grid size={6}>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={updateSummary}
+                    >
+                        Update
+                    </Button>
+                </Grid>
 
-            <TextField fullWidth 
-                label="Short Summary: "
-                multiline
-                rows={4}
-                value={summary.short}
-                margin="dense"
-                defaultValue="Default Value"
-                onChange={(e) => handleSummaryChange("short", e.target.value)}
-            />
-
-            <TextField fullWidth 
-                label="Detailed Summary: "
-                multiline
-                rows={4}
-                value={summary.detailed}
-                margin="dense"
-                defaultValue="Default Value"
-                onChange={(e) =>
-                    handleSummaryChange("detailed", e.target.value)
-                }
-            />
-            <Button variant="contained" size="small" onClick={updateSummary}>
-                Update
-            </Button>
+                <Grid size={12}>
+                    <TextField
+                        fullWidth
+                        label="Short Summary: "
+                        multiline
+                        rows={4}
+                        value={summary.short}
+                        margin="dense"
+                        defaultValue="Default Value"
+                        onChange={(e) =>
+                            handleSummaryChange("short", e.target.value)
+                        }
+                    />
+                </Grid>
+                <Grid size={12}>
+                    <TextField
+                        fullWidth
+                        label="Detailed Summary: "
+                        multiline
+                        rows={4}
+                        value={summary.detailed}
+                        margin="dense"
+                        defaultValue="Default Value"
+                        onChange={(e) =>
+                            handleSummaryChange("detailed", e.target.value)
+                        }
+                    />
+                </Grid>
+            </Grid>
         </Box>
     );
 }

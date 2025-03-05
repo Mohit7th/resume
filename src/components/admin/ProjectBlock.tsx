@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 export default function ProjectsBlock() {
     const userdata = useUserData();
@@ -52,67 +53,78 @@ export default function ProjectsBlock() {
 
     return (
         <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
-            <h2>Projects</h2>
+            <Grid container spacing={2}>
+                <Grid size={6}>
+                    <h2>Projects</h2>
+                </Grid>
+                <Grid size={6}>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={updateProjects}
+                    >
+                        Update
+                    </Button>
+                </Grid>
+                {Object.keys(projects).map((categoryKey) => (
+                    <Grid size={6} key={categoryKey}>
+                        <h3>{categoryKey.replace("-", " ")}</h3>
+                        {projects[categoryKey as ProjectCategory].map(
+                            (project, index) => (
+                                <div key={project._id} className="project-item">
+                                    <label>Project Name:</label>
+                                    <input
+                                        type="text"
+                                        value={project.name}
+                                        onChange={(e) =>
+                                            handleProjectChange(
+                                                index,
+                                                categoryKey as ProjectCategory,
+                                                "name",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-            {Object.keys(projects).map((categoryKey) => (
-                <div key={categoryKey}>
-                    <h3>{categoryKey.replace("-", " ")}</h3>
-                    {projects[categoryKey as ProjectCategory].map(
-                        (project, index) => (
-                            <div key={project._id} className="project-item">
-                                <label>Project Name:</label>
-                                <input
-                                    type="text"
-                                    value={project.name}
-                                    onChange={(e) =>
-                                        handleProjectChange(
-                                            index,
-                                            categoryKey as ProjectCategory,
-                                            "name",
-                                            e.target.value
-                                        )
-                                    }
-                                />
+                                    <label>Description:</label>
+                                    <textarea
+                                        value={project.description}
+                                        onChange={(e) =>
+                                            handleProjectChange(
+                                                index,
+                                                categoryKey as ProjectCategory,
+                                                "description",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-                                <label>Description:</label>
-                                <textarea
-                                    value={project.description}
-                                    onChange={(e) =>
-                                        handleProjectChange(
-                                            index,
-                                            categoryKey as ProjectCategory,
-                                            "description",
-                                            e.target.value
-                                        )
-                                    }
-                                />
+                                    <label>URL:</label>
+                                    <input
+                                        type="text"
+                                        value={project.url}
+                                        onChange={(e) =>
+                                            handleProjectChange(
+                                                index,
+                                                categoryKey as ProjectCategory,
+                                                "url",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-                                <label>URL:</label>
-                                <input
-                                    type="text"
-                                    value={project.url}
-                                    onChange={(e) =>
-                                        handleProjectChange(
-                                            index,
-                                            categoryKey as ProjectCategory,
-                                            "url",
-                                            e.target.value
-                                        )
-                                    }
-                                />
-
-                                <IconButton aria-label="delete" color="error">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
-                        )
-                    )}
-                </div>
-            ))}
-
-            <Button variant="contained" size="small" onClick={updateProjects}>
-                Update
-            </Button>
+                                    <IconButton
+                                        aria-label="delete"
+                                        color="error"
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </div>
+                            )
+                        )}
+                    </Grid>
+                ))}
+            </Grid>
         </Box>
     );
 }
