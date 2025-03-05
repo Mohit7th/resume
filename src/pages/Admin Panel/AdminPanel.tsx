@@ -1,10 +1,10 @@
 import React from "react";
 import { UserDataProvider } from "../../components/UserContext";
-import { TitleHeaderBlock } from "./AddHeaderBlock";
-import SummaryBlock from "./AddSummaryBlock";
-import SkillsBlock from "./AddSkillsBlock";
-import ProjectsBlock from "./AddProjectBlock";
-import WorkHistoryBlock from "./AddWorkHistoryBlock";
+import { TitleHeaderBlock } from "./TitleHeaderBlock";
+import SummaryBlock from "./SummaryBlock";
+import SkillsBlock from "./SkillsBlock";
+import ProjectsBlock from "./ProjectBlock";
+import WorkHistoryBlock from "./WorkHistoryBlock";
 
 const AdminPanel: React.FC = () => {
     return (
