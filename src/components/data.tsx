@@ -8,6 +8,7 @@ export const resumeData: ResumeData = {
             email: "m7uniyal@gmail.com",
             phone: "+91 7835816795",
             address: "Dehradun, India",
+            _id: "38"
         },
         image: "https://avatars.githubusercontent.com/u/47273253?v=4",
         socials: [
@@ -233,7 +234,13 @@ export const resumeData: ResumeData = {
                 _id: "29",
             },
         ],
-        personalProjects: [],
+        personalProjects: [{
+            name: "REACT JS Resume",
+            description: "The current resume site with admin panel to update resume",
+            technologies: ["REACT.js", "Node.js", "Express.js", "MongoDB" ],
+            url: "",
+            _id: "37"
+        }],
     },
     workHistory: [
         {

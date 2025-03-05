@@ -1,99 +1,106 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../components/UserContext";
+import { Projects, Project } from "../../types"; // Import correct types
 
 export default function ProjectsBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
 
-    const [projects, setProjects] = React.useState(userdata.projects);
-    type ProjectCategory = keyof typeof projects;
+    // Ensure projects are properly initialized
+    const [projects, setProjects] = useState<Projects>(
+        userdata?.projects || { professional: [], personalProjects: [] }
+    );
 
+    type ProjectCategory = keyof Projects; // Ensures only valid categories
+
+    // Sync projects state when userdata changes
+    useEffect(() => {
+        if (userdata?.projects) {
+            setProjects(userdata.projects);
+        }
+    }, [userdata]);
 
     function updateProjects() {
-        if (dispatch) {
-            dispatch({
-                type: "UPDATE_PROJECTS",
-                payload: projects,
-            });
-        }
-    }
-
-    function handleProjectChange(
-        _index: number,
-        category: ProjectCategory,
-        field: string,
-        newValue: string
-    ) {
-        const categoryArray = projects[category];
-
-        // Ensure the block exists and is an array
-        if (!Array.isArray(categoryArray)) {
-            console.error(`Invalid block: ${category}`);
+        if (!dispatch) {
+            console.error("Dispatch function is not available");
             return;
         }
 
-        const updatedProjects = categoryArray.map((project, index) =>
-            index === _index ? { ...project, [field]: newValue } : project
-        );
+        dispatch({
+            type: "UPDATE_PROJECTS",
+            payload: projects, // ✅ Correctly structured payload
+        });
+    }
 
-        setProjects((prevCategory) => ({
-            ...prevCategory,
-            [category]: updatedProjects,
+    function handleProjectChange(
+        index: number,
+        category: ProjectCategory,
+        field: keyof Project, // ✅ Ensures only valid project fields
+        newValue: string
+    ) {
+        setProjects((prevProjects) => ({
+            ...prevProjects,
+            [category]: prevProjects[category].map((project, i) =>
+                i === index ? { ...project, [field]: newValue } : project
+            ),
         }));
     }
-    const categoryKeys = Object.keys(projects);
+
     return (
         <div className="update-block">
             <h2>Projects</h2>
-            {categoryKeys.map((categoryKey) =>
-                projects[categoryKey as ProjectCategory].map(
-                    (project, index) => (
-                        <div key={project._id}>
-                            <label>Project Name:</label>
-                            <input
-                                type="text"
-                                value={project.name}
-                                onChange={(e) =>
-                                    handleProjectChange(
-                                        index,
-                                        categoryKey as ProjectCategory,
-                                        "name",
-                                        e.target.value
-                                    )
-                                }
-                            />
 
-                            <label>Description: </label>
-                            <input
-                                type="text"
-                                value={project.description}
-                                onChange={(e) =>
-                                    handleProjectChange(
-                                        index,
-                                        categoryKey as ProjectCategory,
-                                        "description",
-                                        e.target.value
-                                    )
-                                }
-                            />
+            {Object.keys(projects).map((categoryKey) => (
+                <div key={categoryKey}>
+                    <h3>{categoryKey.replace("-", " ")}</h3>
+                    {projects[categoryKey as ProjectCategory].map(
+                        (project, index) => (
+                            <div key={project._id} className="project-item">
+                                <label>Project Name:</label>
+                                <input
+                                    type="text"
+                                    value={project.name}
+                                    onChange={(e) =>
+                                        handleProjectChange(
+                                            index,
+                                            categoryKey as ProjectCategory,
+                                            "name",
+                                            e.target.value
+                                        )
+                                    }
+                                />
 
-                            <label>Url: </label>
-                            <input
-                                type="text"
-                                value={project.url}
-                                onChange={(e) =>
-                                    handleProjectChange(
-                                        index,
-                                        categoryKey as ProjectCategory,
-                                        "url",
-                                        e.target.value
-                                    )
-                                }
-                            />
-                        </div>
-                    )
-                )
-            )}
+                                <label>Description:</label>
+                                <textarea
+                                    value={project.description}
+                                    onChange={(e) =>
+                                        handleProjectChange(
+                                            index,
+                                            categoryKey as ProjectCategory,
+                                            "description",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                                <label>URL:</label>
+                                <input
+                                    type="text"
+                                    value={project.url}
+                                    onChange={(e) =>
+                                        handleProjectChange(
+                                            index,
+                                            categoryKey as ProjectCategory,
+                                            "url",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        )
+                    )}
+                </div>
+            ))}
 
             <button onClick={updateProjects}>Update</button>
         </div>

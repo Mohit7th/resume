@@ -12,6 +12,7 @@ export type TitleHeader = {
         email: string;
         phone: string;
         address: string;
+        _id: string;
     };
     image: string;
     socials: SocialProfile[];
