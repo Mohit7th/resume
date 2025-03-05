@@ -1,48 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../components/UserContext";
+import { WorkHistory } from "../../types"; // Import the correct type
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
 
-    const [workHistory, setWorkHistory] = React.useState(userdata.workHistory);
+    // Ensure workHistory is properly initialized
+    const [workHistory, setWorkHistory] = useState<WorkHistory[]>(
+        userdata?.workHistory || []
+    );
+
+    // Sync workHistory state when userdata changes
+    useEffect(() => {
+        if (userdata?.workHistory) {
+            setWorkHistory(userdata.workHistory);
+        }
+    }, [userdata]);
 
     function updateWorkHistory() {
-        if (dispatch) {
-            dispatch({
-                type: "UPDATE_WORK_HISTORY",
-                payload: workHistory,
-            });
+        if (!dispatch) {
+            console.error("Dispatch function is not available");
+            return;
         }
+
+        dispatch({
+            type: "UPDATE_WORK_HISTORY",
+            payload: workHistory, 
+        });
     }
 
     function handleWorkHistoryChange(
-        _index: number,
-        field: string,
+        index: number,
+        field: keyof WorkHistory,
         newValue: string
     ) {
-        const updatedWorkHistory = workHistory.map((detail, index) =>
-            index == _index ? { ...detail, [field]: newValue } : detail
+        setWorkHistory((prevWorkHistory) =>
+            prevWorkHistory.map((detail, i) =>
+                i === index ? { ...detail, [field]: newValue } : detail
+            )
         );
-
-        setWorkHistory(updatedWorkHistory);
     }
 
     return (
         <div className="update-block">
             <h2>Work History</h2>
+
             {workHistory.map((detail, index) => (
-                <div key={detail._id}>
+                <div key={detail._id} className="work-item">
                     <label>Company:</label>
                     <input
                         type="text"
                         value={detail.company}
                         onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "company",
-                                e.target.value
-                            )
+                            handleWorkHistoryChange(index, "company", e.target.value)
                         }
                     />
 
@@ -51,11 +62,7 @@ export default function WorkHistoryBlock() {
                         type="text"
                         value={detail.position}
                         onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "position",
-                                e.target.value
-                            )
+                            handleWorkHistoryChange(index, "position", e.target.value)
                         }
                     />
 
@@ -64,15 +71,12 @@ export default function WorkHistoryBlock() {
                         type="text"
                         value={detail.website}
                         onChange={(e) =>
-                            handleWorkHistoryChange(
-                                index,
-                                "website",
-                                e.target.value
-                            )
+                            handleWorkHistoryChange(index, "website", e.target.value)
                         }
                     />
                 </div>
             ))}
+
             <button onClick={updateWorkHistory}>Update</button>
         </div>
     );
