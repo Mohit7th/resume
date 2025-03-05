@@ -77,7 +77,7 @@ export default function SkillsBlock() {
             </Grid>
             <Grid container spacing={2}>
                 {Object.keys(skills).map((skillKey) => (
-                    <Grid size={{ xs: 12, md: 4 }} key={skillKey}>
+                    <Grid size={{ xs: 12, md: 6 }} key={skillKey}>
                         <h3>{skillKey.replace("-", " ")}</h3>
                         {skills[skillKey as SkillCategory].map(
                             (tech, index) => (

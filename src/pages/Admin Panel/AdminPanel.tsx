@@ -6,17 +6,20 @@ import SkillsBlock from "../../components/admin/SkillsBlock";
 import ProjectsBlock from "../../components/admin/ProjectBlock";
 import WorkHistoryBlock from "../../components/admin/WorkHistoryBlock";
 import { UserDataProvider } from "../../context/UserContext";
+import { Container } from "@mui/material";
 
 const AdminPanel: React.FC = () => {
     return (
-        <UserDataProvider>
-            <h1>Admin Panel</h1>
-            <TitleHeaderBlock />
-            <SummaryBlock />
-            <SkillsBlock />
-            <ProjectsBlock />
-            <WorkHistoryBlock />
-        </UserDataProvider>
+        <Container fixed>
+            <UserDataProvider>
+                <h1>Admin Panel</h1>
+                <TitleHeaderBlock />
+                <SummaryBlock />
+                <SkillsBlock />
+                <ProjectsBlock />
+                <WorkHistoryBlock />
+            </UserDataProvider>
+        </Container>
     );
 };
 

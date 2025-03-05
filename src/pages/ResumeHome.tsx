@@ -3,7 +3,7 @@ import { resumeData } from "../components/data";
 
 export default function MainLayout() {
     return (
-        <Container maxWidth="sm">
+        <Container fixed>
             <TitleHeader />
             <Summary />
             <Skills />
