@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useUserData, useUserDataDispatch } from "../../components/UserContext";
+import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Skills, Skill } from "../../types"; // Import correct types
 
 export default function SkillsBlock() {

@@ -1,5 +1,5 @@
 import "./App.css";
-import MainLayout from "./components/MainLayout";
+import MainLayout from "./pages/ResumeHome";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminPanel from "./pages/Admin Panel/AdminPanel";
 

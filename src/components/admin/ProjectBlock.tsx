@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useUserData, useUserDataDispatch } from "../../components/UserContext";
 import { Projects, Project } from "../../types"; // Import correct types
+import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 
 export default function ProjectsBlock() {
     const userdata = useUserData();

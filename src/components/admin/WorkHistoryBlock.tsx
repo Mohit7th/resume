@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useUserData, useUserDataDispatch } from "../../components/UserContext";
+import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { WorkHistory } from "../../types"; // Import the correct type
 
 export default function WorkHistoryBlock() {

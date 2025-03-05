@@ -1,4 +1,4 @@
-import { resumeData } from "./data";
+import { resumeData } from "../components/data";
 
 export default function MainLayout() {
     return (

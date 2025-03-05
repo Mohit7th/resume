@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useUserData, useUserDataDispatch } from "../../components/UserContext";
+import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { TitleHeader } from "../../types"; 
 
 export function TitleHeaderBlock() {

@@ -6,7 +6,7 @@ import {
     useContext,
 } from "react";
 import { ResumeData } from "../types"; // Import type
-import { resumeData } from "./data";
+import { resumeData } from "../components/data";
 
 // Define action type
 type Action =
