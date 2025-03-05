@@ -2,30 +2,46 @@ import { useState, useEffect } from "react";
 import { useUserData, useUserDataDispatch } from "../../components/UserContext";
 
 export function TitleHeaderBlock() {
-    const [text, setText] = useState("");
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
 
-    useEffect(() => {
-        if (userdata) setText(userdata.titleHeader.title);
-    }, [userdata]);
+    const [titleHeader, setTitleHeader] = useState(userdata.titleHeader);
 
     function updateTitleHeader() {
         dispatch({
             type: "UPDATE_TITLE_HEADER",
-            payload: {
-                title: text,
-            },
+            payload: titleHeader,
         });
+    }
+
+    function handleTitleHeaderChange(
+        _index: number,
+        field: string,
+        newValue: string
+    ) {
+        const updatedTitleHeader = {
+            ...titleHeader,
+            [field]: newValue,
+        };
+
+        setTitleHeader(updatedTitleHeader);
     }
 
     return (
         <div className="update-block">
+            <h2>Title Header</h2>
+            <label>Name:</label>
+            <input
+                type="text"
+                value={titleHeader.name}
+                onChange={(e) => handleTitleHeaderChange(-1, "name",e.target.value)}
+            />
+
             <label>Title:</label>
             <input
                 type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
+                value={titleHeader.title}
+                onChange={(e) => handleTitleHeaderChange(-1, "title", e.target.value)}
             />
             <button onClick={updateTitleHeader}>Update</button>
         </div>

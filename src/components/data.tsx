@@ -1,4 +1,6 @@
-export const resumeData = {
+import { ResumeData } from "../types";
+
+export const resumeData: ResumeData = {
     titleHeader: {
         name: "Mohit Uniyal",
         title: "Full Stack Developer",
@@ -25,7 +27,7 @@ export const resumeData = {
     summary: {
         detailed:
             "Full Stack Developer with 8 years of experience, including 5 years in MEAN stack (MongoDB, Express.js, Angular, Node.js) and 3 years in MSBI (Microsoft Business Intelligence). Skilled in building scalable web applications, developing RESTful APIs, browser extensions, and integrating third-party APIs. Experienced in data visualization, automation, and performance optimization. Strong in problem-solving, team mentoring, and client communication. Currently expanding expertise in React.js while thriving in agile environments.",
-        short: "",
+        short: "MEAN STACK | 5 Years | MSBI | 3 years",
         _id: "33",
     },
     skills: {
@@ -231,7 +233,7 @@ export const resumeData = {
                 _id: "29",
             },
         ],
-        "personal-projects": [],
+        personalProjects: [],
     },
     workHistory: [
         {
