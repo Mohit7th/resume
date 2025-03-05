@@ -4,6 +4,7 @@ import { WorkHistory } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Box } from "@mui/material";
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
@@ -46,7 +47,7 @@ export default function WorkHistoryBlock() {
     }
 
     return (
-        <div className="update-block">
+        <Box component="section" sx={{ m:5, p: 2, border: "1px dashed grey" }}>
             <h2>Work History</h2>
 
             {workHistory.map((detail, index) => (
@@ -103,6 +104,6 @@ export default function WorkHistoryBlock() {
             >
                 Update
             </Button>
-        </div>
+        </Box>
     );
 }

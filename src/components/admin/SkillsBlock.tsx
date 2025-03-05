@@ -4,7 +4,7 @@ import { Skills, Skill } from "../../types"; // Import correct types
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { InputAdornment, TextField } from "@mui/material";
+import { Box, InputAdornment, TextField } from "@mui/material";
 
 export default function SkillsBlock() {
     const userdata = useUserData();
@@ -59,7 +59,7 @@ export default function SkillsBlock() {
     }
 
     return (
-        <div className="update-block">
+        <Box component="section" sx={{ m:5 , p: 2, border: "1px dashed grey" }}>
             <h2>Skills</h2>
 
             {Object.keys(skills).map((skillKey) => (
@@ -121,6 +121,6 @@ export default function SkillsBlock() {
             <Button variant="contained" size="small" onClick={updateSkills}>
                 Update
             </Button>
-        </div>
+        </Box>
     );
 }

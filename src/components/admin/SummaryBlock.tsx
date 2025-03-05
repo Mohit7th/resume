@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Summary } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 export default function SummaryBlock() {
     const userdata = useUserData();
@@ -44,7 +44,7 @@ export default function SummaryBlock() {
     }
 
     return (
-        <div className="update-block">
+        <Box component="section" sx={{ m:5, p: 2, border: "1px dashed grey" }}>
             <h2>Summary</h2>
 
             <TextField fullWidth 
@@ -71,6 +71,6 @@ export default function SummaryBlock() {
             <Button variant="contained" size="small" onClick={updateSummary}>
                 Update
             </Button>
-        </div>
+        </Box>
     );
 }

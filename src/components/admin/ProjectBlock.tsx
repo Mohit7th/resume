@@ -4,6 +4,7 @@ import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Box } from "@mui/material";
 
 export default function ProjectsBlock() {
     const userdata = useUserData();
@@ -50,7 +51,7 @@ export default function ProjectsBlock() {
     }
 
     return (
-        <div className="update-block">
+        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
             <h2>Projects</h2>
 
             {Object.keys(projects).map((categoryKey) => (
@@ -112,6 +113,6 @@ export default function ProjectsBlock() {
             <Button variant="contained" size="small" onClick={updateProjects}>
                 Update
             </Button>
-        </div>
+        </Box>
     );
 }

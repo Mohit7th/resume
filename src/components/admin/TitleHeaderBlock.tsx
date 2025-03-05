@@ -52,7 +52,7 @@ export function TitleHeaderBlock() {
     }
 
     return (
-        <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
+        <Box component="section" sx={{ m:5, p: 2, border: "1px dashed grey" }}>
             <h2>Title Header</h2>
 
             <TextField
