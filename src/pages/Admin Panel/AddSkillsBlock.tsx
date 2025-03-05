@@ -18,7 +18,7 @@ export default function SkillsBlock() {
     }
 
     return (
-        <div>
+        <div className="update-block">
             <label>Skills:</label>
             <input
                 type="text"

@@ -18,7 +18,7 @@ export default function SummaryBlock() {
     }
 
     return (
-        <div>
+        <div className="update-block">
             <label>Summary:</label>
             <input
                 type="text"

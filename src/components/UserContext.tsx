@@ -16,10 +16,10 @@ type UserDataState = typeof resumeData;
 // Define the type of dispatch function
 type UserDataDispatch = Dispatch<Action>;
 
-export const UserDataContext = createContext<UserDataState | null>(null);
-export const UserDataDispatchContext = createContext<UserDataDispatch | null>(
-    null
-);
+export const UserDataContext = createContext<UserDataState>(resumeData);
+export const UserDataDispatchContext = createContext<UserDataDispatch>(() => {
+    throw new Error("UserDataDispatchContext is not provided");
+});
 
 export function useUserData() {
     return useContext(UserDataContext);

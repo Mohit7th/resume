@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserData, useUserDataDispatch } from "../../components/UserContext";
 
 export function TitleHeaderBlock() {
@@ -6,19 +6,21 @@ export function TitleHeaderBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
 
+    useEffect(() => {
+        if (userdata) setText(userdata.titleHeader.title);
+    }, [userdata]);
+
     function updateTitleHeader() {
-        if (dispatch) {
-            dispatch({
-                type: "UPDATE_TITLE_HEADER",
-                payload: {
-                    title: text,
-                },
-            });
-        }
+        dispatch({
+            type: "UPDATE_TITLE_HEADER",
+            payload: {
+                title: text,
+            },
+        });
     }
 
     return (
-        <div>
+        <div className="update-block">
             <label>Title:</label>
             <input
                 type="text"

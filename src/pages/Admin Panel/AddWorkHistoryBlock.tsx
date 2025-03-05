@@ -17,7 +17,7 @@ export default function WorkHistoryBlock() {
         }
     }
     return (
-        <div>
+        <div className="update-block">
             <label>Work History:</label>
             <input
                 type="text"
