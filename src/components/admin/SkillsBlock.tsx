@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Skills, Skill } from "../../types"; // Import correct types
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { InputAdornment, TextField } from "@mui/material";
 
 export default function SkillsBlock() {
     const userdata = useUserData();
@@ -63,9 +67,11 @@ export default function SkillsBlock() {
                     <h3>{skillKey.replace("-", " ")}</h3>
                     {skills[skillKey as SkillCategory].map((tech, index) => (
                         <div key={tech._id} className="skill-item">
-                            <label>Skill:</label>
-                            <input
-                                type="text"
+                            <TextField
+                                id="outlined-basic"
+                                label="Name:"
+                                variant="outlined"
+                                margin="dense"
                                 value={tech.name}
                                 onChange={(e) =>
                                     handleSkillsChange(
@@ -76,12 +82,45 @@ export default function SkillsBlock() {
                                     )
                                 }
                             />
+
+                            <TextField
+                                label="Experience"
+                                id="outlined-start-adornment"
+                                type="number"
+                                margin="dense"
+                                slotProps={{
+                                    input: {
+                                        endAdornment: (
+                                            <InputAdornment position="start">
+                                                Years
+                                            </InputAdornment>
+                                        ),
+                                    },
+                                }}
+                            />
+
+                            <TextField
+                                id="outlined-number"
+                                label="Experience"
+                                type="number"
+                                margin="dense"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    },
+                                }}
+                            />
+                            <IconButton aria-label="delete" color="error">
+                                <DeleteIcon />
+                            </IconButton>
                         </div>
                     ))}
                 </div>
             ))}
 
-            <button onClick={updateSkills}>Update</button>
+            <Button variant="contained" size="small" onClick={updateSkills}>
+                Update
+            </Button>
         </div>
     );
 }

@@ -1,14 +1,15 @@
+import { Container } from "@mui/material";
 import { resumeData } from "../components/data";
 
 export default function MainLayout() {
     return (
-        <div className="MainLayout">
+        <Container maxWidth="sm">
             <TitleHeader />
             <Summary />
             <Skills />
             <Projects />
             <WorkHistory />
-        </div>
+        </Container>
     );
 }
 

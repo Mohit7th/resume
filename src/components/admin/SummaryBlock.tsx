@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Summary } from "../../types"; // Import the correct type
+import Button from "@mui/material/Button";
+import { TextField } from "@mui/material";
 
 export default function SummaryBlock() {
     const userdata = useUserData();
@@ -45,21 +47,30 @@ export default function SummaryBlock() {
         <div className="update-block">
             <h2>Summary</h2>
 
-            <label>Short Summary:</label>
-            <input
-                type="text"
+            <TextField fullWidth 
+                label="Short Summary: "
+                multiline
+                rows={4}
                 value={summary.short}
+                margin="dense"
+                defaultValue="Default Value"
                 onChange={(e) => handleSummaryChange("short", e.target.value)}
             />
 
-            <label>Detailed Summary:</label>
-            <textarea
+            <TextField fullWidth 
+                label="Detailed Summary: "
+                multiline
+                rows={4}
                 value={summary.detailed}
+                margin="dense"
+                defaultValue="Default Value"
                 onChange={(e) =>
                     handleSummaryChange("detailed", e.target.value)
                 }
             />
-            <button onClick={updateSummary}>Update</button>
+            <Button variant="contained" size="small" onClick={updateSummary}>
+                Update
+            </Button>
         </div>
     );
 }

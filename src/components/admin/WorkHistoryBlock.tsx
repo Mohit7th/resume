@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { WorkHistory } from "../../types"; // Import the correct type
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
@@ -26,7 +29,7 @@ export default function WorkHistoryBlock() {
 
         dispatch({
             type: "UPDATE_WORK_HISTORY",
-            payload: workHistory, 
+            payload: workHistory,
         });
     }
 
@@ -53,7 +56,11 @@ export default function WorkHistoryBlock() {
                         type="text"
                         value={detail.company}
                         onChange={(e) =>
-                            handleWorkHistoryChange(index, "company", e.target.value)
+                            handleWorkHistoryChange(
+                                index,
+                                "company",
+                                e.target.value
+                            )
                         }
                     />
 
@@ -62,7 +69,11 @@ export default function WorkHistoryBlock() {
                         type="text"
                         value={detail.position}
                         onChange={(e) =>
-                            handleWorkHistoryChange(index, "position", e.target.value)
+                            handleWorkHistoryChange(
+                                index,
+                                "position",
+                                e.target.value
+                            )
                         }
                     />
 
@@ -71,13 +82,27 @@ export default function WorkHistoryBlock() {
                         type="text"
                         value={detail.website}
                         onChange={(e) =>
-                            handleWorkHistoryChange(index, "website", e.target.value)
+                            handleWorkHistoryChange(
+                                index,
+                                "website",
+                                e.target.value
+                            )
                         }
                     />
+
+                    <IconButton aria-label="delete" color="error">
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
             ))}
 
-            <button onClick={updateWorkHistory}>Update</button>
+            <Button
+                variant="contained"
+                size="small"
+                onClick={updateWorkHistory}
+            >
+                Update
+            </Button>
         </div>
     );
 }

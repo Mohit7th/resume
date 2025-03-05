@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Projects, Project } from "../../types"; // Import correct types
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ProjectsBlock() {
     const userdata = useUserData();
@@ -96,13 +99,19 @@ export default function ProjectsBlock() {
                                         )
                                     }
                                 />
+
+                                <IconButton aria-label="delete" color="error">
+                                    <DeleteIcon />
+                                </IconButton>
                             </div>
                         )
                     )}
                 </div>
             ))}
 
-            <button onClick={updateProjects}>Update</button>
+            <Button variant="contained" size="small" onClick={updateProjects}>
+                Update
+            </Button>
         </div>
     );
 }

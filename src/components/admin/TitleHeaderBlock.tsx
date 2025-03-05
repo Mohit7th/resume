@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
-import { TitleHeader } from "../../types"; 
+import { TitleHeader } from "../../types";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import TextField from "@mui/material/TextField";
+import { Box } from "@mui/material";
 
 export function TitleHeaderBlock() {
     const userdata = useUserData();
@@ -37,7 +41,10 @@ export function TitleHeaderBlock() {
         });
     }
 
-    function handleTitleHeaderChange(field: keyof TitleHeader, newValue: string) {
+    function handleTitleHeaderChange(
+        field: keyof TitleHeader,
+        newValue: string
+    ) {
         setTitleHeader((prev) => ({
             ...prev,
             [field]: newValue,
@@ -45,24 +52,39 @@ export function TitleHeaderBlock() {
     }
 
     return (
-        <div className="update-block">
+        <Box component="section" sx={{ p: 2, border: "1px dashed grey" }}>
             <h2>Title Header</h2>
 
-            <label>Name:</label>
-            <input
-                type="text"
+            <TextField
+                id="outlined-basic"
+                label="Name:"
+                variant="outlined"
+                size="small"
                 value={titleHeader.name}
-                onChange={(e) => handleTitleHeaderChange("name", e.target.value)}
+                onChange={(e) =>
+                    handleTitleHeaderChange("name", e.target.value)
+                }
             />
 
-            <label>Title:</label>
-            <input
-                type="text"
+            <TextField
+                id="outlined-basic"
+                label="Title:"
+                variant="outlined"
+                size="small"
                 value={titleHeader.title}
-                onChange={(e) => handleTitleHeaderChange("title", e.target.value)}
+                onChange={(e) =>
+                    handleTitleHeaderChange("title", e.target.value)
+                }
             />
 
-            <button onClick={updateTitleHeader}>Update</button>
-        </div>
+            <Button
+                variant="contained"
+                size="small"
+                endIcon={<SendIcon />}
+                onClick={updateTitleHeader}
+            >
+                Update
+            </Button>
+        </Box>
     );
 }
