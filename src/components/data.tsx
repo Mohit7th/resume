@@ -196,6 +196,13 @@ export const resumeData: ResumeData = {
                 _id: "27",
             },
             {
+                name: "Quick Snip",
+                description: "A small browser extension to capture screenshot of web browser tabs, region or full page. Managing chrome store deployment, bug fixing etc",
+                technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+                url: "https://chromewebstore.google.com/detail/Quick%20Snip/gjjhmphibjpmjbeghgjgecennojdohgc?hl=en&authuser=0",
+                _id: "38"
+            },
+            {
                 name: "Synthesis",
                 description:
                     "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
@@ -204,7 +211,7 @@ export const resumeData: ResumeData = {
                 _id: "28",
             },
             {
-                name: "HyperWallet: Financial/Loyalty Data Mart (MSBI) ",
+                name: "HyperWallet: Financial/Loyalty Data Mart",
                 description:
                     "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
                 technologies: ["SSIS", "Power BI", "SQL Server"],

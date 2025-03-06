@@ -3,12 +3,10 @@ import {
     Avatar,
     Box,
     Button,
-    IconButton,
     Toolbar,
     Typography,
 } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../../context/AuthContext";
 import { deepOrange } from "@mui/material/colors";
 import Footer from "./Footer";

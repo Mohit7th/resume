@@ -22,6 +22,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useUserData } from "../context/UserContext";
 import { SyntheticEvent, useState } from "react";
+import FormDialog from "../components/ui/RatingFormDialog";
 
 export default function ResumeHome() {
     return (
@@ -36,50 +37,62 @@ export default function ResumeHome() {
 }
 
 function TitleHeader() {
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
     const userdata = useUserData();
     function handleDownloadCV() {}
 
     function handleContactMe() {}
 
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
     return (
-        <Grid container spacing={2}>
-            <Grid size={6}>
-                {/* <img src="../../public/assets/logo192.png"></img> */}
-                <Skeleton variant="circular" width={200} height={200} />
+        <>
+            <Grid container spacing={2} sx={{ mb: 5 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                    {/* <img src="../../public/assets/logo192.png"></img> */}
+                    <Skeleton variant="circular" width={200} height={200} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }} sx={{ alignItems: "center" }}>
+                    <h1>{userdata.titleHeader.name}</h1>
+                    <h2>{userdata.titleHeader.title}</h2>
+                    <h3>{userdata.titleHeader.contact.email}</h3>
+                    <p>{userdata.summary.short}</p>
+                    <Stack direction="row" spacing={2}>
+                        <Tooltip title="PDF" placement="top" arrow>
+                            <Chip
+                                label="Download CV"
+                                variant="outlined"
+                                onClick={handleDownloadCV}
+                            />
+                            {/* <Button variant="outlined">Download CV</Button> */}
+                        </Tooltip>
+                        <Tooltip title="Email" placement="top" arrow>
+                            <Chip
+                                label="Contact"
+                                variant="outlined"
+                                onClick={handleContactMe}
+                            />
+                            {/* <Button variant="outlined">Contact</Button> */}
+                        </Tooltip>
+                        <Tooltip title="Rate Website" placement="top" arrow>
+                            <Chip
+                                icon={<FavoriteIcon />}
+                                label="Rate"
+                                variant="outlined"
+                                onClick={handleOpenDialog}
+                            />
+                        </Tooltip>
+                    </Stack>
+                </Grid>
             </Grid>
-            <Grid size={6}>
-                <h1>{userdata.titleHeader.name}</h1>
-                <h2>{userdata.titleHeader.title}</h2>
-                <h3>{userdata.titleHeader.contact.email}</h3>
-                <p>{userdata.summary.short}</p>
-                <Stack direction="row" spacing={2}>
-                    <Tooltip title="PDF" placement="top" arrow>
-                        <Chip
-                            label="Download CV"
-                            variant="outlined"
-                            onClick={handleDownloadCV}
-                        />
-                        {/* <Button variant="outlined">Download CV</Button> */}
-                    </Tooltip>
-                    <Tooltip title="Email" placement="top" arrow>
-                        <Chip
-                            label="Contact"
-                            variant="outlined"
-                            onClick={handleContactMe}
-                        />
-                        {/* <Button variant="outlined">Contact</Button> */}
-                    </Tooltip>
-                    <Tooltip title="Rate Website" placement="top" arrow>
-                        <Chip
-                            icon={<FavoriteIcon />}
-                            label="Rate"
-                            variant="outlined"
-                            onClick={handleContactMe}
-                        />
-                    </Tooltip>
-                </Stack>
-            </Grid>
-        </Grid>
+            <FormDialog open={openDialog} handleClose={handleCloseDialog} />
+        </>
     );
 }
 
@@ -88,7 +101,7 @@ function Summary() {
     return (
         <Box
             component="section"
-            sx={{ p: 2, border: "1px dashed grey", mt: 5, mb: 5 }}
+            sx={{ p: 2, border: "1px dashed grey", mb: 5 }}
         >
             {userdata.summary.detailed}
         </Box>
@@ -126,7 +139,7 @@ function Projects() {
     ));
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={5} sx={{ mb: 5, justifyContent: "center" }}>
             {projects}
         </Grid>
     );
@@ -154,7 +167,7 @@ function WorkHistory() {
     ));
 
     return (
-        <Grid container spacing={2} sx={{ mt: 5, mb: 5 }}>
+        <Grid container spacing={2} sx={{ mb: 5 }}>
             <Grid size={12}>{accordianData}</Grid>
         </Grid>
     );
