@@ -1,5 +1,9 @@
 import {
     Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
     Container,
     IconButton,
     ListItem,
@@ -19,9 +23,9 @@ export default function ResumeHome() {
         <Container fixed>
             <TitleHeader />
             <Summary />
-            <Skills />
             <Projects />
             <WorkHistory />
+            <Skills />
         </Container>
     );
 }
@@ -96,33 +100,35 @@ function Skills() {
 
 function Projects() {
     const projects = resumeData.projects.professional.map((project: any) => (
-        <div
-            className="mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-2-2xl"
-            key={project._id}
-        >
-            <div className="md:flex">
-                <div className="md:shrink-0">
-                    <img
-                        className="h-48 w-full object-cover md:h-full md:w-48"
-                        src="/img/buildings.jpg"
-                        alt="not found"
-                    />
-                </div>
-                <div className="p-8">
-                    <div className="text-sm font-semibold tracking-wide text-indigo-500 upppercase">
-                        {project.name}
-                    </div>
-                    <a
-                        href={project.url}
-                        className="mt-1 block text-lg leading-tight font-medium text-black hover:underline"
-                    ></a>
-                    <p className="mt-2 text-gray-500">{project.description}</p>
-                </div>
-            </div>
-        </div>
+        <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" } } key={project._id}>
+            {/* <CardMedia
+                sx={{ height: 140 }}
+                image="/static/images/cards/contemplative-reptile.jpg"
+                title="green iguana"
+            /> */}
+            <Skeleton variant="rounded" height={140} />
+
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {project.name}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                    {project.description}
+                </Typography>
+            </CardContent>
+            <CardActions sx={{ mt: "auto" }}>
+                {project.technologies.map((skill: string, index: number) => (
+                    <Button size="small">{skill}</Button>
+                ))}
+            </CardActions>
+        </Card>
     ));
 
-    return <div>{projects}</div>;
+    return (
+        <Grid container spacing={2}>
+            {projects}
+        </Grid>
+    );
 }
 
 function WorkHistory() {
