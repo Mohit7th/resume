@@ -8,7 +8,7 @@ export const resumeData: ResumeData = {
             email: "m7uniyal@gmail.com",
             phone: "+91 7835816795",
             address: "Dehradun, India",
-            _id: "38"
+            _id: "38",
         },
         image: "https://avatars.githubusercontent.com/u/47273253?v=4",
         socials: [
@@ -32,7 +32,19 @@ export const resumeData: ResumeData = {
         _id: "33",
     },
     skills: {
-        programmingLanguages: [
+        webTechnologies: [
+            {
+                name: "Angular",
+                experience: "5 years",
+                _id: "9",
+                image: "",
+            },
+            {
+                name: "React",
+                experience: "5 years",
+                _id: "10",
+                image: "",
+            },
             {
                 name: "JavaScript",
                 experience: "5 years",
@@ -46,14 +58,6 @@ export const resumeData: ResumeData = {
                 image: "",
             },
             {
-                name: "SQL",
-                experience: "5 years",
-                _id: "3",
-                image: "",
-            },
-        ],
-        webTechnologies: [
-            {
                 name: "HTML",
                 experience: "5 years",
                 _id: "4",
@@ -66,12 +70,6 @@ export const resumeData: ResumeData = {
                 image: "",
             },
             {
-                name: "SASS",
-                experience: "5 years",
-                _id: "6",
-                image: "",
-            },
-            {
                 name: "Bootstrap",
                 experience: "5 years",
                 _id: "7",
@@ -81,20 +79,6 @@ export const resumeData: ResumeData = {
                 name: "jQuery",
                 experience: "5 years",
                 _id: "8",
-                image: "",
-            },
-        ],
-        frontendFrameworks: [
-            {
-                name: "Angular",
-                experience: "5 years",
-                _id: "9",
-                image: "",
-            },
-            {
-                name: "React",
-                experience: "5 years",
-                _id: "10",
                 image: "",
             },
         ],
@@ -166,12 +150,6 @@ export const resumeData: ResumeData = {
                 image: "",
             },
             {
-                name: "SSRS",
-                experience: "5 years",
-                _id: "21",
-                image: "",
-            },
-            {
                 name: "Power BI",
                 experience: "5 years",
                 _id: "22",
@@ -234,13 +212,16 @@ export const resumeData: ResumeData = {
                 _id: "29",
             },
         ],
-        personalProjects: [{
-            name: "REACT JS Resume",
-            description: "The current resume site with admin panel to update resume",
-            technologies: ["REACT.js", "Node.js", "Express.js", "MongoDB" ],
-            url: "",
-            _id: "37"
-        }],
+        personalProjects: [
+            {
+                name: "REACT JS Resume",
+                description:
+                    "The current resume site with admin panel to update resume",
+                technologies: ["REACT.js", "Node.js", "Express.js", "MongoDB"],
+                url: "",
+                _id: "37",
+            },
+        ],
     },
     workHistory: [
         {

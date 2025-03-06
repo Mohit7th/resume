@@ -9,10 +9,15 @@ import {
     CardContent,
     Chip,
     Container,
+    Divider,
     ListItem,
     ListItemText,
+    Paper,
     Skeleton,
     Stack,
+    styled,
+    Tab,
+    Tabs,
     Tooltip,
     Typography,
 } from "@mui/material";
@@ -21,20 +26,24 @@ import Grid from "@mui/material/Grid2";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import List from "@mui/material/List";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useUserData } from "../context/UserContext";
+import { SyntheticEvent, useState } from "react";
 
 export default function ResumeHome() {
     return (
         <Container fixed>
             <TitleHeader />
             <Summary />
+            <BasicTabs />
             <WorkHistory />
             <Projects />
-            <Skills />
+            {/* <Skills /> */}
         </Container>
     );
 }
 
 function TitleHeader() {
+    const userdata = useUserData();
     function handleDownloadCV() {}
 
     function handleContactMe() {}
@@ -46,10 +55,10 @@ function TitleHeader() {
                 <Skeleton variant="circular" width={200} height={200} />
             </Grid>
             <Grid size={6}>
-                <h1>{resumeData.titleHeader.name}</h1>
-                <h2>{resumeData.titleHeader.title}</h2>
-                <h3>{resumeData.titleHeader.contact.email}</h3>
-                <p>{resumeData.summary.short}</p>
+                <h1>{userdata.titleHeader.name}</h1>
+                <h2>{userdata.titleHeader.title}</h2>
+                <h3>{userdata.titleHeader.contact.email}</h3>
+                <p>{userdata.summary.short}</p>
                 <Stack direction="row" spacing={2}>
                     <Tooltip title="PDF" placement="top" arrow>
                         <Chip
@@ -82,45 +91,20 @@ function TitleHeader() {
 }
 
 function Summary() {
+    const userdata = useUserData();
     return (
-        <Box component="section" sx={{ p: 2, border: "1px dashed grey", mt:5, mb:5}}>
-            {resumeData.summary.detailed}
+        <Box
+            component="section"
+            sx={{ p: 2, border: "1px dashed grey", mt: 5, mb: 5 }}
+        >
+            {userdata.summary.detailed}
         </Box>
     );
 }
 
-function Skills() {
-    const header = Object.keys(resumeData.skills) as Array<
-        keyof typeof resumeData.skills
-    >;
-
-    const tableBody = header.map((col) => (
-        <Grid size={3} key={col}>
-            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-                {col}
-            </Typography>
-            {resumeData.skills[col].map((data) => (
-                <List key={data._id} dense={true}>
-                    <ListItem>
-                        <ListItemText
-                            primary={data.name}
-                            secondary={data.experience}
-                        />
-                    </ListItem>
-                </List>
-            ))}
-        </Grid>
-    ));
-
-    return (
-        <Grid container spacing={2}>
-            {tableBody}
-        </Grid>
-    );
-}
-
 function Projects() {
-    const projects = resumeData.projects.professional.map((project: any) => (
+    const userdata = useUserData();
+    const projects = userdata.projects.professional.map((project: any) => (
         <Card
             sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}
             key={project._id}
@@ -156,7 +140,8 @@ function Projects() {
 }
 
 function WorkHistory() {
-    const accordianData = resumeData.workHistory.map((work: any) => (
+    const userdata = useUserData();
+    const accordianData = userdata.workHistory.map((work: any) => (
         <Accordion key={work._id}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -179,5 +164,108 @@ function WorkHistory() {
         <Grid container spacing={2} sx={{ mt: 5, mb: 5 }}>
             <Grid size={12}>{accordianData}</Grid>
         </Grid>
+    );
+}
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`,
+    };
+}
+
+function Skills() {
+    const userdata = useUserData();
+    const header = Object.keys(userdata.skills) as Array<
+        keyof typeof resumeData.skills
+    >;
+
+    const tableBody = header.map((col) => (
+        <Grid size={3} key={col}>
+            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                {col}
+            </Typography>
+            {resumeData.skills[col].map((data) => (
+                <List key={data._id} dense={true}>
+                    <ListItem>
+                        <ListItemText
+                            primary={data.name}
+                            secondary={data.experience}
+                        />
+                    </ListItem>
+                </List>
+            ))}
+        </Grid>
+    ));
+
+    return (
+        <Grid container spacing={2}>
+            {tableBody}
+        </Grid>
+    );
+}
+
+function BasicTabs() {
+    const userdata = useUserData();
+    const header = Object.keys(userdata.skills) as Array<
+        keyof typeof resumeData.skills
+    >;
+
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event: SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
+
+    return (
+        <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                >
+                    {header.map((col, index) => (
+                        <Tab label={col} {...a11yProps(index)} />
+                    ))}
+                </Tabs>
+            </Box>
+
+            {header.map((col, index) => (
+                <CustomTabPanel value={value} index={index}>
+                    {userdata.skills[col].map((data) => (
+                        <Stack
+                            direction="column"
+                            
+                            spacing={2}
+                        >
+                            <p>{data.name}</p>
+                        </Stack>
+                    ))}
+                </CustomTabPanel>
+            ))}
+        </Box>
     );
 }

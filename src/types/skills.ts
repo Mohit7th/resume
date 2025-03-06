@@ -7,9 +7,7 @@ export type Skill = {
 };
 
 export type Skills = {
-    programmingLanguages: Skill[];
     webTechnologies: Skill[];
-    frontendFrameworks: Skill[];
     backendFrameworks: Skill[];
     databases: Skill[];
     tools: Skill[];
