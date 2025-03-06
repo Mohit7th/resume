@@ -9,13 +9,8 @@ import {
     CardContent,
     Chip,
     Container,
-    Divider,
-    ListItem,
-    ListItemText,
-    Paper,
     Skeleton,
     Stack,
-    styled,
     Tab,
     Tabs,
     Tooltip,
@@ -24,7 +19,6 @@ import {
 import { resumeData } from "../components/data";
 import Grid from "@mui/material/Grid2";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import List from "@mui/material/List";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useUserData } from "../context/UserContext";
 import { SyntheticEvent, useState } from "react";
@@ -34,10 +28,9 @@ export default function ResumeHome() {
         <Container fixed>
             <TitleHeader />
             <Summary />
-            <BasicTabs />
+            <Skills />
             <WorkHistory />
             <Projects />
-            {/* <Skills /> */}
         </Container>
     );
 }
@@ -197,37 +190,6 @@ function a11yProps(index: number) {
 }
 
 function Skills() {
-    const userdata = useUserData();
-    const header = Object.keys(userdata.skills) as Array<
-        keyof typeof resumeData.skills
-    >;
-
-    const tableBody = header.map((col) => (
-        <Grid size={3} key={col}>
-            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-                {col}
-            </Typography>
-            {resumeData.skills[col].map((data) => (
-                <List key={data._id} dense={true}>
-                    <ListItem>
-                        <ListItemText
-                            primary={data.name}
-                            secondary={data.experience}
-                        />
-                    </ListItem>
-                </List>
-            ))}
-        </Grid>
-    ));
-
-    return (
-        <Grid container spacing={2}>
-            {tableBody}
-        </Grid>
-    );
-}
-
-function BasicTabs() {
     const userdata = useUserData();
     const header = Object.keys(userdata.skills) as Array<
         keyof typeof resumeData.skills

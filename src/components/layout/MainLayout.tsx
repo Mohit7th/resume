@@ -11,6 +11,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../../context/AuthContext";
 import { deepOrange } from "@mui/material/colors";
+import Footer from "./Footer";
 
 export default function MainLayout() {
     const location = useLocation();
@@ -19,6 +20,9 @@ export default function MainLayout() {
 
     const hideAppBarRoutes = ["/login"];
     const shouldHideAppBar = hideAppBarRoutes.includes(location.pathname);
+
+    const hideFooterRoutes = ["/admin"];
+    const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
 
     return (
         <Box
@@ -74,6 +78,8 @@ export default function MainLayout() {
             <Box sx={{ flexGrow: 1, padding: 2 }}>
                 <Outlet /> {/* 👈 Renders the page content dynamically */}
             </Box>
+
+            {!shouldHideFooter && <Footer />}
         </Box>
     );
 }
