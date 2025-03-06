@@ -1,7 +1,18 @@
-import { Button, Container, IconButton, Skeleton, Stack, Tooltip } from "@mui/material";
+import {
+    Button,
+    Container,
+    IconButton,
+    ListItem,
+    ListItemText,
+    Skeleton,
+    Stack,
+    Tooltip,
+    Typography,
+} from "@mui/material";
 import { resumeData } from "../components/data";
 import Grid from "@mui/material/Grid2";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import List from "@mui/material/List";
 
 export default function ResumeHome() {
     return (
@@ -36,7 +47,7 @@ function TitleHeader() {
                     </Tooltip>
                     <Tooltip title="Rate Website" placement="top" arrow>
                         <IconButton>
-                            <FavoriteIcon/>
+                            <FavoriteIcon />
                         </IconButton>
                     </Tooltip>
                 </Stack>
@@ -59,28 +70,28 @@ function Skills() {
     >;
 
     const tableBody = header.map((col) => (
-        <div
-            className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5"
-            key={col}
-        >
-            <div>
-                <span className="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
-                    <svg className="h-6 w-6 stroke-width"></svg>
-                </span>
-            </div>
-            <h3 className="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight">
+        <Grid size={3} key={col}>
+            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
                 {col}
-            </h3>
+            </Typography>
             {resumeData.skills[col].map((data) => (
-                <ul key={data._id}>
-                    <li>{data.name}</li>
-                    <li>{data.experience}</li>
-                </ul>
+                <List key={data._id} dense={true}>
+                    <ListItem>
+                        <ListItemText
+                            primary={data.name}
+                            secondary={data.experience}
+                        />
+                    </ListItem>
+                </List>
             ))}
-        </div>
+        </Grid>
     ));
 
-    return <div>{tableBody}</div>;
+    return (
+        <Grid container spacing={2}>
+            {tableBody}
+        </Grid>
+    );
 }
 
 function Projects() {
