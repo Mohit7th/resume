@@ -1,11 +1,13 @@
 import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
     Button,
     Card,
     CardActions,
     CardContent,
-    CardMedia,
+    Chip,
     Container,
-    IconButton,
     ListItem,
     ListItemText,
     Skeleton,
@@ -17,20 +19,25 @@ import { resumeData } from "../components/data";
 import Grid from "@mui/material/Grid2";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import List from "@mui/material/List";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function ResumeHome() {
     return (
         <Container fixed>
             <TitleHeader />
             <Summary />
-            <Projects />
             <WorkHistory />
+            <Projects />
             <Skills />
         </Container>
     );
 }
 
 function TitleHeader() {
+    function handleDownloadCV() {}
+
+    function handleContactMe() {}
+
     return (
         <Grid container spacing={2}>
             <Grid size={6}>
@@ -44,15 +51,28 @@ function TitleHeader() {
                 <p>{resumeData.summary.short}</p>
                 <Stack direction="row" spacing={2}>
                     <Tooltip title="PDF" placement="top" arrow>
-                        <Button variant="outlined">Download CV</Button>
+                        <Chip
+                            label="Download CV"
+                            variant="outlined"
+                            onClick={handleDownloadCV}
+                        />
+                        {/* <Button variant="outlined">Download CV</Button> */}
                     </Tooltip>
                     <Tooltip title="Email" placement="top" arrow>
-                        <Button variant="outlined">Contact</Button>
+                        <Chip
+                            label="Contact"
+                            variant="outlined"
+                            onClick={handleContactMe}
+                        />
+                        {/* <Button variant="outlined">Contact</Button> */}
                     </Tooltip>
                     <Tooltip title="Rate Website" placement="top" arrow>
-                        <IconButton>
-                            <FavoriteIcon />
-                        </IconButton>
+                        <Chip
+                            icon={<FavoriteIcon />}
+                            label="Rate"
+                            variant="outlined"
+                            onClick={handleContactMe}
+                        />
                     </Tooltip>
                 </Stack>
             </Grid>
@@ -100,7 +120,10 @@ function Skills() {
 
 function Projects() {
     const projects = resumeData.projects.professional.map((project: any) => (
-        <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" } } key={project._id}>
+        <Card
+            sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}
+            key={project._id}
+        >
             {/* <CardMedia
                 sx={{ height: 140 }}
                 image="/static/images/cards/contemplative-reptile.jpg"
@@ -132,18 +155,28 @@ function Projects() {
 }
 
 function WorkHistory() {
-    const workHistory = resumeData.workHistory.map((work: any) => {
-        return (
-            <div key={work._id}>
-                <h2>{work.company}</h2>
-                <p>
-                    <b>{work.position}</b>
-                </p>
+    const accordianData = resumeData.workHistory.map((work: any) => (
+        <Accordion key={work._id}>
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+            >
+                <Typography component="span">
+                     <b>{work.company}</b> {work.position}
+                </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
                 {work.reponsibilities.map((resp: any, index: number) => (
                     <p key={index}>{resp}</p>
                 ))}
-            </div>
-        );
-    });
-    return <div>{workHistory}</div>;
+            </AccordionDetails>
+        </Accordion>
+    ));
+
+    return (
+        <Grid container spacing={2} sx={{ mt: 5, mb: 5 }}>
+            <Grid size={12}>{accordianData}</Grid>
+        </Grid>
+    );
 }
