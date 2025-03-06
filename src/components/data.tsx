@@ -14,12 +14,12 @@ export const resumeData: ResumeData = {
         socials: [
             {
                 name: "LinkedIn",
-                url: "https://www.linkedin.com/in/mohit-uniyal-7b1b3b1a7/",
+                url: "https://www.linkedin.com/in/mohit-uniyal-77183692/",
                 _id: "35",
             },
             {
                 name: "GitHub",
-                url: "",
+                url: "https://github.com/mohit-uniyal-dev",
                 _id: "36",
             },
         ],
@@ -28,7 +28,7 @@ export const resumeData: ResumeData = {
     summary: {
         detailed:
             "Full Stack Developer with 8 years of experience, including 5 years in MEAN stack (MongoDB, Express.js, Angular, Node.js) and 3 years in MSBI (Microsoft Business Intelligence). Skilled in building scalable web applications, developing RESTful APIs, browser extensions, and integrating third-party APIs. Experienced in data visualization, automation, and performance optimization. Strong in problem-solving, team mentoring, and client communication. Currently expanding expertise in React.js while thriving in agile environments.",
-        short: "MEAN STACK | 5 Years | MSBI | 3 years",
+        short: "MEAN STACK (5 Years) | MSBI (3 years)",
         _id: "33",
     },
     skills: {
@@ -176,7 +176,7 @@ export const resumeData: ResumeData = {
                 description:
                     "Developed a web application that manages a white-label system for the Join Cherry Chrome extension, enabling seamless customization and integration for various clients",
                 technologies: ["MEAN Stack"],
-                url: "",
+                url: "https://admin.rezme.com/login",
                 _id: "25",
             },
             {
@@ -184,7 +184,7 @@ export const resumeData: ResumeData = {
                 description:
                     "Built a web and Chrome extension-based platform that allows users to search for hotel and flight deals while displaying relevant browser extension data within a user-friendly dashboard",
                 technologies: ["MEAN Stack"],
-                url: "",
+                url: "https://www.joincherry.com/",
                 _id: "26",
             },
             {
@@ -192,7 +192,7 @@ export const resumeData: ResumeData = {
                 description:
                     "Designed and developed a browser extension that integrates with various OTA platforms (e.g., Booking.com, Expedia) to provide users with exclusive discounts on hotels, attractions, and flights.",
                 technologies: ["HTML", "CSS", "JavaScript"],
-                url: "",
+                url: "https://chromewebstore.google.com/detail/join-cherry-stop-overpayi/chdofjfbphhphdllcadpnaochgcapnid",
                 _id: "27",
             },
             {
@@ -200,7 +200,7 @@ export const resumeData: ResumeData = {
                 description:
                     "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
                 technologies: ["T-SQL", "Crystal Reports"],
-                url: "",
+                url: "https://www.contata.com/oil-gas-software",
                 _id: "28",
             },
             {
@@ -208,7 +208,7 @@ export const resumeData: ResumeData = {
                 description:
                     "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
                 technologies: ["SSIS", "Power BI", "SQL Server"],
-                url: "",
+                url: "https://www.hyperwallet.com",
                 _id: "29",
             },
         ],

@@ -35,7 +35,7 @@ export default function MainLayout() {
             {!shouldHideAppBar && (
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton
+                        {/* <IconButton
                             size="large"
                             edge="start"
                             color="inherit"
@@ -43,28 +43,22 @@ export default function MainLayout() {
                             sx={{ mr: 2 }}
                         >
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{ flexGrow: 1 }}
+                            sx={{ flexGrow: 1 }} onClick={() => navigate("/")}
                         >
-                            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                            <Avatar sx={{ bgcolor: deepOrange[500] }} >
                                 MU
                             </Avatar>
                         </Typography>
-                        <Button color="inherit" onClick={() => navigate("/")}>
-                            Home
-                        </Button>
                         <Button
                             color="inherit"
                             onClick={() => navigate("/admin")}
                         >
                             Admin
                         </Button>
-                        {!auth?.isAuthenticated && (
-                            <Button color="inherit">Login</Button>
-                        )}
                         {auth?.isAuthenticated && (
                             <Button color="inherit" onClick={auth?.logout}>
                                 Logout

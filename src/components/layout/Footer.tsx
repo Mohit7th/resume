@@ -33,10 +33,10 @@ export default function Footer() {
 
                 {/* Right Side: Social Media Icons */}
                 <Box>
-                    <IconButton href="https://github.com/yourgithub" target="_blank" sx={{ color: "white" }}>
+                    <IconButton href={userData.titleHeader.socials[1].url} target="_blank" sx={{ color: "white" }}>
                         <GitHubIcon />
                     </IconButton>
-                    <IconButton href="https://linkedin.com/in/yourlinkedin" target="_blank" sx={{ color: "white" }}>
+                    <IconButton href={userData.titleHeader.socials[0].url} target="_blank" sx={{ color: "white" }}>
                         <LinkedInIcon />
                     </IconButton>
                 </Box>

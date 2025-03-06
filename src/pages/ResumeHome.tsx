@@ -207,7 +207,7 @@ function Skills() {
                 <Tabs
                     value={value}
                     onChange={handleChange}
-                    aria-label="basic tabs example"
+                    aria-label="skills-tabs"
                 >
                     {header.map((col, index) => (
                         <Tab label={col} {...a11yProps(index)} />
@@ -218,13 +218,9 @@ function Skills() {
             {header.map((col, index) => (
                 <CustomTabPanel value={value} index={index}>
                     {userdata.skills[col].map((data) => (
-                        <Stack
-                            direction="column"
-                            
-                            spacing={2}
-                        >
-                            <p>{data.name}</p>
-                        </Stack>
+                        <span>
+                            {data.name} ({data.experience})
+                        </span>
                     ))}
                 </CustomTabPanel>
             ))}
