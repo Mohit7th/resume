@@ -2,6 +2,7 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Box,
     Button,
     Card,
     CardActions,
@@ -82,9 +83,9 @@ function TitleHeader() {
 
 function Summary() {
     return (
-        <div>
-            <p>{resumeData.summary.detailed}</p>
-        </div>
+        <Box component="section" sx={{ p: 2, border: "1px dashed grey", mt:5, mb:5}}>
+            {resumeData.summary.detailed}
+        </Box>
     );
 }
 
@@ -163,7 +164,7 @@ function WorkHistory() {
                 id="panel1-header"
             >
                 <Typography component="span">
-                     <b>{work.company}</b> {work.position}
+                    <b>{work.company}</b> {work.position}
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
