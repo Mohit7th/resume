@@ -1,19 +1,25 @@
 import "./App.css";
-import MainLayout from "./pages/ResumeHome";
+import ResumeHome from "./pages/ResumeHome";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminPanel from "./pages/Admin Panel/AdminPanel";
 import NotFound from "./pages/NotFound";
+import MainLayout from "./components/layout/MainLayout";
+import { AuthProvider } from "./context/AuthContext";
 
 const App: React.FC = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<MainLayout />} />
-                <Route path="/admin" element={<AdminPanel />} />
-                {/* Catch-all 404 Route (Must be at the end) */}
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route element={<MainLayout />}>
+                        <Route path="/" element={<ResumeHome />} />
+                        <Route path="/admin" element={<AdminPanel />} />
+                        {/* Catch-all 404 Route (Must be at the end) */}
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 };
 

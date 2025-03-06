@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { resumeData } from "../components/data";
 
-export default function MainLayout() {
+export default function ResumeHome() {
     return (
         <Container fixed>
             <TitleHeader />
@@ -37,7 +37,7 @@ function Skills() {
     >;
 
     const tableBody = header.map((col) => (
-        <div className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5">
+        <div className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5" key={col}>
             <div>
                 <span className="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
                     <svg className="h-6 w-6 stroke-width"></svg>
@@ -97,8 +97,8 @@ function WorkHistory() {
                 <p>
                     <b>{work.position}</b>
                 </p>
-                {work.reponsibilities.map((resp: any) => (
-                    <p>{resp}</p>
+                {work.reponsibilities.map((resp: any, index: number) => (
+                    <p key={index}>{resp}</p>
                 ))}
             </div>
         );

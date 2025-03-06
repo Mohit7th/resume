@@ -4,7 +4,7 @@ import { Skills, Skill } from "../../types"; // Import correct types
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, InputAdornment, Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 export default function SkillsBlock() {

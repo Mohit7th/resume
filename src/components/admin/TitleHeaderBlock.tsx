@@ -4,7 +4,7 @@ import { TitleHeader } from "../../types";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 export function TitleHeaderBlock() {
