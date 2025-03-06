@@ -1,5 +1,7 @@
-import { Container } from "@mui/material";
+import { Button, Container, IconButton, Skeleton, Stack, Tooltip } from "@mui/material";
 import { resumeData } from "../components/data";
+import Grid from "@mui/material/Grid2";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function ResumeHome() {
     return (
@@ -15,11 +17,31 @@ export default function ResumeHome() {
 
 function TitleHeader() {
     return (
-        <div>
-            <h1>{resumeData.titleHeader.name}</h1>
-            <h2>{resumeData.titleHeader.title}</h2>
-            <p>{resumeData.titleHeader.contact.email}</p>
-        </div>
+        <Grid container spacing={2}>
+            <Grid size={6}>
+                {/* <img src="../../public/assets/logo192.png"></img> */}
+                <Skeleton variant="circular" width={200} height={200} />
+            </Grid>
+            <Grid size={6}>
+                <h1>{resumeData.titleHeader.name}</h1>
+                <h2>{resumeData.titleHeader.title}</h2>
+                <h3>{resumeData.titleHeader.contact.email}</h3>
+                <p>{resumeData.summary.short}</p>
+                <Stack direction="row" spacing={2}>
+                    <Tooltip title="PDF" placement="top" arrow>
+                        <Button variant="outlined">Download CV</Button>
+                    </Tooltip>
+                    <Tooltip title="Email" placement="top" arrow>
+                        <Button variant="outlined">Contact</Button>
+                    </Tooltip>
+                    <Tooltip title="Rate Website" placement="top" arrow>
+                        <IconButton>
+                            <FavoriteIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Stack>
+            </Grid>
+        </Grid>
     );
 }
 
@@ -37,7 +59,10 @@ function Skills() {
     >;
 
     const tableBody = header.map((col) => (
-        <div className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5" key={col}>
+        <div
+            className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5"
+            key={col}
+        >
             <div>
                 <span className="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
                     <svg className="h-6 w-6 stroke-width"></svg>

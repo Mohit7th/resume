@@ -1,5 +1,6 @@
 import {
     AppBar,
+    Avatar,
     Box,
     Button,
     IconButton,
@@ -9,6 +10,7 @@ import {
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../../context/AuthContext";
+import { deepOrange } from "@mui/material/colors";
 
 export default function MainLayout() {
     const location = useLocation();
@@ -43,7 +45,9 @@ export default function MainLayout() {
                             component="div"
                             sx={{ flexGrow: 1 }}
                         >
-                            Mohit Uniyal
+                            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                                MU
+                            </Avatar>
                         </Typography>
                         <Button color="inherit" onClick={() => navigate("/")}>
                             Home
@@ -58,7 +62,9 @@ export default function MainLayout() {
                             <Button color="inherit">Login</Button>
                         )}
                         {auth?.isAuthenticated && (
-                            <Button color="inherit" onClick={auth?.logout}>Logout</Button>
+                            <Button color="inherit" onClick={auth?.logout}>
+                                Logout
+                            </Button>
                         )}
                     </Toolbar>
                 </AppBar>
