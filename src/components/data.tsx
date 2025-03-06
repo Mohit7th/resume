@@ -105,13 +105,13 @@ export const resumeData: ResumeData = {
             },
             {
                 name: "MySQL",
-                experience: "5 years",
+                experience: "2 years",
                 _id: "14",
                 image: "",
             },
             {
                 name: "SQL Server",
-                experience: "5 years",
+                experience: "4 years",
                 _id: "15",
                 image: "",
             },
@@ -119,13 +119,13 @@ export const resumeData: ResumeData = {
         tools: [
             {
                 name: "Git",
-                experience: "5 years",
+                experience: "8 years",
                 _id: "16",
                 image: "",
             },
             {
                 name: "JIRA",
-                experience: "5 years",
+                experience: "8 years",
                 _id: "17",
                 image: "",
             },
@@ -136,8 +136,8 @@ export const resumeData: ResumeData = {
                 image: "",
             },
             {
-                name: "Visual Studio Code",
-                experience: "5 years",
+                name: "VS Code",
+                experience: "8 years",
                 _id: "19",
                 image: "",
             },
@@ -145,25 +145,25 @@ export const resumeData: ResumeData = {
         businessIntelligence: [
             {
                 name: "SSIS",
-                experience: "5 years",
+                experience: "4 years",
                 _id: "20",
                 image: "",
             },
             {
                 name: "Power BI",
-                experience: "5 years",
+                experience: "1 years",
                 _id: "22",
                 image: "",
             },
             {
                 name: "Crystal Reports",
-                experience: "5 years",
+                experience: "1 years",
                 _id: "23",
                 image: "",
             },
             {
                 name: "Qlik View",
-                experience: "5 years",
+                experience: "1 years",
                 _id: "24",
                 image: "",
             },

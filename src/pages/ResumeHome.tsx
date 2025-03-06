@@ -5,6 +5,7 @@ import {
     Box,
     Button,
     Card,
+    CardActionArea,
     CardActions,
     CardContent,
     Chip,
@@ -29,8 +30,8 @@ export default function ResumeHome() {
         <Container fixed>
             <TitleHeader />
             <Summary />
-            <Skills />
             <WorkHistory />
+            <Skills />
             <Projects />
         </Container>
     );
@@ -230,11 +231,41 @@ function Skills() {
 
             {header.map((col, index) => (
                 <CustomTabPanel value={value} index={index}>
-                    {userdata.skills[col].map((data) => (
-                        <span>
-                            {data.name} ({data.experience})
-                        </span>
-                    ))}
+                    <Box
+                        sx={{
+                            width: "100%",
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(auto-fill, minmax(min(180px, 100%), 1fr))",
+                            gap: 2,
+                        }}
+                    >
+                        {userdata.skills[col].map((data) => (
+                            <Card>
+                                <CardActionArea
+                                    onClick={() => {}}
+                                    sx={{
+                                        height: "100%",
+                                    }}
+                                >
+                                    <CardContent sx={{ height: "100%" }}>
+                                        <Typography
+                                            variant="h6"
+                                            component="div"
+                                        >
+                                            {data.name}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="text.secondary"
+                                        >
+                                            {data.experience}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        ))}
+                    </Box>
                 </CustomTabPanel>
             ))}
         </Box>
