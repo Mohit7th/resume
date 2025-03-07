@@ -27,14 +27,15 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
     );
 
     return (
-        <Grid container spacing={2} sx={{ mb: 5, justifyContent: "center" }}>
+        <Grid container spacing={{lg:7, sm: 5}} sx={{ mt:3, mb: 5, justifyContent: "center" }}>
             {filteredProjects.map((project: any) => (
-                <Grid size={4}>
+                <Grid size={{lg:4}}>
                     <Card
                         sx={{
                             maxWidth: 345,
                             display: "flex",
                             flexDirection: "column",
+                            height: "100%"
                         }}
                         key={project._id}
                     >

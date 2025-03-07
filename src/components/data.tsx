@@ -101,8 +101,8 @@ export const resumeData: ResumeData = {
                 experience: "8 years",
                 _id: "19",
                 image: "",
-                type: "tool", 
-            }
+                type: "tool",
+            },
         ],
         browserExtension: [
             {
@@ -148,6 +148,13 @@ export const resumeData: ResumeData = {
                 _id: "20",
                 image: "",
                 type: "ETL",
+            },
+            {
+                name: "T-SQL",
+                experience: "4 years",
+                _id: "39",
+                image: "",
+                type: "scripting",
             },
             {
                 name: "Power BI",
@@ -202,7 +209,7 @@ export const resumeData: ResumeData = {
     },
     projects: [
         {
-            name: "Rezme Web Application",
+            name: "Rezme",
             description:
                 "Developed a web application that manages a white-label system for the Join Cherry Chrome extension, enabling seamless customization and integration for various clients",
             technologies: ["MEAN Stack"],
@@ -211,7 +218,7 @@ export const resumeData: ResumeData = {
             type: "webTechnologies",
         },
         {
-            name: "Join Cherry Web Application",
+            name: "Join Cherry",
             description:
                 "Built a web and Chrome extension-based platform that allows users to search for hotel and flight deals while displaying relevant browser extension data within a user-friendly dashboard",
             technologies: ["MEAN Stack"],
@@ -220,7 +227,7 @@ export const resumeData: ResumeData = {
             type: "webTechnologies",
         },
         {
-            name: "Join Cherry Browser Extension",
+            name: "Join Cherry",
             description:
                 "Designed and developed a browser extension that integrates with various OTA platforms (e.g., Booking.com, Expedia) to provide users with exclusive discounts on hotels, attractions, and flights.",
             technologies: ["HTML", "CSS", "JavaScript"],
@@ -238,6 +245,32 @@ export const resumeData: ResumeData = {
             type: "browserExtension",
         },
         {
+            name: "Al-go",
+            description: "Browser extension to customize youtube feed.",
+            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+            url: "https://chromewebstore.google.com/detail/al-go/adjbkhalicehnbjboobhmhkakcgkmelb?hl=en",
+            _id: "39",
+            type: "browserExtension",
+        },
+        {
+            name: "My Web Resume",
+            description:
+                "The current resume site with admin panel to update resume",
+            technologies: ["MERN Stack"],
+            url: "",
+            _id: "37",
+            type: "webTechnologies",
+        },
+        {
+            name: "HyperWallet",
+            description:
+                "It was a Financial/Loyalty Data Mart, Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
+            technologies: ["SSIS", "Power BI", "SQL Server"],
+            url: "https://www.hyperwallet.com",
+            _id: "29",
+            type: "businessIntelligence",
+        },
+        {
             name: "Synthesis",
             description:
                 "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
@@ -247,23 +280,13 @@ export const resumeData: ResumeData = {
             type: "businessIntelligence",
         },
         {
-            name: "HyperWallet: Financial/Loyalty Data Mart",
+            name: "Colliers",
             description:
-                "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
-            technologies: ["SSIS", "Power BI", "SQL Server"],
-            url: "https://www.hyperwallet.com",
-            _id: "29",
+                "Contributed to the development & maintance of MSBI ETL packages, implementing QlickView reports.",
+            technologies: ["SSIS", "T-SQL", "QlickView"],
+            url: "https://www.contata.com/oil-gas-software",
+            _id: "28",
             type: "businessIntelligence",
-        },
-
-        {
-            name: "My Web Resume",
-            description:
-                "The current resume site with admin panel to update resume",
-            technologies: ["MERN Stack"],
-            url: "",
-            _id: "37",
-            type: "webTechnologies",
         },
     ],
     workHistory: [

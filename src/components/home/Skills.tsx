@@ -1,7 +1,17 @@
 import { SyntheticEvent, useState } from "react";
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
-import { Box, Card, CardActionArea, CardContent, Tab, Tabs, Typography } from "@mui/material";
+import {
+    Box,
+    Card,
+    CardActionArea,
+    CardContent,
+    Paper,
+    styled,
+    Tab,
+    Tabs,
+    Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Projects from "./Projects";
 
@@ -22,7 +32,7 @@ function CustomTabPanel(props: TabPanelProps) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
         </div>
     );
 }
@@ -33,6 +43,17 @@ function a11yProps(index: number, col: string) {
         "aria-controls": `simple-tabpanel-${index}`,
     };
 }
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles("dark", {
+        backgroundColor: "#1A2027",
+    }),
+}));
 
 export default function Skills() {
     const userdata = useUserData();
@@ -47,7 +68,7 @@ export default function Skills() {
     };
 
     return (
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", mb: 5 }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                     value={tabIndex}
@@ -68,30 +89,13 @@ export default function Skills() {
                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                     >
                         {userdata.skills[col].map((data) => (
-                            <Grid size={2}>
-                                <Card>
-                                    <CardActionArea
-                                        onClick={() => {}}
-                                        sx={{
-                                            height: "100%",
-                                        }}
-                                    >
-                                        <CardContent sx={{ height: "100%" }}>
-                                            <Typography
-                                                variant="h6"
-                                                component="div"
-                                            >
-                                                {data.name}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                color="text.secondary"
-                                            >
-                                                {data.experience}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
+                            <Grid size={{md:2, sm: 4}}>
+                                <Item>
+                                    <Typography variant="h6" component="div">
+                                        {data.name}
+                                    </Typography>
+                                    {data.experience}
+                                </Item>
                             </Grid>
                         ))}
                     </Grid>
