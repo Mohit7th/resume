@@ -92,7 +92,7 @@ export default function TitleHeader() {
                                         onClick={handleDownloadCV}
                                         sx={{
                                             color: theme.palette.primary
-                                                .contrastText,
+                                                .contrastText
                                         }}
                                     />
                                 </Tooltip>
@@ -118,7 +118,7 @@ export default function TitleHeader() {
                                     arrow
                                 >
                                     <Chip
-                                        icon={<FavoriteIcon color="primary"/>}
+                                        icon={<FavoriteIcon color="primary" />}
                                         label="Rate"
                                         variant="outlined"
                                         onClick={handleOpenDialog}

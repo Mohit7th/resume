@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState } from "react";
 import { useUserData } from "../../context/UserContext";
-import { resumeData } from "../data";
 import { Box, Paper, styled, Tab, Tabs, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Projects from "./Projects";
@@ -12,19 +11,11 @@ interface TabPanelProps {
     value: number;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
+function CustomTabPanel({ children, value, index }: TabPanelProps) {
     return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
-        </div>
+        <Box sx={{ pt: 3, minHeight: "200px" }}>
+            {value === index && children}
+        </Box>
     );
 }
 
@@ -49,7 +40,7 @@ export default function Skills() {
     const theme = useTheme();
     const userdata = useUserData();
     const header = Object.keys(userdata.skills) as Array<
-        keyof typeof resumeData.skills
+        keyof typeof userdata.skills
     >;
 
     const [tabIndex, setTabIndex] = useState(0);
@@ -69,9 +60,14 @@ export default function Skills() {
                     sx={{ fontWeight: 700 }}
                 >
                     {header.map((tabName, index) => {
-                        const displayName = tabName === "browserExtension" ? "Browser Extension" : tabName === "businessIntelligence" ? "Business Intelligence" : "Web Applications"
+                        const displayName =
+                            tabName === "browserExtension"
+                                ? "Browser Extension"
+                                : tabName === "businessIntelligence"
+                                ? "Business Intelligence"
+                                : "Web Applications";
                         return (
-                            <Tab
+                            <Tab key={index}
                                 label={displayName}
                                 {...a11yProps(index, tabName)}
                                 sx={{
@@ -83,35 +79,32 @@ export default function Skills() {
                 </Tabs>
             </Box>
 
-            {header.map((col, index) => (
-                <CustomTabPanel value={tabIndex} index={index}>
-                    <Grid
-                        container
-                        rowSpacing={1}
-                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                    >
-                        {userdata.skills[col].map((data) => (
-                            <Grid size={{ md: 2, sm: 4 }}>
-                                <Item
-                                    sx={{
-                                        backgroundColor:
-                                            theme.palette.primary.light,
-                                        color: theme.palette.primary
-                                            .contrastText,
-                                    }}
-                                >
-                                    <Typography variant="h6" component="div">
-                                        {data.name}
-                                    </Typography>
-                                    {data.experience}
-                                </Item>
-                            </Grid>
-                        ))}
-                    </Grid>
+            <CustomTabPanel value={tabIndex} index={tabIndex}>
+                <Grid
+                    container
+                    rowSpacing={1}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                >
+                    {userdata.skills[header[tabIndex]].map((data, idx) => (
+                        <Grid size={{ xs: 4, sm:6, md: 2}} key={idx}>
+                            <Item
+                                sx={{
+                                    backgroundColor:
+                                        theme.palette.primary.light,
+                                    color: theme.palette.primary.contrastText,
+                                }}
+                            >
+                                <Typography variant="h6" component="div">
+                                    {data.name}
+                                </Typography>
+                                {data.experience}
+                            </Item>
+                        </Grid>
+                    ))}
+                </Grid>
 
-                    <Projects tabIndex={tabIndex} header={header} />
-                </CustomTabPanel>
-            ))}
+                <Projects tabIndex={tabIndex} header={header} />
+            </CustomTabPanel>
         </Box>
     );
 }

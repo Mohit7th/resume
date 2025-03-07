@@ -314,6 +314,16 @@ export const resumeData: ResumeData = {
             type: "businessIntelligence",
             image: "/assets/real-state.jpg",
         },
+        {
+            name: "Patent Analytics System",
+            description:
+                "Contributed in optimizing the slow running queries, made stored procedure to avoid mutliple database queries.",
+            technologies: ["MySQL"],
+            url: "https://www.contata.com/case-studies/invent-management-system-for-an-ip-law-consulting-firm/",
+            _id: "28",
+            type: "businessIntelligence",
+            image: "/assets/patent-analytics.jpg",
+        },
     ],
     workHistory: [
         {

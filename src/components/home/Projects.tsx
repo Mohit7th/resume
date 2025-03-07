@@ -31,18 +31,24 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
     return (
         <Grid
             container
-            spacing={{ lg: 7, sm: 2 }}
+            spacing={{ xs: 2, sm: 2, md: 2 }}
             sx={{ mt: 3, mb: 5, justifyContent: "space-between" }}
         >
-            {filteredProjects.map((project: any) => (
-                <Grid size={{ lg: 4 }}>
+            {filteredProjects.map((project: any, idx: number) => (
+                <Grid size={{ xs: 12, sm:6, md: 3}} key={idx}>
                     <Card
                         sx={{
-                            maxWidth: 345,
+                            maxWidth: 300,
                             display: "flex",
                             flexDirection: "column",
                             height: "100%",
                             backgroundColor: theme.palette.primary.light,
+                            transition: "0.3s",
+                            boxShadow: 3,
+                            "&:hover": {
+                                boxShadow: 10,
+                                transform: "translateY(-5px)",
+                            },
                         }}
                         key={project._id}
                     >
