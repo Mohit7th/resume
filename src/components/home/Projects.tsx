@@ -4,6 +4,7 @@ import {
     CardContent,
     Typography,
     Skeleton,
+    CardActionArea,
 } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
@@ -44,31 +45,27 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                         }}
                         key={project._id}
                     >
-                        <Skeleton variant="rounded" height={140} />
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                            >
-                                {project.name}
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                sx={{ color: theme.palette.primary.contrastText }}
-                            >
-                                {project.description}
-                            </Typography>
-                        </CardContent>
-                        {/* <CardActions sx={{ mt: "auto" }}>
-                            {project.technologies.map(
-                                (skill: string, index: number) => (
-                                    <Button key={index} size="small">
-                                        {skill}
-                                    </Button>
-                                )
-                            )}
-                        </CardActions> */}
+                        <CardActionArea onClick={() => window.open(project.url)}>
+                            <Skeleton variant="rounded" height={140} />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="div"
+                                >
+                                    {project.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        color: theme.palette.primary
+                                            .contrastText,
+                                    }}
+                                >
+                                    {project.description}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
                     </Card>
                 </Grid>
             ))}

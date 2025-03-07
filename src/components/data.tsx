@@ -260,7 +260,7 @@ export const resumeData: ResumeData = {
             type: "browserExtension",
         },
         {
-            name: "My Web Resume",
+            name: "Web Resume",
             description:
                 "The current resume site with admin panel to update resume",
             technologies: ["MERN Stack"],
@@ -269,29 +269,29 @@ export const resumeData: ResumeData = {
             type: "webTechnologies",
         },
         {
-            name: "HyperWallet",
+            name: "Financial/Loyalty Data Mart",
             description:
-                "It was a Financial/Loyalty Data Mart, Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
+                "It was a Financial/Loyalty Data Mart, the main responsibilites included ETL pacakges implementation and deployment.",
             technologies: ["SSIS", "Power BI", "SQL Server"],
             url: "https://www.hyperwallet.com",
             _id: "29",
             type: "businessIntelligence",
         },
         {
-            name: "Synthesis",
+            name: "Oil & Gas Reporting",
             description:
-                "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
+                "Contributed to the development business reports for the oil and gas industry, Implemented stored procedures for data reports.",
             technologies: ["T-SQL", "Crystal Reports"],
             url: "https://www.contata.com/oil-gas-software",
             _id: "28",
             type: "businessIntelligence",
         },
         {
-            name: "Colliers",
+            name: "Real State Service",
             description:
-                "Contributed to the development & maintance of MSBI ETL packages, implementing QlickView reports.",
+                "Contributed to the development & maintance of MSBI ETL packages, implementing QlickView reports. Handled US-based client calls regarding project.",
             technologies: ["SSIS", "T-SQL", "QlickView"],
-            url: "https://www.contata.com/oil-gas-software",
+            url: "https://cginfinity.com/data-analytics-ai",
             _id: "28",
             type: "businessIntelligence",
         },
@@ -322,7 +322,7 @@ export const resumeData: ResumeData = {
             position: "BI Engineer",
             startDate: "2018-08-01",
             endDate: "2019-08-01",
-            website: "https://www.cybergroup.in",
+            website: "https://cginfinity.com",
             reponsibilities: [
                 "Developed and optimized QlikView reports for data visualization.",
                 "Debugged and implemented MSBI ETL packages for efficient data processing",
