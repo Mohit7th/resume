@@ -37,11 +37,12 @@ export default function WorkHistory() {
             <Accordion
                 key={work._id}
                 sx={{
-                    backgroundColor: theme.palette.primary.light,
+                    backgroundColor: theme.palette.primary.dark,
                     color: theme.palette.primary.contrastText,
                 }}
                 expanded={expanded === work._id}
                 onChange={handleChange(work._id)}
+                
             >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -62,7 +63,7 @@ export default function WorkHistory() {
                     <Typography
                         component="span"
                         sx={{
-                            color: theme.palette.primary.dark,
+                            color: theme.palette.primary.contrastText,
                             fontWeight: 500,
                         }}
                     >
@@ -79,14 +80,16 @@ export default function WorkHistory() {
                     <Typography
                         component="span"
                         sx={{
-                            color: theme.palette.primary.dark,
+                            color: theme.palette.primary.contrastText,
                             fontWeight: 500,
                         }}
                     >
                         {years} years {months > 0 ? `${months} months` : ""}
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{
+                    backgroundColor: theme.palette.primary.light,
+                }}>
                     <List dense={true}>
                         {work.reponsibilities.map(
                             (resp: any, index: number) => (

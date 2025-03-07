@@ -1,7 +1,14 @@
 import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useUserData } from "../../context/UserContext";
-import { Box, Chip, Skeleton, Stack, Tooltip, Typography } from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Chip,
+    Stack,
+    Tooltip,
+    Typography,
+} from "@mui/material";
 import FormDialog from "../ui/RatingFormDialog";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTheme } from "@mui/material/styles";
@@ -13,7 +20,9 @@ export default function TitleHeader() {
 
     function handleDownloadCV() {}
 
-    function handleContactMe() {}
+    function handleContactMe(recipientEmail: string) {
+        window.location.href = `mailto:${recipientEmail}`;
+    }
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -42,9 +51,8 @@ export default function TitleHeader() {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        {/* <img src="../../public/assets/logo192.png"></img> */}
-                        <Skeleton variant="circular" width={200} height={200} />
+                    <Grid size={{ xs: 12, md: 6 }} alignItems="center" sx={{pl:4}}>
+                        <Avatar alt="Remy Sharp" src="/assets/mypic.jpg" sx={{ width: 200, height: 200 }}/>
                     </Grid>
                     <Grid
                         size={{ xs: 12, md: 6 }}
@@ -83,7 +91,7 @@ export default function TitleHeader() {
                                     <Chip
                                         label="Contact"
                                         variant="outlined"
-                                        onClick={handleContactMe}
+                                        onClick={()=>handleContactMe(userdata.titleHeader.contact.email)}
                                         sx={{
                                             color: theme.palette.primary
                                                 .contrastText,
