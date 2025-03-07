@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { deepOrange } from "@mui/material/colors";
 import Footer from "./Footer";
 import { useTheme } from "@mui/material/styles";
 
@@ -43,7 +42,7 @@ export default function MainLayout() {
                             component="div"
                             sx={{ flexGrow: 1 }} onClick={() => navigate("/")}
                         >
-                            <Avatar sx={{ bgcolor: deepOrange[500] }} >
+                            <Avatar sx={{ bgcolor: theme.palette.primary.light }} >
                                 MU
                             </Avatar>
                         </Typography>
