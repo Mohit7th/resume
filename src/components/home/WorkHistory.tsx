@@ -3,6 +3,10 @@ import {
     AccordionDetails,
     AccordionSummary,
     Divider,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
     Typography,
 } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
@@ -10,6 +14,8 @@ import Grid from "@mui/material/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTheme } from "@mui/material/styles";
 import { SyntheticEvent, useState } from "react";
+
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function WorkHistory() {
     const [expanded, setExpanded] = useState<string | false>(false);
@@ -26,7 +32,7 @@ export default function WorkHistory() {
             key={work._id}
             sx={{
                 backgroundColor: theme.palette.primary.light,
-                color: theme.palette.primary.contrastText
+                color: theme.palette.primary.contrastText,
             }}
             expanded={expanded === work._id}
             onChange={handleChange(work._id)}
@@ -37,13 +43,21 @@ export default function WorkHistory() {
                 id="panel1-header"
             >
                 <Typography component="span">
-                    <b>{work.company}</b><Divider orientation="vertical" flexItem /> {work.position}
+                    <b>{work.company}</b>
+                    <Divider orientation="vertical" flexItem /> {work.position}
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
-                {work.reponsibilities.map((resp: any, index: number) => (
-                    <p key={index}>{resp}</p>
-                ))}
+                <List dense={true}>
+                    {work.reponsibilities.map((resp: any, index: number) => (
+                        <ListItem key={index}>
+                            <ListItemIcon>
+                                <CheckIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={resp} />
+                        </ListItem>
+                    ))}
+                </List>
             </AccordionDetails>
         </Accordion>
     ));
