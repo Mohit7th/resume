@@ -285,7 +285,7 @@ export const resumeData: ResumeData = {
             image: "/assets/resume.png",
         },
         {
-            name: "Financial/Loyalty Data Mart",
+            name: "Financial Data Mart",
             description:
                 "It was a Financial/Loyalty Data Mart, the main responsibilites included ETL pacakges implementation and deployment.",
             technologies: ["SSIS", "Power BI", "SQL Server"],
@@ -315,7 +315,7 @@ export const resumeData: ResumeData = {
             image: "/assets/real-state.jpg",
         },
         {
-            name: "Patent Analytics System",
+            name: "Patent Analytics",
             description:
                 "Contributed in optimizing the slow running queries, made stored procedure to avoid mutliple database queries.",
             technologies: ["MySQL"],
