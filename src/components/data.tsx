@@ -279,7 +279,7 @@ export const resumeData: ResumeData = {
             description:
                 "The current resume site with admin panel to update resume",
             technologies: ["MERN Stack"],
-            url: "",
+            url: "navigate('/')",
             _id: "37",
             type: "webTechnologies",
             image: "/assets/resume.png",
@@ -337,7 +337,7 @@ export const resumeData: ResumeData = {
             _id: "30",
         },
         {
-            company: "Cyber Group Inc.",
+            company: "Cyber Group Inc. / CG Infinity",
             position: "BI Engineer",
             startDate: "2018-08-01",
             endDate: "2019-08-01",
