@@ -95,7 +95,7 @@ export default function Skills() {
                                 <Item
                                     sx={{
                                         backgroundColor:
-                                            theme.palette.primary.dark,
+                                            theme.palette.primary.light,
                                         color: theme.palette.primary
                                             .contrastText,
                                     }}

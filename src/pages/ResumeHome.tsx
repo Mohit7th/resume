@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Chip, Container, Divider } from "@mui/material";
 
 import Skills from "../components/home/Skills";
 import TitleHeader from "../components/home/TitleHeader";
@@ -9,7 +9,9 @@ export default function ResumeHome() {
     return (
         <Container fixed>
             <TitleHeader />
+            <Divider> <Chip label="Summary" /></Divider>
             <Summary />
+            <Divider/>
             <WorkHistory />
             <Skills />
         </Container>

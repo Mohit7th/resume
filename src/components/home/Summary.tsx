@@ -8,7 +8,7 @@ export default function Summary() {
     return (
         <Box
             component="section"
-            sx={{ p: 5, border: "1px dashed grey", mb: 5, color: theme.palette.primary.dark }}
+            sx={{ p: 5, color: theme.palette.primary.dark }}
         >
             <Typography variant="subtitle1" gutterBottom>
                 {userdata.summary.detailed}

@@ -1,14 +1,7 @@
 import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useUserData } from "../../context/UserContext";
-import {
-    Avatar,
-    Box,
-    Chip,
-    Stack,
-    Tooltip,
-    Typography,
-} from "@mui/material";
+import { Avatar, Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
 import FormDialog from "../ui/RatingFormDialog";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +11,16 @@ export default function TitleHeader() {
     const userdata = useUserData();
     const theme = useTheme();
 
-    function handleDownloadCV() {}
+    function handleDownloadCV() {
+        const date = new Date();
+        const pdfFilePath = "/assets/Mohit_Uniyal.pdf"; // Update with your actual PDF file path
+        const link = document.createElement("a");
+        link.href = pdfFilePath;
+        link.download = `Mohit_Uniyal_${date}.pdf`; // Change this to desired file name
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
     function handleContactMe(recipientEmail: string) {
         window.location.href = `mailto:${recipientEmail}`;
@@ -51,8 +53,16 @@ export default function TitleHeader() {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid size={{ xs: 12, md: 6 }} alignItems="center" sx={{pl:4}}>
-                        <Avatar alt="Remy Sharp" src="/assets/mypic.jpg" sx={{ width: 200, height: 200 }}/>
+                    <Grid
+                        size={{ xs: 12, md: 6 }}
+                        alignItems="center"
+                        sx={{ pl: 4 }}
+                    >
+                        <Avatar
+                            alt="Remy Sharp"
+                            src="/assets/mypic.jpg"
+                            sx={{ width: 200, height: 200 }}
+                        />
                     </Grid>
                     <Grid
                         size={{ xs: 12, md: 6 }}
@@ -91,7 +101,12 @@ export default function TitleHeader() {
                                     <Chip
                                         label="Contact"
                                         variant="outlined"
-                                        onClick={()=>handleContactMe(userdata.titleHeader.contact.email)}
+                                        onClick={() =>
+                                            handleContactMe(
+                                                userdata.titleHeader.contact
+                                                    .email
+                                            )
+                                        }
                                         sx={{
                                             color: theme.palette.primary
                                                 .contrastText,

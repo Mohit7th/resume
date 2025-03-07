@@ -89,6 +89,7 @@ export default function WorkHistory() {
                 </AccordionSummary>
                 <AccordionDetails sx={{
                     backgroundColor: theme.palette.primary.light,
+                    color: theme.palette.primary.contrastText,
                 }}>
                     <List dense={true}>
                         {work.reponsibilities.map(
@@ -108,7 +109,7 @@ export default function WorkHistory() {
     });
 
     return (
-        <Grid container spacing={2} sx={{ mb: 5 }}>
+        <Grid container spacing={2} sx={{ mb: 5, mt:5 }}>
             <Grid size={12}>{accordianData}</Grid>
         </Grid>
     );
