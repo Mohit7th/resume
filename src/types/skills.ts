@@ -4,12 +4,11 @@ export type Skill = {
     experience: string;
     _id: string;
     image: string;
+    type: string;
 };
 
 export type Skills = {
     webTechnologies: Skill[];
-    backendFrameworks: Skill[];
-    databases: Skill[];
-    tools: Skill[];
+    browserExtension: Skill[];
     businessIntelligence: Skill[];
 };
