@@ -300,7 +300,7 @@ export const resumeData: ResumeData = {
         {
             company: "Frooty Studios Pvt. Ltd",
             position: "Full Stack Developer",
-            startDate: "2019-01-01",
+            startDate: "2019-07-01",
             endDate: null,
             website: "https://www.frootystudios.com",
             reponsibilities: [
@@ -320,8 +320,8 @@ export const resumeData: ResumeData = {
         {
             company: "Cyber Group Inc.",
             position: "BI Engineer",
-            startDate: "2018-01-01",
-            endDate: "2019-01-01",
+            startDate: "2018-08-01",
+            endDate: "2019-08-01",
             website: "https://www.cybergroup.in",
             reponsibilities: [
                 "Developed and optimized QlikView reports for data visualization.",
@@ -335,7 +335,7 @@ export const resumeData: ResumeData = {
             company: "Contata Solutions Pvt. Ltd",
             position: "Jr. System Analyst",
             startDate: "2016-01-01",
-            endDate: "2018-01-01",
+            endDate: "2018-08-01",
             website: "https://www.contata.com",
             reponsibilities: [
                 "Developed and managed ETL packages for data processing",

@@ -65,17 +65,21 @@ export default function Skills() {
                     value={tabIndex}
                     onChange={handleChange}
                     aria-label="skills-tabs"
+                    centered
+                    sx={{ fontWeight: 700 }}
                 >
-                    {header.map((col, index) => (
-                        <Tab
-                            label={col}
-                            {...a11yProps(index, col)}
-                            sx={{
-                                color:
-                                    theme.palette.primary.dark,
-                            }}
-                        />
-                    ))}
+                    {header.map((tabName, index) => {
+                        const displayName = tabName === "browserExtension" ? "Browser Extension" : tabName === "businessIntelligence" ? "Business Intelligence" : "Web Applications"
+                        return (
+                            <Tab
+                                label={displayName}
+                                {...a11yProps(index, tabName)}
+                                sx={{
+                                    color: theme.palette.primary.dark,
+                                }}
+                            />
+                        );
+                    })}
                 </Tabs>
             </Box>
 

@@ -29,8 +29,8 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
     return (
         <Grid
             container
-            spacing={{ lg: 7, sm: 5 }}
-            sx={{ mt: 3, mb: 5, justifyContent: "center" }}
+            spacing={{ lg: 7, sm: 2 }}
+            sx={{ mt: 3, mb: 5, justifyContent: "space-between" }}
         >
             {filteredProjects.map((project: any) => (
                 <Grid size={{ lg: 4 }}>
