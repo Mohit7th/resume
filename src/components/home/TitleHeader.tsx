@@ -95,7 +95,6 @@ export default function TitleHeader() {
                                                 .contrastText,
                                         }}
                                     />
-                                    {/* <Button variant="outlined">Download CV</Button> */}
                                 </Tooltip>
                                 <Tooltip title="Email" placement="top" arrow>
                                     <Chip
@@ -112,7 +111,6 @@ export default function TitleHeader() {
                                                 .contrastText,
                                         }}
                                     />
-                                    {/* <Button variant="outlined">Contact</Button> */}
                                 </Tooltip>
                                 <Tooltip
                                     title="Rate Website"
@@ -120,7 +118,7 @@ export default function TitleHeader() {
                                     arrow
                                 >
                                     <Chip
-                                        icon={<FavoriteIcon />}
+                                        icon={<FavoriteIcon color="primary"/>}
                                         label="Rate"
                                         variant="outlined"
                                         onClick={handleOpenDialog}

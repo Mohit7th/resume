@@ -223,6 +223,7 @@ export const resumeData: ResumeData = {
             url: "https://admin.rezme.com/login",
             _id: "25",
             type: "webTechnologies",
+            image: "/assets/rezme-web.png",
         },
         {
             name: "Join Cherry",
@@ -232,6 +233,7 @@ export const resumeData: ResumeData = {
             url: "https://www.joincherry.com/",
             _id: "26",
             type: "webTechnologies",
+            image: "/assets/cherry-web.png",
         },
         {
             name: "Join Cherry",
@@ -241,6 +243,7 @@ export const resumeData: ResumeData = {
             url: "https://chromewebstore.google.com/detail/join-cherry-stop-overpayi/chdofjfbphhphdllcadpnaochgcapnid",
             _id: "27",
             type: "browserExtension",
+            image: "/assets/cherry.png",
         },
         {
             name: "Quick Snip",
@@ -250,6 +253,7 @@ export const resumeData: ResumeData = {
             url: "https://chromewebstore.google.com/detail/Quick%20Snip/gjjhmphibjpmjbeghgjgecennojdohgc?hl=en&authuser=0",
             _id: "38",
             type: "browserExtension",
+            image: "/assets/quick-snip.png",
         },
         {
             name: "Al-go",
@@ -258,6 +262,17 @@ export const resumeData: ResumeData = {
             url: "https://chromewebstore.google.com/detail/al-go/adjbkhalicehnbjboobhmhkakcgkmelb?hl=en",
             _id: "39",
             type: "browserExtension",
+            image: "/assets/al-go.png",
+        },
+        {
+            name: "i-search",
+            description:
+                "allows Internet users to search the web in complete privacy and provides the essentials to take control of their personal information: tracker blocking, smarter encryption, and private search.",
+            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+            url: "https://addons.mozilla.org/en-US/firefox/addon/isearch/",
+            _id: "39",
+            type: "browserExtension",
+            image: "/assets/i-search.png",
         },
         {
             name: "Web Resume",
@@ -267,6 +282,7 @@ export const resumeData: ResumeData = {
             url: "",
             _id: "37",
             type: "webTechnologies",
+            image: "/assets/resume.png",
         },
         {
             name: "Financial/Loyalty Data Mart",
@@ -276,6 +292,7 @@ export const resumeData: ResumeData = {
             url: "https://www.hyperwallet.com",
             _id: "29",
             type: "businessIntelligence",
+            image: "/assets/wallet.jpg",
         },
         {
             name: "Oil & Gas Reporting",
@@ -285,6 +302,7 @@ export const resumeData: ResumeData = {
             url: "https://www.contata.com/oil-gas-software",
             _id: "28",
             type: "businessIntelligence",
+            image: "/assets/oil-gas.jpg",
         },
         {
             name: "Real State Service",
@@ -294,6 +312,7 @@ export const resumeData: ResumeData = {
             url: "https://cginfinity.com/data-analytics-ai",
             _id: "28",
             type: "businessIntelligence",
+            image: "/assets/real-state.jpg",
         },
     ],
     workHistory: [

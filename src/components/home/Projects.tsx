@@ -5,6 +5,7 @@ import {
     Typography,
     Skeleton,
     CardActionArea,
+    CardMedia,
 } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
@@ -45,8 +46,19 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                         }}
                         key={project._id}
                     >
-                        <CardActionArea onClick={() => window.open(project.url)}>
-                            <Skeleton variant="rounded" height={140} />
+                        <CardActionArea
+                            onClick={() => window.open(project.url)}
+                        >
+                            {!project.image ? (
+                                <Skeleton variant="rounded" height={140} />
+                            ) : (
+                                <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={project.image}
+                                    alt={project.name}
+                                />
+                            )}
                             <CardContent>
                                 <Typography
                                     gutterBottom

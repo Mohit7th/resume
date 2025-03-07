@@ -6,4 +6,5 @@ export type Projects = {
     url: string;
     _id: string;
     type: string;
+    image: string;
 };
