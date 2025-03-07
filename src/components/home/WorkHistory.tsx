@@ -2,6 +2,7 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Divider,
     Typography,
 } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
@@ -24,7 +25,8 @@ export default function WorkHistory() {
         <Accordion
             key={work._id}
             sx={{
-                backgroundColor: theme.palette.primary.contrastText,
+                backgroundColor: theme.palette.primary.light,
+                color: theme.palette.primary.contrastText
             }}
             expanded={expanded === work._id}
             onChange={handleChange(work._id)}
@@ -35,7 +37,7 @@ export default function WorkHistory() {
                 id="panel1-header"
             >
                 <Typography component="span">
-                    <b>{work.company}</b> {work.position}
+                    <b>{work.company}</b><Divider orientation="vertical" flexItem /> {work.position}
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>

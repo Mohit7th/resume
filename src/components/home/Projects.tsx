@@ -42,7 +42,7 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                             display: "flex",
                             flexDirection: "column",
                             height: "100%",
-                            backgroundColor: theme.palette.primary.contrastText,
+                            backgroundColor: theme.palette.primary.light,
                         }}
                         key={project._id}
                     >
@@ -57,12 +57,12 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                             </Typography>
                             <Typography
                                 variant="body2"
-                                sx={{ color: theme.palette.primary.light }}
+                                sx={{ color: theme.palette.primary.contrastText }}
                             >
                                 {project.description}
                             </Typography>
                         </CardContent>
-                        <CardActions sx={{ mt: "auto" }}>
+                        {/* <CardActions sx={{ mt: "auto" }}>
                             {project.technologies.map(
                                 (skill: string, index: number) => (
                                     <Button key={index} size="small">
@@ -70,7 +70,7 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                                     </Button>
                                 )
                             )}
-                        </CardActions>
+                        </CardActions> */}
                     </Card>
                 </Grid>
             ))}

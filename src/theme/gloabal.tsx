@@ -4,14 +4,14 @@ const globalStyles = (
     <GlobalStyles
         styles={{
             body: {
-                backgroundColor: "#7886C7",
+                backgroundColor: "#A9B5DF",
                 color: "#FFF2F2",
             },
             "::-webkit-scrollbar": {
                 width: "5px",
             },
             "::-webkit-scrollbar-thumb": {
-                background: "#A9B5DF",
+                background: "#7886C7",
                 borderRadius: "5px",
             },
         }}

@@ -4,16 +4,10 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#2D336B", // Example primary color
-            light: "#FFF2F2", // Lighter shade
+            main: "#fff", // Example primary color
+            light: "#7886C7", // Lighter shade
             dark: "#2D336B", // Darker shade
-            contrastText: "#A9B5DF", // Text color on primary
-        },
-        secondary: {
-            main: "#222831", // Example secondary color
-            light: "#31363F",
-            dark: "#76ABAE",
-            contrastText: "#EEEEEE",
+            contrastText: "#FFF2F2", // Text color on primary
         },
         error: {
             main: "#D02631",
@@ -33,7 +27,7 @@ const theme = createTheme({
         },
         text: {
             primary: "#2D336B",
-            secondary: "#A9B5DF",
+            secondary: "#7886C7",
         },
     },
 });

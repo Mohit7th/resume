@@ -140,6 +140,13 @@ export const resumeData: ResumeData = {
                 image: "",
                 type: "web",
             },
+            {
+                name: "VS Code",
+                experience: "8 years",
+                _id: "19",
+                image: "",
+                type: "tool",
+            },
         ],
         businessIntelligence: [
             {

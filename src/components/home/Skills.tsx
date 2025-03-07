@@ -36,11 +36,10 @@ function a11yProps(index: number, col: string) {
 }
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     ...theme.applyStyles("dark", {
         backgroundColor: "#1A2027",
     }),
@@ -60,7 +59,7 @@ export default function Skills() {
     };
 
     return (
-        <Box sx={{ width: "100%", mb: 5 }}>
+        <Box sx={{ width: "100%" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                     value={tabIndex}
@@ -68,7 +67,14 @@ export default function Skills() {
                     aria-label="skills-tabs"
                 >
                     {header.map((col, index) => (
-                        <Tab label={col} {...a11yProps(index, col)} />
+                        <Tab
+                            label={col}
+                            {...a11yProps(index, col)}
+                            sx={{
+                                color:
+                                    theme.palette.primary.dark,
+                            }}
+                        />
                     ))}
                 </Tabs>
             </Box>
@@ -82,7 +88,14 @@ export default function Skills() {
                     >
                         {userdata.skills[col].map((data) => (
                             <Grid size={{ md: 2, sm: 4 }}>
-                                <Item color="primary" >
+                                <Item
+                                    sx={{
+                                        backgroundColor:
+                                            theme.palette.primary.dark,
+                                        color: theme.palette.primary
+                                            .contrastText,
+                                    }}
+                                >
                                     <Typography variant="h6" component="div">
                                         {data.name}
                                     </Typography>
