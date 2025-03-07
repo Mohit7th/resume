@@ -1,19 +1,10 @@
 import { SyntheticEvent, useState } from "react";
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
-import {
-    Box,
-    Card,
-    CardActionArea,
-    CardContent,
-    Paper,
-    styled,
-    Tab,
-    Tabs,
-    Typography,
-} from "@mui/material";
+import { Box, Paper, styled, Tab, Tabs, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Projects from "./Projects";
+import { useTheme } from "@mui/material/styles";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -56,6 +47,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Skills() {
+    const theme = useTheme();
     const userdata = useUserData();
     const header = Object.keys(userdata.skills) as Array<
         keyof typeof resumeData.skills
@@ -89,8 +81,8 @@ export default function Skills() {
                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                     >
                         {userdata.skills[col].map((data) => (
-                            <Grid size={{md:2, sm: 4}}>
-                                <Item>
+                            <Grid size={{ md: 2, sm: 4 }}>
+                                <Item color="primary" >
                                     <Typography variant="h6" component="div">
                                         {data.name}
                                     </Typography>

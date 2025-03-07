@@ -10,6 +10,7 @@ import {
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 // Define props interface for type safety
 interface ProjectsProps {
     tabIndex: number;
@@ -17,6 +18,7 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
+    const theme = useTheme();
     const selectedTab = header.find((_, index) => index === tabIndex) || {
         type: "webTechnologies",
     };
@@ -27,15 +29,20 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
     );
 
     return (
-        <Grid container spacing={{lg:7, sm: 5}} sx={{ mt:3, mb: 5, justifyContent: "center" }}>
+        <Grid
+            container
+            spacing={{ lg: 7, sm: 5 }}
+            sx={{ mt: 3, mb: 5, justifyContent: "center" }}
+        >
             {filteredProjects.map((project: any) => (
-                <Grid size={{lg:4}}>
+                <Grid size={{ lg: 4 }}>
                     <Card
                         sx={{
                             maxWidth: 345,
                             display: "flex",
                             flexDirection: "column",
-                            height: "100%"
+                            height: "100%",
+                            backgroundColor: theme.palette.primary.contrastText,
                         }}
                         key={project._id}
                     >
@@ -50,7 +57,7 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                             </Typography>
                             <Typography
                                 variant="body2"
-                                sx={{ color: "text.secondary" }}
+                                sx={{ color: theme.palette.primary.light }}
                             >
                                 {project.description}
                             </Typography>

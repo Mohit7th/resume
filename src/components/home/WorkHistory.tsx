@@ -1,12 +1,34 @@
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Typography,
+} from "@mui/material";
 import { useUserData } from "../../context/UserContext";
 import Grid from "@mui/material/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useTheme } from "@mui/material/styles";
+import { SyntheticEvent, useState } from "react";
 
 export default function WorkHistory() {
+    const [expanded, setExpanded] = useState<string | false>(false);
+
+    const handleChange =
+        (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+            setExpanded(isExpanded ? panel : false);
+        };
+
+    const theme = useTheme();
     const userdata = useUserData();
     const accordianData = userdata.workHistory.map((work: any) => (
-        <Accordion key={work._id}>
+        <Accordion
+            key={work._id}
+            sx={{
+                backgroundColor: theme.palette.primary.contrastText,
+            }}
+            expanded={expanded === work._id}
+            onChange={handleChange(work._id)}
+        >
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
