@@ -169,67 +169,72 @@ export const resumeData: ResumeData = {
             },
         ],
     },
-    projects: {
-        professional: [
-            {
-                name: "Rezme Web Application",
-                description:
-                    "Developed a web application that manages a white-label system for the Join Cherry Chrome extension, enabling seamless customization and integration for various clients",
-                technologies: ["MEAN Stack"],
-                url: "https://admin.rezme.com/login",
-                _id: "25",
-            },
-            {
-                name: "Join Cherry Web Application",
-                description:
-                    "Built a web and Chrome extension-based platform that allows users to search for hotel and flight deals while displaying relevant browser extension data within a user-friendly dashboard",
-                technologies: ["MEAN Stack"],
-                url: "https://www.joincherry.com/",
-                _id: "26",
-            },
-            {
-                name: "Join Cherry Browser Extension",
-                description:
-                    "Designed and developed a browser extension that integrates with various OTA platforms (e.g., Booking.com, Expedia) to provide users with exclusive discounts on hotels, attractions, and flights.",
-                technologies: ["HTML", "CSS", "JavaScript"],
-                url: "https://chromewebstore.google.com/detail/join-cherry-stop-overpayi/chdofjfbphhphdllcadpnaochgcapnid",
-                _id: "27",
-            },
-            {
-                name: "Quick Snip",
-                description: "A small browser extension to capture screenshot of web browser tabs, region or full page. Managing chrome store deployment, bug fixing etc",
-                technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
-                url: "https://chromewebstore.google.com/detail/Quick%20Snip/gjjhmphibjpmjbeghgjgecennojdohgc?hl=en&authuser=0",
-                _id: "38"
-            },
-            {
-                name: "Synthesis",
-                description:
-                    "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
-                technologies: ["T-SQL", "Crystal Reports"],
-                url: "https://www.contata.com/oil-gas-software",
-                _id: "28",
-            },
-            {
-                name: "HyperWallet: Financial/Loyalty Data Mart",
-                description:
-                    "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
-                technologies: ["SSIS", "Power BI", "SQL Server"],
-                url: "https://www.hyperwallet.com",
-                _id: "29",
-            },
-        ],
-        personalProjects: [
-            {
-                name: "REACT JS Resume",
-                description:
-                    "The current resume site with admin panel to update resume",
-                technologies: ["REACT.js", "Node.js", "Express.js", "MongoDB"],
-                url: "",
-                _id: "37",
-            },
-        ],
-    },
+    projects: [
+        {
+            name: "Rezme Web Application",
+            description:
+                "Developed a web application that manages a white-label system for the Join Cherry Chrome extension, enabling seamless customization and integration for various clients",
+            technologies: ["MEAN Stack"],
+            url: "https://admin.rezme.com/login",
+            _id: "25",
+            type: "web",
+        },
+        {
+            name: "Join Cherry Web Application",
+            description:
+                "Built a web and Chrome extension-based platform that allows users to search for hotel and flight deals while displaying relevant browser extension data within a user-friendly dashboard",
+            technologies: ["MEAN Stack"],
+            url: "https://www.joincherry.com/",
+            _id: "26",
+            type: "web",
+        },
+        {
+            name: "Join Cherry Browser Extension",
+            description:
+                "Designed and developed a browser extension that integrates with various OTA platforms (e.g., Booking.com, Expedia) to provide users with exclusive discounts on hotels, attractions, and flights.",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            url: "https://chromewebstore.google.com/detail/join-cherry-stop-overpayi/chdofjfbphhphdllcadpnaochgcapnid",
+            _id: "27",
+            type: "extension",
+        },
+        {
+            name: "Quick Snip",
+            description:
+                "A small browser extension to capture screenshot of web browser tabs, region or full page. Managing chrome store deployment, bug fixing etc",
+            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+            url: "https://chromewebstore.google.com/detail/Quick%20Snip/gjjhmphibjpmjbeghgjgecennojdohgc?hl=en&authuser=0",
+            _id: "38",
+            type: "extension",
+        },
+        {
+            name: "Synthesis",
+            description:
+                "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
+            technologies: ["T-SQL", "Crystal Reports"],
+            url: "https://www.contata.com/oil-gas-software",
+            _id: "28",
+            type: "bi",
+        },
+        {
+            name: "HyperWallet: Financial/Loyalty Data Mart",
+            description:
+                "Contributed to the development of a comprehensive order-to-cash management system tailored for the oil and gas industry, streamlining financial transactions and operational workflows.",
+            technologies: ["SSIS", "Power BI", "SQL Server"],
+            url: "https://www.hyperwallet.com",
+            _id: "29",
+            type: "bi",
+        },
+
+        {
+            name: "REACT JS Resume",
+            description:
+                "The current resume site with admin panel to update resume",
+            technologies: ["REACT.js", "Node.js", "Express.js", "MongoDB"],
+            url: "",
+            _id: "37",
+            type: "web",
+        },
+    ],
     workHistory: [
         {
             company: "Frooty Studios Pvt. Ltd",

@@ -111,7 +111,7 @@ function Summary() {
 
 function Projects() {
     const userdata = useUserData();
-    const projects = userdata.projects.professional.map((project: any) => (
+    const projects = userdata.projects.map((project: any) => (
         <Card
             sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}
             key={project._id}

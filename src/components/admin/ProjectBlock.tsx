@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Projects, Project } from "../../types"; // Import correct types
+import { Projects } from "../../types"; // Import correct types
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -12,11 +12,9 @@ export default function ProjectsBlock() {
     const dispatch = useUserDataDispatch();
 
     // Ensure projects are properly initialized
-    const [projects, setProjects] = useState<Projects>(
-        userdata?.projects || { professional: [], personalProjects: [] }
+    const [projects, setProjects] = useState<Projects[]>(
+        userdata?.projects || []
     );
-
-    type ProjectCategory = keyof Projects; // Ensures only valid categories
 
     // Sync projects state when userdata changes
     useEffect(() => {
@@ -39,16 +37,14 @@ export default function ProjectsBlock() {
 
     function handleProjectChange(
         index: number,
-        category: ProjectCategory,
-        field: keyof Project, // ✅ Ensures only valid project fields
+        field: keyof Projects, // ✅ Ensures only valid project fields
         newValue: string
     ) {
-        setProjects((prevProjects) => ({
-            ...prevProjects,
-            [category]: prevProjects[category].map((project, i) =>
+        setProjects((prevProjects) => 
+            prevProjects.map((project: any, i: number) =>
                 i === index ? { ...project, [field]: newValue } : project
-            ),
-        }));
+            )
+        );
     }
 
     return (
@@ -66,11 +62,9 @@ export default function ProjectsBlock() {
                         Update
                     </Button>
                 </Grid>
-                {Object.keys(projects).map((categoryKey) => (
-                    <Grid size={{ xs: 12, md: 6 }} key={categoryKey}>
-                        <h3>{categoryKey.replace("-", " ")}</h3>
-                        {projects[categoryKey as ProjectCategory].map(
-                            (project, index) => (
+                {userdata.projects.map((project: any, index: number) => (
+                    <Grid size={{ xs: 12, md: 6 }} key={index}>
+                        {
                                 <Stack spacing={2} key={project._id}>
                                     <TextField
                                         id="outlined-basic"
@@ -81,7 +75,6 @@ export default function ProjectsBlock() {
                                         onChange={(e) =>
                                             handleProjectChange(
                                                 index,
-                                                categoryKey as ProjectCategory,
                                                 "name",
                                                 e.target.value
                                             )
@@ -97,7 +90,6 @@ export default function ProjectsBlock() {
                                         onChange={(e) =>
                                             handleProjectChange(
                                                 index,
-                                                categoryKey as ProjectCategory,
                                                 "url",
                                                 e.target.value
                                             )
@@ -115,7 +107,6 @@ export default function ProjectsBlock() {
                                         onChange={(e) =>
                                             handleProjectChange(
                                                 index,
-                                                categoryKey as ProjectCategory,
                                                 "description",
                                                 e.target.value
                                             )
@@ -128,8 +119,8 @@ export default function ProjectsBlock() {
                                         <DeleteIcon />
                                     </IconButton>
                                 </Stack>
-                            )
-                        )}
+                            
+                        }
                     </Grid>
                 ))}
             </Grid>

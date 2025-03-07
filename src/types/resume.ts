@@ -8,6 +8,6 @@ export type ResumeData = {
     titleHeader: TitleHeader;
     summary: Summary;
     skills: Skills;
-    projects: Projects;
+    projects: Projects[];
     workHistory: WorkHistory[];
 };

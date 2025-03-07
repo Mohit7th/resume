@@ -1,13 +1,9 @@
 // src/types/projects.ts
-export type Project = {
+export type Projects = {
     name: string;
     description: string;
     technologies: string[];
     url: string;
     _id: string;
-};
-
-export type Projects = {
-    professional: Project[];
-    personalProjects: Project[];
+    type: string;
 };
