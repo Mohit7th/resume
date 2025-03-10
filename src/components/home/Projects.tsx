@@ -35,7 +35,15 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
             sx={{ mt: 3, mb: 5, justifyContent: "space-between" }}
         >
             {filteredProjects.map((project: any, idx: number) => (
-                <Grid size={{ xs: 12, sm:6, md: 3}} key={idx}>
+                <Grid size={{ xs: 12, sm:6, md: 3}} key={idx} 
+                sx={{
+                    display: "flex",
+                    justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens, left-align on medium+
+                    alignItems: "center",
+                    // Add padding only on medium+ screens
+                    textAlign: { xs: "center", md: "left" }, // Center text on small screens
+                }}
+                >
                     <Card
                         sx={{
                             maxWidth: 300,

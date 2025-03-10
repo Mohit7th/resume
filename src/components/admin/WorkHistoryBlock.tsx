@@ -93,7 +93,7 @@ export default function WorkHistoryBlock() {
                     Add
                 </Button>
             </Box>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
                 {workHistory.map((detail, index) => (
                     <Grid size={6}>
                         <Accordion

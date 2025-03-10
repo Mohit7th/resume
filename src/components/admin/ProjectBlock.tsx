@@ -94,7 +94,7 @@ export default function ProjectsBlock() {
                     Add
                 </Button>
             </Box>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
                 {userdata.projects.map((project: any, index: number) => (
                     <Grid size={6}>
                         <Accordion
