@@ -148,7 +148,7 @@ export default function ProjectsBlock() {
                             <AccordionDetails
                                 sx={{
                                     backgroundColor:
-                                        theme.palette.primary.light,
+                                        theme.palette.primary.contrastText,
                                     color: theme.palette.primary.light,
                                 }}
                             >

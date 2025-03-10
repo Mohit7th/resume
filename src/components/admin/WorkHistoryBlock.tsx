@@ -147,7 +147,7 @@ export default function WorkHistoryBlock() {
                             <AccordionDetails
                                 sx={{
                                     backgroundColor:
-                                        theme.palette.primary.light,
+                                        theme.palette.primary.contrastText,
                                     color: theme.palette.primary.light,
                                 }}
                             >
