@@ -10,7 +10,7 @@ export default function Summary() {
             component="section"
             sx={{ p: 5, color: theme.palette.primary.dark }}
         >
-            <Typography variant="subtitle1" gutterBottom>
+            <Typography variant="h6" gutterBottom>
                 {userdata.summary.detailed}
             </Typography>
         </Box>

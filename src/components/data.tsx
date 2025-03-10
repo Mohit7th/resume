@@ -103,6 +103,13 @@ export const resumeData: ResumeData = {
                 image: "",
                 type: "tool",
             },
+            {
+                name: "Material UI",
+                experience: "1 month",
+                _id: "30",
+                image: "",
+                type: "web",
+            }
         ],
         browserExtension: [
             {
@@ -211,7 +218,7 @@ export const resumeData: ResumeData = {
                 _id: "30",
                 image: "",
                 type: "database",
-            },
+            }
         ],
     },
     projects: [

@@ -38,7 +38,7 @@ export default function WorkHistory() {
                 <Accordion
                    
                     sx={{
-                        backgroundColor: theme.palette.primary.dark,
+                        backgroundColor: theme.palette.primary.light,
                         color: theme.palette.primary.contrastText,
                     }}
                     expanded={expanded === work._id}
@@ -97,8 +97,8 @@ export default function WorkHistory() {
                     </AccordionSummary>
                     <AccordionDetails
                         sx={{
-                            backgroundColor: theme.palette.primary.light,
-                            color: theme.palette.primary.contrastText,
+                            backgroundColor: theme.palette.primary.contrastText,
+                            color: theme.palette.primary.dark,
                         }}
                     >
                         <List dense={true}>
