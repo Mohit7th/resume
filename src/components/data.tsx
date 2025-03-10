@@ -224,6 +224,7 @@ export const resumeData: ResumeData = {
             _id: "31",
             type: "webTechnologies",
             image: "/assets/rezme-web.png",
+           techStack: "MEAN stack"
         },
         {
             name: "Join Cherry",
@@ -234,6 +235,7 @@ export const resumeData: ResumeData = {
             _id: "32",
             type: "webTechnologies",
             image: "/assets/cherry-web.png",
+           techStack: "MEAN stack"
         },
         {
             name: "Join Cherry",
@@ -244,6 +246,7 @@ export const resumeData: ResumeData = {
             _id: "33",
             type: "browserExtension",
             image: "/assets/cherry.png",
+           techStack: "Bootstrap & JS"
         },
         {
             name: "Minimine",
@@ -254,6 +257,7 @@ export const resumeData: ResumeData = {
             _id: "34",
             type: "webTechnologies",
             image: "/assets/cherry.png",
+           techStack: "MEAN stack"
         },
         {
             name: "Quick Snip",
@@ -264,6 +268,7 @@ export const resumeData: ResumeData = {
             _id: "35",
             type: "browserExtension",
             image: "/assets/quick-snip.png",
+           techStack: "Bootstrap & JS"
         },
         {
             name: "Al-go",
@@ -273,6 +278,7 @@ export const resumeData: ResumeData = {
             _id: "36",
             type: "browserExtension",
             image: "/assets/al-go.png",
+           techStack: "Bootstrap & JS"
         },
         {
             name: "i-search",
@@ -283,6 +289,7 @@ export const resumeData: ResumeData = {
             _id: "37",
             type: "browserExtension",
             image: "/assets/i-search.png",
+           techStack: "Bootstrap & JS"
         },
         {
             name: "Web Resume",
@@ -293,6 +300,7 @@ export const resumeData: ResumeData = {
             _id: "38",
             type: "webTechnologies",
             image: "/assets/resume.png",
+           techStack: "MERN Stack"
         },
         {
             name: "Financial Data Mart",
@@ -303,6 +311,7 @@ export const resumeData: ResumeData = {
             _id: "39",
             type: "businessIntelligence",
             image: "/assets/wallet.jpg",
+           techStack: "MSBI"
         },
         {
             name: "Oil & Gas Reporting",
@@ -313,6 +322,7 @@ export const resumeData: ResumeData = {
             _id: "40",
             type: "businessIntelligence",
             image: "/assets/oil-gas.jpg",
+           techStack: "MSBI"
         },
         {
             name: "Real State Service",
@@ -323,6 +333,7 @@ export const resumeData: ResumeData = {
             _id: "41",
             type: "businessIntelligence",
             image: "/assets/real-state.jpg",
+           techStack: "MSBI"
         },
         {
             name: "Patent Analytics",
@@ -333,6 +344,7 @@ export const resumeData: ResumeData = {
             _id: "42",
             type: "businessIntelligence",
             image: "/assets/patent-analytics.jpg",
+           techStack: "MySQL"
         },
     ],
     workHistory: [

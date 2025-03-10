@@ -7,4 +7,5 @@ export type Projects = {
     _id: string;
     type: string;
     image: string;
+    techStack: string;
 };

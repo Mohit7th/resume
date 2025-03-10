@@ -6,6 +6,8 @@ import {
     Skeleton,
     CardActionArea,
     CardMedia,
+    Chip,
+    Box,
 } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
 import { resumeData } from "../data";
@@ -35,14 +37,15 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
             sx={{ mt: 3, mb: 5, justifyContent: "space-between" }}
         >
             {filteredProjects.map((project: any, idx: number) => (
-                <Grid size={{ xs: 12, sm:6, md: 3}} key={idx} 
-                sx={{
-                    display: "flex",
-                    justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens, left-align on medium+
-                    alignItems: "center",
-                    // Add padding only on medium+ screens
-                    textAlign: { xs: "center", md: "left" }, // Center text on small screens
-                }}
+                <Grid
+                    size={{ xs: 12, sm: 6, md: 3 }}
+                    key={idx}
+                    sx={{
+                        display: "flex",
+                        justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens, left-align on medium+
+                        alignItems: "center",
+                        textAlign: { xs: "center", md: "left" }, // Center text on small screens
+                    }}
                 >
                     <Card
                         sx={{
@@ -53,6 +56,7 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                             backgroundColor: theme.palette.primary.light,
                             transition: "0.3s",
                             boxShadow: 3,
+                            position: "relative", // Required for absolute positioning
                             "&:hover": {
                                 boxShadow: 10,
                                 transform: "translateY(-5px)",
@@ -60,9 +64,23 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                         }}
                         key={project._id}
                     >
-                        <CardActionArea
-                            onClick={() => window.open(project.url)}
+                        {/* Tech Stack Chip - Positioned at top-right */}
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: 8,
+                                right: 8,
+                                zIndex: 2, // Ensures it stays on top
+                            }}
                         >
+                            <Chip
+                                label={project.techStack || "MEAN"}
+                                sx={{backgroundColor: theme.palette.primary.light, color: theme.palette.primary.contrastText}}
+                                size="small"
+                            />
+                        </Box>
+
+                        <CardActionArea onClick={() => window.open(project.url)}>
                             {!project.image ? (
                                 <Skeleton variant="rounded" height={140} />
                             ) : (
@@ -74,18 +92,13 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                                 />
                             )}
                             <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="div"
-                                >
+                                <Typography gutterBottom variant="h5">
                                     {project.name}
                                 </Typography>
                                 <Typography
                                     variant="body2"
                                     sx={{
-                                        color: theme.palette.primary
-                                            .contrastText,
+                                        color: theme.palette.primary.contrastText,
                                     }}
                                 >
                                     {project.description}
