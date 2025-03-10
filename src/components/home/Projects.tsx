@@ -49,7 +49,7 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                 >
                     <Card
                         sx={{
-                            maxWidth: 300,
+                            width: { xs: "100%", md: 300 },
                             display: "flex",
                             flexDirection: "column",
                             height: "100%",
