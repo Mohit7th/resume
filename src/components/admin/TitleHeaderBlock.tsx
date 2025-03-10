@@ -11,7 +11,7 @@ import { useTheme } from "@mui/material/styles";
 export function TitleHeaderBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
-        const theme = useTheme();
+    const theme = useTheme();
 
     // Ensure titleHeader is initialized correctly
     const [titleHeader, setTitleHeader] = useState<TitleHeader>(
@@ -55,7 +55,10 @@ export function TitleHeaderBlock() {
     }
 
     return (
-        <Box component="section" sx={{ mt: 8, p: 2, border: "1px dashed grey" }}>
+        <Box
+            component="section"
+            sx={{ mt: 8, p: 2, border: "1px dashed grey" }}
+        >
             <Grid container spacing={2}>
                 <Grid size={12}>
                     <h2>Title Header</h2>
@@ -91,7 +94,7 @@ export function TitleHeaderBlock() {
                         endIcon={<SendIcon />}
                         onClick={updateTitleHeader}
                         sx={{
-                            backgroundColor: theme.palette.primary.dark
+                            backgroundColor: theme.palette.primary.dark,
                         }}
                     >
                         Update

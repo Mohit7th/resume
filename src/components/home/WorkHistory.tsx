@@ -45,7 +45,9 @@ export default function WorkHistory() {
                 
             >
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon sx={{
+                        color: theme.palette.primary.contrastText,
+                    }}/>}
                     aria-controls="panel1-content"
                     id="panel1-header"
                 >
