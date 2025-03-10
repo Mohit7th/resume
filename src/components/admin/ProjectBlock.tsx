@@ -71,34 +71,36 @@ export default function ProjectsBlock() {
 
     return (
         <>
-            <Grid
-                container
-                spacing={2}
-                sx={{ alignItems: "center", justifyContent: "space-between" }}
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                    mt: 4,
+                    mb: 2,
+                }}
             >
-                <Grid size={6}>
-                    <h2>Projects</h2>
-                </Grid>
-                <Grid size={6}>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={updateProjects}
-                        sx={{
-                            backgroundColor: theme.palette.primary.dark,
-                        }}
-                    >
-                        Add
-                    </Button>
-                </Grid>
-            </Grid>
+                <Typography component="span" sx={{ flexGrow: 1 }}>
+                    <b>Projects</b>
+                </Typography>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={updateProjects}
+                    sx={{
+                        backgroundColor: theme.palette.primary.dark,
+                    }}
+                >
+                    Add
+                </Button>
+            </Box>
             <Grid container spacing={2}>
-                <Grid size={12}>
-                    {userdata.projects.map((project: any, index: number) => (
+                {userdata.projects.map((project: any, index: number) => (
+                    <Grid size={6}>
                         <Accordion
                             key={project._id}
                             sx={{
-                                backgroundColor: theme.palette.primary.dark,
+                                backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.primary.contrastText,
                             }}
                             expanded={expanded === project._id}
@@ -137,10 +139,8 @@ export default function ProjectsBlock() {
                                         size="small"
                                     >
                                         <DeleteIcon
-                                            sx={{
-                                                color: theme.palette.primary
-                                                    .light,
-                                            }}
+                                            aria-label="delete"
+                                            color="error"
                                         />
                                     </IconButton>
                                 </Box>
@@ -202,8 +202,8 @@ export default function ProjectsBlock() {
                                 </Stack>
                             </AccordionDetails>
                         </Accordion>
-                    ))}
-                </Grid>
+                    </Grid>
+                ))}
             </Grid>
         </>
     );

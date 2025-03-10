@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { WorkHistory } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Stack, TextField } from "@mui/material";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Box,
+    Stack,
+    TextField,
+    Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useTheme } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
@@ -49,83 +58,150 @@ export default function WorkHistoryBlock() {
         );
     }
 
+    const [expanded, setExpanded] = useState<string | false>(false);
+
+    const handleChange =
+        (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+            setExpanded(isExpanded ? panel : false);
+        };
+
+    function handleDelete(e: SyntheticEvent) {
+        e.stopPropagation();
+    }
+
     return (
-        <Box
-            component="section"
-            sx={{ mt: 5, p: 2, border: "1px dashed grey" }}
-        >
-            <Grid container spacing={2}>
-                <Grid size={6}>
-                    <h2>Work History</h2>
-                </Grid>
-                <Grid size={6}>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={updateWorkHistory}
-                        sx={{
-                            backgroundColor: theme.palette.primary.dark,
-                        }}
-                    >
-                        Update
-                    </Button>
-                </Grid>
-            </Grid>
+        <>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                    mt: 4, mb:2
+                }}
+            >
+                <Typography component="span" sx={{ flexGrow: 1 }}>
+                    <b>Work History</b>
+                </Typography>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={updateWorkHistory}
+                    sx={{
+                        backgroundColor: theme.palette.primary.dark,
+                    }}
+                >
+                    Add
+                </Button>
+            </Box>
             <Grid container spacing={2}>
                 {workHistory.map((detail, index) => (
-                    <Grid size={4} key={detail._id}>
-                        <Stack spacing={2}>
-                            <TextField
-                                id="outlined-basic"
-                                label="Company:"
-                                variant="outlined"
-                                size="small"
-                                value={detail.company}
-                                onChange={(e) =>
-                                    handleWorkHistoryChange(
-                                        index,
-                                        "company",
-                                        e.target.value
-                                    )
+                    <Grid size={6}>
+                        <Accordion
+                            key={detail._id}
+                            sx={{
+                                backgroundColor: theme.palette.primary.light,
+                                color: theme.palette.primary.contrastText,
+                            }}
+                            expanded={expanded === detail._id}
+                            onChange={handleChange(detail._id)}
+                        >
+                            <AccordionSummary
+                                expandIcon={
+                                    <ExpandMoreIcon
+                                        sx={{
+                                            color: theme.palette.primary
+                                                .contrastText,
+                                        }}
+                                    />
                                 }
-                            />
+                                aria-controls="panel1-content"
+                                sx={{
+                                    color: theme.palette.primary.contrastText,
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Typography
+                                        component="span"
+                                        sx={{ flexGrow: 1 }}
+                                    >
+                                        <b>{detail.company}</b>
+                                    </Typography>
+                                    {/* Delete Button (Aligned to the Right) */}
+                                    <IconButton
+                                        onClick={handleDelete}
+                                        size="small"
+                                    >
+                                        <DeleteIcon
+                                            aria-label="delete"
+                                            color="error"
+                                        />
+                                    </IconButton>
+                                </Box>
+                            </AccordionSummary>
+                            <AccordionDetails
+                                sx={{
+                                    backgroundColor:
+                                        theme.palette.primary.light,
+                                    color: theme.palette.primary.light,
+                                }}
+                            >
+                                <Stack spacing={2}>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Company:"
+                                        variant="outlined"
+                                        size="small"
+                                        value={detail.company}
+                                        onChange={(e) =>
+                                            handleWorkHistoryChange(
+                                                index,
+                                                "company",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-                            <TextField
-                                id="outlined-basic"
-                                label="Position:"
-                                variant="outlined"
-                                size="small"
-                                value={detail.position}
-                                onChange={(e) =>
-                                    handleWorkHistoryChange(
-                                        index,
-                                        "position",
-                                        e.target.value
-                                    )
-                                }
-                            />
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Position:"
+                                        variant="outlined"
+                                        size="small"
+                                        value={detail.position}
+                                        onChange={(e) =>
+                                            handleWorkHistoryChange(
+                                                index,
+                                                "position",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-                            <TextField
-                                id="outlined-basic"
-                                label="Website:"
-                                variant="outlined"
-                                size="small"
-                                value={detail.website}
-                                onChange={(e) =>
-                                    handleWorkHistoryChange(
-                                        index,
-                                        "website",
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <IconButton aria-label="delete" color="error">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Stack>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Website:"
+                                        variant="outlined"
+                                        size="small"
+                                        value={detail.website}
+                                        onChange={(e) =>
+                                            handleWorkHistoryChange(
+                                                index,
+                                                "website",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+                                </Stack>
+                            </AccordionDetails>
+                        </Accordion>
                     </Grid>
                 ))}
             </Grid>
-        </Box>
+        </>
     );
 }
