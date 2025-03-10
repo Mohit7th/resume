@@ -6,10 +6,12 @@ import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 
 export function TitleHeaderBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
+        const theme = useTheme();
 
     // Ensure titleHeader is initialized correctly
     const [titleHeader, setTitleHeader] = useState<TitleHeader>(
@@ -53,7 +55,7 @@ export function TitleHeaderBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+        <Box component="section" sx={{ mt: 8, p: 2, border: "1px dashed grey" }}>
             <Grid container spacing={2}>
                 <Grid size={12}>
                     <h2>Title Header</h2>
@@ -88,6 +90,9 @@ export function TitleHeaderBlock() {
                         size="small"
                         endIcon={<SendIcon />}
                         onClick={updateTitleHeader}
+                        sx={{
+                            backgroundColor: theme.palette.primary.dark
+                        }}
                     >
                         Update
                     </Button>

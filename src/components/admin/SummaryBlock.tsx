@@ -4,10 +4,12 @@ import { Summary } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
 import { Box, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 
 export default function SummaryBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
+    const theme = useTheme();
 
     // Ensure summary is properly initialized
     const [summary, setSummary] = useState<Summary>(
@@ -45,7 +47,10 @@ export default function SummaryBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+        <Box
+            component="section"
+            sx={{ mt: 5, p: 2, border: "1px dashed grey" }}
+        >
             <Grid container spacing={2}>
                 <Grid size={6}>
                     <h2>Summary</h2>
@@ -55,6 +60,9 @@ export default function SummaryBlock() {
                         variant="contained"
                         size="small"
                         onClick={updateSummary}
+                        sx={{
+                            backgroundColor: theme.palette.primary.dark,
+                        }}
                     >
                         Update
                     </Button>

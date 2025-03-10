@@ -6,10 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 
 export default function WorkHistoryBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
+    const theme = useTheme();
 
     // Ensure workHistory is properly initialized
     const [workHistory, setWorkHistory] = useState<WorkHistory[]>(
@@ -48,7 +50,10 @@ export default function WorkHistoryBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+        <Box
+            component="section"
+            sx={{ mt: 5, p: 2, border: "1px dashed grey" }}
+        >
             <Grid container spacing={2}>
                 <Grid size={6}>
                     <h2>Work History</h2>
@@ -58,6 +63,9 @@ export default function WorkHistoryBlock() {
                         variant="contained"
                         size="small"
                         onClick={updateWorkHistory}
+                        sx={{
+                            backgroundColor: theme.palette.primary.dark,
+                        }}
                     >
                         Update
                     </Button>
@@ -66,7 +74,7 @@ export default function WorkHistoryBlock() {
             <Grid container spacing={2}>
                 {workHistory.map((detail, index) => (
                     <Grid size={4} key={detail._id}>
-                        <Stack spacing={2} >
+                        <Stack spacing={2}>
                             <TextField
                                 id="outlined-basic"
                                 label="Company:"

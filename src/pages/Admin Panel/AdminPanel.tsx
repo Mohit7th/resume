@@ -12,7 +12,6 @@ const AdminPanel: React.FC = () => {
     return (
         <Container fixed>
             <UserDataProvider>
-                <h1>Admin Panel</h1>
                 <TitleHeaderBlock />
                 <SummaryBlock />
                 <SkillsBlock />

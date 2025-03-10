@@ -6,11 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useTheme } from "@mui/material/styles";
 
 export default function SkillsBlock() {
     const userdata = useUserData();
     const dispatch = useUserDataDispatch();
-
+    const theme = useTheme();
     // Ensure skills are properly initialized
     const [skills, setSkills] = useState<Skills>(
         userdata?.skills || {
@@ -60,7 +61,10 @@ export default function SkillsBlock() {
     }
 
     return (
-        <Box component="section" sx={{ m: 5, p: 2, border: "1px dashed grey" }}>
+        <Box
+            component="section"
+            sx={{ mt: 5, p: 2, border: "1px dashed grey" }}
+        >
             <Grid container justifyContent="space-between">
                 <Grid size={6}>
                     <h2>Skills</h2>
@@ -70,6 +74,9 @@ export default function SkillsBlock() {
                         variant="contained"
                         size="small"
                         onClick={updateSkills}
+                        sx={{
+                            backgroundColor: theme.palette.primary.dark,
+                        }}
                     >
                         Update
                     </Button>
@@ -77,7 +84,7 @@ export default function SkillsBlock() {
             </Grid>
             <Grid container spacing={2}>
                 {Object.keys(skills).map((skillKey, idx) => (
-                    <Grid size={{ xs: 12, md: 6 }} key={skillKey+idx}>
+                    <Grid size={{ xs: 12, md: 6 }} key={skillKey + idx}>
                         <h3>{skillKey.replace("-", " ")}</h3>
                         {skills[skillKey as SkillCategory].map(
                             (tech, index) => (
