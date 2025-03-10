@@ -10,6 +10,8 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Footer from "./Footer";
 import { useTheme } from "@mui/material/styles";
+import LoginFormDialog from "../ui/LoginFormDialog";
+import { useState } from "react";
 
 export default function MainLayout() {
     const location = useLocation();
@@ -23,32 +25,48 @@ export default function MainLayout() {
     const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
     const theme = useTheme();
 
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    function handleAdminLogin(){
+        setOpenDialog(true);
+        // navigate("/admin");
+    }
+
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "100vh"
+                minHeight: "100vh",
             }}
         >
             {!shouldHideAppBar && (
-                <AppBar position="fixed" sx={{
-                    backgroundColor: theme.palette.primary.dark,
-                    mb: 4
-                    }}>
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        backgroundColor: theme.palette.primary.dark,
+                        mb: 4,
+                    }}
+                >
                     <Toolbar>
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{ flexGrow: 1 }} onClick={() => navigate("/")}
+                            sx={{ flexGrow: 1 }}
+                            onClick={() => navigate("/")}
                         >
-                            <Avatar sx={{ bgcolor: theme.palette.primary.light }} >
+                            <Avatar
+                                sx={{ bgcolor: theme.palette.primary.light }}
+                            >
                                 MU
                             </Avatar>
                         </Typography>
                         <Button
                             color="inherit"
-                            onClick={() => navigate("/admin")}
+                            onClick={handleAdminLogin}
                         >
                             Admin
                         </Button>
@@ -67,6 +85,10 @@ export default function MainLayout() {
             </Box>
 
             {!shouldHideFooter && <Footer />}
+            <LoginFormDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
+            />
         </Box>
     );
 }
