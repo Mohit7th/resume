@@ -142,7 +142,6 @@ export default function SummaryBlock() {
                                     rows={4}
                                     value={summary.short}
                                     margin="dense"
-                                    defaultValue="Default Value"
                                     onChange={(e) =>
                                         handleSummaryChange(
                                             "short",
@@ -157,7 +156,6 @@ export default function SummaryBlock() {
                                     rows={4}
                                     value={summary.detailed}
                                     margin="dense"
-                                    defaultValue="Default Value"
                                     onChange={(e) =>
                                         handleSummaryChange(
                                             "detailed",

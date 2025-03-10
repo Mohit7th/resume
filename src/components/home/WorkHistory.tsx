@@ -34,9 +34,9 @@ export default function WorkHistory() {
             work.endDate
         );
         return (
-            <Grid size={12}>
+            <Grid size={12}  key={work._id}>
                 <Accordion
-                    key={work._id}
+                   
                     sx={{
                         backgroundColor: theme.palette.primary.dark,
                         color: theme.palette.primary.contrastText,

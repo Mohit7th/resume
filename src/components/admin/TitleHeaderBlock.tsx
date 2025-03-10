@@ -59,7 +59,7 @@ export function TitleHeaderBlock() {
             component="section"
             sx={{ mt: 8, p: 2, border: "1px dashed grey" }}
         >
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{display: "flex", justifyContent: "cneter", alignItems: "center"}}>
                 <Grid size={12}>
                     <h2>Title Header</h2>
                 </Grid>

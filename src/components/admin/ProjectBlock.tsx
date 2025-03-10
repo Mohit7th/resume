@@ -2,7 +2,6 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import { Projects } from "../../types"; // Import correct types
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
     Accordion,
@@ -96,9 +95,9 @@ export default function ProjectsBlock() {
             </Box>
             <Grid container spacing={1}>
                 {userdata.projects.map((project: any, index: number) => (
-                    <Grid size={6}>
+                    <Grid size={{ xs: 12, md: 6 }} key={project._id}>
                         <Accordion
-                            key={project._id}
+                            
                             sx={{
                                 backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.primary.contrastText,
@@ -134,15 +133,11 @@ export default function ProjectsBlock() {
                                         <b>{project.name}</b>
                                     </Typography>
                                     {/* Delete Button (Aligned to the Right) */}
-                                    <IconButton
+                                    <DeleteIcon
                                         onClick={handleDelete}
-                                        size="small"
-                                    >
-                                        <DeleteIcon
-                                            aria-label="delete"
-                                            color="error"
-                                        />
-                                    </IconButton>
+                                        aria-label="delete"
+                                        color="error"
+                                    />
                                 </Box>
                             </AccordionSummary>
                             <AccordionDetails
@@ -190,7 +185,6 @@ export default function ProjectsBlock() {
                                         rows={4}
                                         value={project.description}
                                         margin="dense"
-                                        defaultValue="Default Value"
                                         onChange={(e) =>
                                             handleProjectChange(
                                                 index,

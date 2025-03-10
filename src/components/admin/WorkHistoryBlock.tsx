@@ -2,7 +2,6 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { WorkHistory } from "../../types"; // Import the correct type
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
     Accordion,
@@ -76,7 +75,8 @@ export default function WorkHistoryBlock() {
                     display: "flex",
                     alignItems: "center",
                     width: "100%",
-                    mt: 4, mb:2
+                    mt: 4,
+                    mb: 2,
                 }}
             >
                 <Typography component="span" sx={{ flexGrow: 1 }}>
@@ -95,9 +95,8 @@ export default function WorkHistoryBlock() {
             </Box>
             <Grid container spacing={1}>
                 {workHistory.map((detail, index) => (
-                    <Grid size={6}>
+                    <Grid size={{ xs: 12, md: 6 }} key={detail._id}>
                         <Accordion
-                            key={detail._id}
                             sx={{
                                 backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.primary.contrastText,
@@ -133,15 +132,12 @@ export default function WorkHistoryBlock() {
                                         <b>{detail.company}</b>
                                     </Typography>
                                     {/* Delete Button (Aligned to the Right) */}
-                                    <IconButton
+
+                                    <DeleteIcon
                                         onClick={handleDelete}
-                                        size="small"
-                                    >
-                                        <DeleteIcon
-                                            aria-label="delete"
-                                            color="error"
-                                        />
-                                    </IconButton>
+                                        aria-label="delete"
+                                        color="error"
+                                    />
                                 </Box>
                             </AccordionSummary>
                             <AccordionDetails

@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useUserData, useUserDataDispatch } from "../../context/UserContext";
 import { Skills, Skill } from "../../types"; // Import correct types
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Stack, TextField } from "@mui/material";
+
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Box,
+    Stack,
+    TextField,
+    Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useTheme } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default function SkillsBlock() {
     const userdata = useUserData();
@@ -60,78 +71,145 @@ export default function SkillsBlock() {
         }));
     }
 
+    const [expanded, setExpanded] = useState<string | false>(false);
+
+    const handleChange =
+        (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+            setExpanded(isExpanded ? panel : false);
+        };
+
+    function handleAdd(e: SyntheticEvent) {
+        e.stopPropagation();
+    }
+
     return (
-        <Box
-            component="section"
-            sx={{ mt: 5, p: 2, border: "1px dashed grey" }}
+        <
         >
-            <Grid container justifyContent="space-between">
-                <Grid size={6}>
-                    <h2>Skills</h2>
-                </Grid>
-                <Grid size={6}>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={updateSkills}
-                        sx={{
-                            backgroundColor: theme.palette.primary.dark,
-                        }}
-                    >
-                        Update
-                    </Button>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                    mt: 4,
+                    mb: 2,
+                }}
+            >
+                <Typography component="span" sx={{ flexGrow: 1 }}>
+                    <b>Skills</b>
+                </Typography>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={updateSkills}
+                    sx={{
+                        backgroundColor: theme.palette.primary.dark,
+                    }}
+                >
+                    Add
+                </Button>
+            </Box>
+
+            <Grid container spacing={1}>
                 {Object.keys(skills).map((skillKey, idx) => (
                     <Grid size={{ xs: 12, md: 6 }} key={skillKey + idx}>
-                        <h3>{skillKey.replace("-", " ")}</h3>
-                        {skills[skillKey as SkillCategory].map(
-                            (tech, index) => (
-                                <Stack
-                                    direction="row"
-                                    spacing={2}
-                                    key={tech._id}
-                                >
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Name:"
-                                        variant="outlined"
-                                        margin="dense"
-                                        value={tech.name}
-                                        onChange={(e) =>
-                                            handleSkillsChange(
-                                                index,
-                                                skillKey as SkillCategory,
-                                                "name",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Experience"
-                                        type="number"
-                                        margin="dense"
-                                        slotProps={{
-                                            inputLabel: {
-                                                shrink: true,
-                                            },
+                        <Accordion
+                            key={idx}
+                            sx={{
+                                backgroundColor: theme.palette.primary.light,
+                                color: theme.palette.primary.contrastText,
+                            }}
+                            expanded={expanded === idx.toString()}
+                            onChange={handleChange(idx.toString())}
+                        >
+                            <AccordionSummary
+                                expandIcon={
+                                    <ExpandMoreIcon
+                                        sx={{
+                                            color: theme.palette.primary
+                                                .contrastText,
                                         }}
                                     />
-                                    <IconButton
-                                        aria-label="delete"
-                                        color="error"
+                                }
+                                aria-controls="panel1-content"
+                                sx={{
+                                    color: theme.palette.primary.contrastText,
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Typography
+                                        component="span"
+                                        sx={{ flexGrow: 1 }}
                                     >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </Stack>
-                            )
-                        )}
+                                        <b>{skillKey}</b>
+                                    </Typography>
+                                    {/* Delete Button (Aligned to the Right) */}
+                                    <AddCircleIcon
+                                            aria-label="add" onClick={handleAdd}
+                                            color="success"
+                                        />
+                                </Box>
+                            </AccordionSummary>
+                            <AccordionDetails
+                                sx={{
+                                    backgroundColor:
+                                        theme.palette.primary.contrastText,
+                                    color: theme.palette.primary.light,
+                                }}
+                            >
+                                {skills[skillKey as SkillCategory].map(
+                                    (tech, index) => (
+                                        <Stack
+                                            direction="row"
+                                            spacing={2}
+                                            key={tech._id}
+                                        >
+                                            <TextField
+                                                id="outlined-basic"
+                                                label="Name:"
+                                                variant="outlined"
+                                                margin="dense"
+                                                value={tech.name}
+                                                onChange={(e) =>
+                                                    handleSkillsChange(
+                                                        index,
+                                                        skillKey as SkillCategory,
+                                                        "name",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+
+                                            <TextField
+                                                id="outlined-number"
+                                                label="Experience"
+                                                type="number"
+                                                margin="dense"
+                                                slotProps={{
+                                                    inputLabel: {
+                                                        shrink: true,
+                                                    },
+                                                }}
+                                            />
+                                            <IconButton
+                                                aria-label="delete"
+                                                color="error"
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Stack>
+                                    )
+                                )}
+                            </AccordionDetails>
+                        </Accordion>
                     </Grid>
                 ))}
             </Grid>
-        </Box>
+        </>
     );
 }
