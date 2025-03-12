@@ -37,7 +37,7 @@ export default function WorkHistory() {
             <Grid size={12} key={work._id}>
                 <Accordion
                     sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        backgroundColor: "rgba(120, 134, 199, 0.2)",
                         color: theme.palette.primary.contrastText,
                     }}
                     expanded={expanded === work._id}

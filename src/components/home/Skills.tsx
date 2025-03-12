@@ -90,7 +90,7 @@ export default function Skills() {
                         <Grid size={{ xs: 4, sm: 6, md: 2 }} key={idx}>
                             <Item
                                 sx={{
-                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                    backgroundColor: "rgba(120, 134, 199, 0.2)",
                                     color: theme.palette.primary.contrastText,
                                 }}
                             >
