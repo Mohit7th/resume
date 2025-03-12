@@ -374,6 +374,7 @@ export const resumeData: ResumeData = {
                 "Researched and integrated third-party APIs (ZipTax, Beehiiv, Klaviyo, IATA Geo, AWS S3, SendGrid, Google APIs).",
             ],
             _id: "43",
+            image: "/assets/website.svg"
         },
         {
             company: "Cyber Group Inc. / CG Infinity",
@@ -388,6 +389,7 @@ export const resumeData: ResumeData = {
                 "Mentored new trainees in MSBI technologies, ensuring smooth onboarding.",
             ],
             _id: "44",
+            image: "/assets/data_visual.svg"
         },
         {
             company: "Contata Solutions Pvt. Ltd",
@@ -403,6 +405,7 @@ export const resumeData: ResumeData = {
                 "Translated client mockups into Crystal Reports using stored procedures.",
             ],
             _id: "45",
+            image: "/assets/data.svg"
         },
     ],
 };

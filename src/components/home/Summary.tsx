@@ -4,13 +4,19 @@ import { useTheme } from "@mui/material/styles";
 
 export default function Summary() {
     const userdata = useUserData();
-        const theme = useTheme();
+    const theme = useTheme();
     return (
         <Box
             component="section"
-            sx={{ p: 5, color: theme.palette.primary.dark }}
+            sx={{ p: { sx: 1, md: 2}, color: theme.palette.primary.dark }}
         >
-            <Typography variant="h6" gutterBottom>
+            <Typography
+                variant="h6"
+                gutterBottom
+                sx={{
+                    fontSize: { xs: '0.78rem', sm: '0.875rem', md: '1rem', lg: '1.125rem' },
+                }}
+            >
                 {userdata.summary.detailed}
             </Typography>
         </Box>

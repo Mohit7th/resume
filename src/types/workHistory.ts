@@ -7,4 +7,5 @@ export type WorkHistory = {
     website: string;
     reponsibilities: string[];
     _id: string;
+    image: string;
 };

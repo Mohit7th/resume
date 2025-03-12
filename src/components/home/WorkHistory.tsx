@@ -34,9 +34,8 @@ export default function WorkHistory() {
             work.endDate
         );
         return (
-            <Grid size={12}  key={work._id}>
+            <Grid size={12} key={work._id}>
                 <Accordion
-                   
                     sx={{
                         backgroundColor: theme.palette.primary.light,
                         color: theme.palette.primary.contrastText,
@@ -101,18 +100,45 @@ export default function WorkHistory() {
                             color: theme.palette.primary.dark,
                         }}
                     >
-                        <List dense={true}>
-                            {work.reponsibilities.map(
-                                (resp: any, index: number) => (
-                                    <ListItem key={index}>
-                                        <ListItemIcon>
-                                            <CheckIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={resp} />
-                                    </ListItem>
-                                )
-                            )}
-                        </List>
+                        <Grid container>
+                            <Grid
+                                size={{ xs: 12, md: 8 }}
+                                sx={{ display: "flex", alignItems: "center" }}
+                            >
+                                <List dense={true}>
+                                    {work.reponsibilities.map(
+                                        (resp: any, index: number) => (
+                                            <ListItem key={index}>
+                                                <ListItemIcon>
+                                                    <CheckIcon />
+                                                </ListItemIcon>
+                                                <ListItemText primary={resp} />
+                                            </ListItem>
+                                        )
+                                    )}
+                                </List>
+                            </Grid>
+                            <Grid
+                                size={{ xs: 4, md: 4 }}
+                                sx={{
+                                    display: {
+                                        xs: "none",
+                                        md: "flex",
+                                        justifyContent: "center", // Centers horizontally
+                                        alignItems: "center",
+                                    },
+                                }}
+                            >
+                                <img
+                                    alt="illus"
+                                    src={work.image}
+                                    style={{
+                                        width: 250,
+                                        height: 250,
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
                     </AccordionDetails>
                 </Accordion>
             </Grid>
