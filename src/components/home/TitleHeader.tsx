@@ -60,10 +60,13 @@ export default function TitleHeader() {
                         textAlign: { xs: "center", md: "left" }, // Center text on small screens
                     }}
                 >
-                    <Avatar
+                    <img
                         alt={titleHeader.name}
-                        src="/assets/mypic.jpg"
-                        sx={{ width: 200, height: 200 }}
+                        src="/assets/programming.svg"
+                        style={{
+                            width: 250,
+                            height: 250,
+                        }}
                     />
                 </Grid>
 

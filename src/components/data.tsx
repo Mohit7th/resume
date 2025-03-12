@@ -306,7 +306,7 @@ export const resumeData: ResumeData = {
             url: "navigate('/')",
             _id: "38",
             type: "webTechnologies",
-            image: "/assets/resume.png",
+            image: "/assets/resume.svg",
            techStack: "MERN Stack"
         },
         {
