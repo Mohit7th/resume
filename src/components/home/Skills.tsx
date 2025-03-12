@@ -67,7 +67,8 @@ export default function Skills() {
                                 ? "Business Intelligence"
                                 : "Web Applications";
                         return (
-                            <Tab key={index}
+                            <Tab
+                                key={index}
                                 label={displayName}
                                 {...a11yProps(index, tabName)}
                                 sx={{
@@ -86,11 +87,10 @@ export default function Skills() {
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
                     {userdata.skills[header[tabIndex]].map((data, idx) => (
-                        <Grid size={{ xs: 4, sm:6, md: 2}} key={idx}>
+                        <Grid size={{ xs: 4, sm: 6, md: 2 }} key={idx}>
                             <Item
                                 sx={{
-                                    backgroundColor:
-                                        theme.palette.primary.light,
+                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
                                     color: theme.palette.primary.contrastText,
                                 }}
                             >

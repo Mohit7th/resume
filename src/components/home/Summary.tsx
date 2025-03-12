@@ -8,7 +8,7 @@ export default function Summary() {
     return (
         <Box
             component="section"
-            sx={{ p: { sx: 1, md: 2}, color: theme.palette.primary.dark }}
+            sx={{ p: { sx: 1, md: 2}, color: theme.palette.primary.contrastText }}
         >
             <Typography
                 variant="h6"

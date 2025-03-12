@@ -53,7 +53,8 @@ const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
                             display: "flex",
                             flexDirection: "column",
                             height: "100%",
-                            backgroundColor: theme.palette.primary.light,
+                            // backgroundColor: theme.palette.primary.light,
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
                             transition: "0.3s",
                             boxShadow: 3,
                             position: "relative", // Required for absolute positioning
