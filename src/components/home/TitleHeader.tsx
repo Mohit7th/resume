@@ -43,7 +43,7 @@ export default function TitleHeader() {
                 width: "100%",
                 height: "100%",
                 borderRadius: 1,
-                bgcolor: "primary.dark",
+                bgcolor: "rgba(45, 51, 107, 0.7)",
                 pt: 5,
                 mt: 8,
             }}
