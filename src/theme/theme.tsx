@@ -15,6 +15,9 @@ const theme = createTheme({
         },
     },
     typography: {
+        fontFamily: "'Poppins', sans-serif",
+        h1: { fontWeight: 700 },
+        h2: { fontWeight: 600 },
         fontSize: 14, // Default base font size
         h6: {
             fontSize: "1rem", // Default for h6
@@ -26,6 +29,7 @@ const theme = createTheme({
             },
         },
         body1: {
+            fontWeight: 400,
             fontSize: "0.875rem",
             "@media (max-width:600px)": {
                 fontSize: "0.75rem",

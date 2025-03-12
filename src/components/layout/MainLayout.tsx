@@ -30,7 +30,7 @@ export default function MainLayout() {
         setOpenDialog(false);
     };
 
-    function handleAdminLogin(){
+    function handleAdminLogin() {
         setOpenDialog(true);
         // navigate("/admin");
     }
@@ -64,10 +64,7 @@ export default function MainLayout() {
                                 MU
                             </Avatar>
                         </Typography>
-                        <Button
-                            color="inherit"
-                            onClick={handleAdminLogin}
-                        >
+                        <Button color="inherit" onClick={handleAdminLogin}>
                             Admin
                         </Button>
                         {auth?.isAuthenticated && (
@@ -80,7 +77,17 @@ export default function MainLayout() {
             )}
 
             {/* Page Content */}
-            <Box sx={{ flexGrow: 1, padding: 2 }}>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    padding: 2,
+                    backgroundImage: "url('assets/liquid-cheese.svg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    minHeight: "100vh",
+                }}
+            >
                 <Outlet /> {/* 👈 Renders the page content dynamically */}
             </Box>
 
