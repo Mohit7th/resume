@@ -13,20 +13,20 @@ import {
 // Define props for the component
 interface FormDialogProps {
     open: boolean;
-    handleClose: () => void;
+    onRatingDialogClose: () => void;
 }
 
-const FormDialog: React.FC<FormDialogProps> = ({ open, handleClose }) => {
+const RatingFormDialog: React.FC<FormDialogProps> = ({ open, onRatingDialogClose }) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const formJson = Object.fromEntries(formData.entries());
         console.log("Form Data:", formJson);
-        handleClose(); // Close the dialog after submission
+        onRatingDialogClose(); // Close the dialog after submission
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={onRatingDialogClose}>
             <DialogTitle>Website Feedback</DialogTitle>
             <form onSubmit={handleSubmit}>
                 <DialogContent>
@@ -48,7 +48,7 @@ const FormDialog: React.FC<FormDialogProps> = ({ open, handleClose }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={onRatingDialogClose}>Cancel</Button>
                     <Button type="submit">Submit</Button>
                 </DialogActions>
             </form>
@@ -56,4 +56,4 @@ const FormDialog: React.FC<FormDialogProps> = ({ open, handleClose }) => {
     );
 };
 
-export default FormDialog;
+export default RatingFormDialog;

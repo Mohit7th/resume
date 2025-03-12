@@ -14,12 +14,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid2";
 interface FormDialogProps {
     open: boolean;
-    handleClose: () => void;
+    onCloseDialog: () => void;
 }
 
 export default function LoginFormDialog({
     open,
-    handleClose,
+    onCloseDialog
 }: FormDialogProps) {
     const theme = useTheme();
     const palette = theme.palette.primary;
@@ -30,7 +30,7 @@ export default function LoginFormDialog({
     function handleLogin() {}
 
     return (
-        <Dialog fullScreen open={open} onClose={handleClose}>
+        <Dialog fullScreen open={open} onClose={onCloseDialog}>
             <AppBar
                 sx={{ position: "relative", backgroundColor: palette.dark }}
             >
@@ -45,7 +45,7 @@ export default function LoginFormDialog({
                     <IconButton
                         edge="start"
                         color="inherit"
-                        onClick={handleClose}
+                        onClick={onCloseDialog}
                         aria-label="close"
                     >
                         <CloseIcon />

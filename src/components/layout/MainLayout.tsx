@@ -94,7 +94,7 @@ export default function MainLayout() {
             {!shouldHideFooter && <Footer />}
             <LoginFormDialog
                 open={openDialog}
-                handleClose={handleCloseDialog}
+                onCloseDialog={handleCloseDialog}
             />
         </Box>
     );

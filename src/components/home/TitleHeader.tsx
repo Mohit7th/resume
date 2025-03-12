@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useUserData } from "../../context/UserContext";
 import { Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import FormDialog from "../ui/RatingFormDialog";
+import RatingFormDialog from "../ui/RatingFormDialog";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTheme } from "@mui/material/styles";
 
@@ -126,7 +126,7 @@ export default function TitleHeader() {
             </Grid>
 
             {/* Dialog Component */}
-            <FormDialog open={openDialog} handleClose={handleCloseDialog} />
+            <RatingFormDialog open={openDialog} onRatingDialogClose={handleCloseDialog} />
         </Box>
     );
 }
