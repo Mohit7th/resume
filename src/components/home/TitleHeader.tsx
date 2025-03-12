@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useUserData } from "../../context/UserContext";
-import { Avatar, Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
 import FormDialog from "../ui/RatingFormDialog";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTheme } from "@mui/material/styles";
