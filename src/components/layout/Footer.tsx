@@ -30,7 +30,7 @@ export default function Footer() {
             >
                 {/* Left Side: "Developed by" */}
                 <Typography variant="body2">
-                    Developed by {userData.titleHeader.name}
+                    Developed by {userData.titleHeader.name} in React.js
                 </Typography>
 
                 {/* Right Side: Social Media Icons */}
