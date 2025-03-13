@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid2";
+import { ChangeEvent, useState } from "react";
 interface FormDialogProps {
     open: boolean;
     onCloseDialog: () => void;
@@ -23,11 +24,16 @@ export default function LoginFormDialog({
 }: FormDialogProps) {
     const theme = useTheme();
     const palette = theme.palette.primary;
-    function handleEmailChange(e: string) {}
-
-    function handlePasswordChange(e: string) {}
+    const [loginData, setLoginData] = useState({userEmail: "", userPassword: ""})
 
     function handleLogin() {}
+
+    function handlechange(e: ChangeEvent<HTMLInputElement>){
+        setLoginData({
+            ...loginData,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <Dialog fullScreen open={open} onClose={onCloseDialog}>
@@ -84,20 +90,19 @@ export default function LoginFormDialog({
                             <TextField
                                 id="outlined-basic"
                                 label="Name"
+                                name="userEmail"
                                 variant="outlined"
                                 size="small"
-                                onChange={(e) =>
-                                    handleEmailChange(e.target.value)
+                                onChange={handlechange
                                 }
                             />
                             <TextField
                                 id="outlined-paasword"
                                 label="Password"
+                                name="userPassword"
                                 variant="outlined"
                                 size="small"
-                                onChange={(e) =>
-                                    handlePasswordChange(e.target.value)
-                                }
+                                onChange={handlechange}
                                 type="password"
                             />
                             <Button
