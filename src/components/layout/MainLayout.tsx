@@ -83,6 +83,7 @@ export default function MainLayout() {
                     padding: 2,
                     backgroundImage: "url('assets/liquid-cheese.svg')",
                     backgroundSize: "cover",
+                    backgroundAttachment: "fixed",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     minHeight: "100vh",
