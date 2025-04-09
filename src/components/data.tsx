@@ -109,7 +109,7 @@ export const resumeData: ResumeData = {
                 _id: "30",
                 image: "",
                 type: "web",
-            }
+            },
         ],
         browserExtension: [
             {
@@ -218,7 +218,7 @@ export const resumeData: ResumeData = {
                 _id: "30",
                 image: "",
                 type: "database",
-            }
+            },
         ],
     },
     projects: [
@@ -231,7 +231,16 @@ export const resumeData: ResumeData = {
             _id: "31",
             type: "webTechnologies",
             image: "/assets/rezme-web.png",
-           techStack: "MEAN stack"
+            techStack: "MEAN stack",
+            responsibilities: [
+                "Developed a white-labeling system to automate Chrome extension customization for clients.",
+                "Managed daily communication with UK-based clients for project coordination",
+                "Led and mentored junior developers, ensuring best practices.",
+                "Built Angular-based applications and RESTful APIs using Node.js & Express.js.",
+                "Designed and optimized MongoDB/Mongoose databases for scalable solutions.",
+                "Created API and project documentation using Postman.",
+                "Used Git and branching strategies for seamless collaboration.",
+            ],
         },
         {
             name: "Join Cherry",
@@ -242,7 +251,8 @@ export const resumeData: ResumeData = {
             _id: "32",
             type: "webTechnologies",
             image: "/assets/cherry-web.png",
-           techStack: "MEAN stack"
+            techStack: "MEAN stack",
+            responsibilities: [],
         },
         {
             name: "Join Cherry",
@@ -253,7 +263,8 @@ export const resumeData: ResumeData = {
             _id: "33",
             type: "browserExtension",
             image: "/assets/cherry.png",
-           techStack: "Bootstrap & JS"
+            techStack: "Bootstrap & JS",
+            responsibilities: [],
         },
         {
             name: "Minimine",
@@ -264,7 +275,8 @@ export const resumeData: ResumeData = {
             _id: "34",
             type: "webTechnologies",
             image: "/assets/cherry.png",
-           techStack: "MEAN stack"
+            techStack: "MEAN stack",
+            responsibilities: [],
         },
         {
             name: "Quick Snip",
@@ -275,7 +287,8 @@ export const resumeData: ResumeData = {
             _id: "35",
             type: "browserExtension",
             image: "/assets/quick-snip.png",
-           techStack: "Bootstrap & JS"
+            techStack: "Bootstrap & JS",
+            responsibilities: [],
         },
         {
             name: "Al-go",
@@ -285,7 +298,8 @@ export const resumeData: ResumeData = {
             _id: "36",
             type: "browserExtension",
             image: "/assets/al-go.png",
-           techStack: "Bootstrap & JS"
+            techStack: "Bootstrap & JS",
+            responsibilities: [],
         },
         {
             name: "i-search",
@@ -296,7 +310,8 @@ export const resumeData: ResumeData = {
             _id: "37",
             type: "browserExtension",
             image: "/assets/i-search.png",
-           techStack: "Bootstrap & JS"
+            techStack: "Bootstrap & JS",
+            responsibilities: [],
         },
         {
             name: "Web Resume",
@@ -307,7 +322,8 @@ export const resumeData: ResumeData = {
             _id: "38",
             type: "webTechnologies",
             image: "/assets/resume.svg",
-           techStack: "MERN Stack"
+            techStack: "MERN Stack",
+            responsibilities: [],
         },
         {
             name: "Financial Data Mart",
@@ -318,7 +334,8 @@ export const resumeData: ResumeData = {
             _id: "39",
             type: "businessIntelligence",
             image: "/assets/wallet.jpg",
-           techStack: "MSBI"
+            techStack: "MSBI",
+            responsibilities: [],
         },
         {
             name: "Oil & Gas Reporting",
@@ -329,7 +346,8 @@ export const resumeData: ResumeData = {
             _id: "40",
             type: "businessIntelligence",
             image: "/assets/oil-gas.jpg",
-           techStack: "MSBI"
+            techStack: "MSBI",
+            responsibilities: [],
         },
         {
             name: "Real State Service",
@@ -340,7 +358,8 @@ export const resumeData: ResumeData = {
             _id: "41",
             type: "businessIntelligence",
             image: "/assets/real-state.jpg",
-           techStack: "MSBI"
+            techStack: "MSBI",
+            responsibilities: [],
         },
         {
             name: "Patent Analytics",
@@ -351,7 +370,8 @@ export const resumeData: ResumeData = {
             _id: "42",
             type: "businessIntelligence",
             image: "/assets/patent-analytics.jpg",
-           techStack: "MySQL"
+            techStack: "MySQL",
+            responsibilities: [],
         },
     ],
     workHistory: [
@@ -374,7 +394,7 @@ export const resumeData: ResumeData = {
                 "Researched and integrated third-party APIs (ZipTax, Beehiiv, Klaviyo, IATA Geo, AWS S3, SendGrid, Google APIs).",
             ],
             _id: "43",
-            image: "/assets/website.svg"
+            image: "/assets/website.svg",
         },
         {
             company: "Cyber Group Inc. / CG Infinity",
@@ -389,7 +409,7 @@ export const resumeData: ResumeData = {
                 "Mentored new trainees in MSBI technologies, ensuring smooth onboarding.",
             ],
             _id: "44",
-            image: "/assets/data_visual.svg"
+            image: "/assets/data_visual.svg",
         },
         {
             company: "Contata Solutions Pvt. Ltd",
@@ -405,7 +425,7 @@ export const resumeData: ResumeData = {
                 "Translated client mockups into Crystal Reports using stored procedures.",
             ],
             _id: "45",
-            image: "/assets/data.svg"
+            image: "/assets/data.svg",
         },
     ],
 };

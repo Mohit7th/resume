@@ -8,4 +8,5 @@ export type Projects = {
     type: string;
     image: string;
     techStack: string;
+    responsibilities: string[];
 };
