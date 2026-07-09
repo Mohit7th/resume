@@ -15,6 +15,26 @@ Recommended path:
 3. Upgrade major packages after the build tool is modernized.
 4. Validate each phase with build, tests, and a visual pass.
 
+## Phase 1 execution status
+
+Status on 2026-07-09: partially complete and validated.
+
+Completed updates:
+
+- `react` and `react-dom` to `19.2.7`
+- React type packages to `19.2.x`
+- `react-router-dom` to `7.18.1`
+- Testing Library patch/minor packages except `@testing-library/user-event`
+- `@emotion/styled` to `11.14.1`
+- `@fontsource/roboto` to `5.2.10`
+
+Deferred from phase 1:
+
+- `@mui/material@6.5.0`
+- `@mui/icons-material@6.5.0`
+
+Reason: `@mui/material@6.5.0` failed the CRA production build with `Can't resolve './styles/index.js' in node_modules/@mui/material`. The Jest run also hit ESM parsing from the updated package. MUI was rolled back to `6.4.7`, and build/tests passed again. Treat MUI as part of the Vite/MUI migration work rather than a safe CRA-compatible patch.
+
 ## Current package snapshot
 
 Registry data captured with:
@@ -26,21 +46,21 @@ npm outdated --json
 | Package | Installed | Wanted by current range | Latest | Risk | Recommendation |
 | --- | ---: | ---: | ---: | --- | --- |
 | `@emotion/react` | not outdated | not outdated | not outdated | Low | Leave as-is unless MUI requires a newer peer. |
-| `@emotion/styled` | `11.14.0` | `11.14.1` | `11.14.1` | Low | Update in phase 1. |
-| `@fontsource/roboto` | `5.2.5` | `5.2.10` | `5.2.10` | Low | Update in phase 1. |
-| `@mui/icons-material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Update to `6.5.0` in phase 1. Move to v9 after Vite migration. |
-| `@mui/material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Update to `6.5.0` in phase 1. Move to v9 after Vite migration and MUI migration checks. |
-| `@testing-library/dom` | `10.4.0` | `10.4.1` | `10.4.1` | Low | Update in phase 1. |
-| `@testing-library/jest-dom` | `6.6.3` | `6.9.1` | `6.9.1` | Low | Update in phase 1. |
-| `@testing-library/react` | `16.2.0` | `16.3.2` | `16.3.2` | Low | Update in phase 1. |
+| `@emotion/styled` | `11.14.1` | `11.14.1` | `11.14.1` | Low | Phase 1 complete. |
+| `@fontsource/roboto` | `5.2.10` | `5.2.10` | `5.2.10` | Low | Phase 1 complete. |
+| `@mui/icons-material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Keep at `6.4.7` on CRA. Move with MUI migration after Vite. |
+| `@mui/material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Keep at `6.4.7` on CRA. `6.5.0` failed build validation. |
+| `@testing-library/dom` | `10.4.1` | `10.4.1` | `10.4.1` | Low | Phase 1 complete. |
+| `@testing-library/jest-dom` | `6.9.1` | `6.9.1` | `6.9.1` | Low | Phase 1 complete. |
+| `@testing-library/react` | `16.3.2` | `16.3.2` | `16.3.2` | Low | Phase 1 complete. |
 | `@testing-library/user-event` | `13.5.0` | `13.5.0` | `14.6.1` | Medium | Delay until test migration/review because v14 has behavior/API differences. |
 | `@types/jest` | `27.5.2` | `27.5.2` | `30.0.0` | High with CRA Jest | Keep until test runner is migrated. CRA owns the Jest stack. |
 | `@types/node` | `16.18.126` | `16.18.126` | `26.1.1` | Medium | Do not jump blindly. Align with the Node version used in CI/build. |
-| `@types/react` | `19.0.10` | `19.2.17` | `19.2.17` | Low | Update with React in phase 1. |
-| `@types/react-dom` | `19.0.4` | `19.2.3` | `19.2.3` | Low | Update with React DOM in phase 1. |
-| `react` | `19.0.0` | `19.2.7` | `19.2.7` | Medium | Update with `react-dom` and React type packages in phase 1. |
-| `react-dom` | `19.0.0` | `19.2.7` | `19.2.7` | Medium | Update with `react` and React type packages in phase 1. |
-| `react-router-dom` | `7.3.0` | `7.18.1` | `7.18.1` | Medium | Update in phase 1, then manually verify routes and GitHub Pages basename behavior. |
+| `@types/react` | `19.2.17` | `19.2.17` | `19.2.17` | Low | Phase 1 complete. |
+| `@types/react-dom` | `19.2.3` | `19.2.3` | `19.2.3` | Low | Phase 1 complete. |
+| `react` | `19.2.7` | `19.2.7` | `19.2.7` | Medium | Phase 1 complete. |
+| `react-dom` | `19.2.7` | `19.2.7` | `19.2.7` | Medium | Phase 1 complete. |
+| `react-router-dom` | `7.18.1` | `7.18.1` | `7.18.1` | Medium | Phase 1 complete. Verify routes manually before release. |
 | `react-scripts` | `5.0.1` | `5.0.1` | `5.0.1` | High strategic risk | Do not expect further modernization here. Replace with Vite in phase 2. |
 | `typescript` | `4.9.5` | `4.9.5` | `7.0.2` | High with CRA | Keep on CRA. Upgrade only after Vite migration. |
 | `use-immer` | not outdated | not outdated | not outdated | Low | Leave as-is. |
@@ -88,13 +108,13 @@ npm install \
   @types/react-dom@19.2.3 \
   @emotion/styled@11.14.1 \
   @fontsource/roboto@5.2.10 \
-  @mui/material@6.5.0 \
-  @mui/icons-material@6.5.0 \
   @testing-library/dom@10.4.1 \
   @testing-library/jest-dom@6.9.1 \
   @testing-library/react@16.3.2 \
   react-router-dom@7.18.1
 ```
+
+Do not include MUI in this command while the project is still on CRA. `@mui/material@6.5.0` failed build validation in this repo.
 
 Do not update these in phase 1:
 
@@ -104,6 +124,8 @@ Do not update these in phase 1:
 - `@testing-library/user-event`
 - `@types/node`
 - `web-vitals`
+- `@mui/material`
+- `@mui/icons-material`
 
 Validation gate:
 
