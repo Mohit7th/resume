@@ -1,5 +1,5 @@
 import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
 import ExtensionRoundedIcon from "@mui/icons-material/ExtensionRounded";
 import QueryStatsRoundedIcon from "@mui/icons-material/QueryStatsRounded";
@@ -78,8 +78,7 @@ export default function Skills() {
                             <Stack
                                 direction="row"
                                 useFlexGap
-                                flexWrap="wrap"
-                                gap={1}
+                                sx={{ flexWrap: "wrap", gap: 1 }}
                             >
                                 {skills[category].map((skill) => (
                                     <Chip

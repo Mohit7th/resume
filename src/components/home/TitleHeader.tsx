@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import {
     Box,
     Button,
@@ -60,8 +60,11 @@ export default function TitleHeader() {
                 <Grid
                     container
                     spacing={{ xs: 5, md: 8 }}
-                    alignItems="center"
-                    sx={{ minHeight: { md: 640 }, py: { xs: 8, md: 10 } }}
+                    sx={{
+                        alignItems: "center",
+                        minHeight: { md: 640 },
+                        py: { xs: 8, md: 10 },
+                    }}
                 >
                     <Grid size={{ xs: 12, md: 7 }}>
                         <Typography

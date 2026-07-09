@@ -9,7 +9,7 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { useUserData } from "../../context/UserContext";
@@ -139,9 +139,13 @@ export default function WorkHistory() {
                                                 </ListItemIcon>
                                                 <ListItemText
                                                     primary={responsibility}
-                                                    primaryTypographyProps={{
-                                                        color: "text.secondary",
-                                                        lineHeight: 1.65,
+                                                    slotProps={{
+                                                        primary: {
+                                                            color: "text.secondary",
+                                                            sx: {
+                                                                lineHeight: 1.65,
+                                                            },
+                                                        },
                                                     }}
                                                 />
                                             </ListItem>

@@ -6,7 +6,7 @@ Last reviewed: 2026-07-09
 
 Upgrade the project packages to stable, current versions without breaking the resume site, GitHub Pages deployment, or basic local development.
 
-This project originally used Create React App through `react-scripts@5.0.1`. React officially deprecated Create React App for new apps and recommends migrating existing apps to a framework or build tool such as Vite, Parcel, or Rsbuild. The project has now been migrated to Vite, so the remaining risky work is mainly the MUI major-version migration.
+This project originally used Create React App through `react-scripts@5.0.1`. React officially deprecated Create React App for new apps and recommends migrating existing apps to a framework or build tool such as Vite, Parcel, or Rsbuild. The project has now been migrated to Vite and the MUI major-version migration is complete.
 
 Recommended path:
 
@@ -14,6 +14,29 @@ Recommended path:
 2. Migrate the build tool from CRA to Vite.
 3. Upgrade major packages after the build tool is modernized.
 4. Validate each phase with build, tests, and a visual pass.
+
+## Phase 3 execution status
+
+Status on 2026-07-09: complete and validated.
+
+Completed migration work:
+
+- Upgraded `@mui/material` from `6.4.7` to `9.2.0`.
+- Upgraded `@mui/icons-material` from `6.4.7` to `9.2.0`.
+- Replaced removed `@mui/material/Grid2` imports with `@mui/material/Grid`.
+- Moved stricter MUI layout props into `sx` where required.
+- Migrated `ListItemText` typography customization from `primaryTypographyProps` to `slotProps.primary`.
+
+Validation passed:
+
+```bash
+npm run typecheck
+npm run build
+npm test
+npm outdated --json
+```
+
+`npm outdated --json` returned `{}`, so the project packages are current at the time of this review.
 
 ## Phase 2 execution status
 
@@ -75,8 +98,8 @@ npm outdated --json
 | `@emotion/react` | not outdated | not outdated | not outdated | Low | Leave as-is unless MUI requires a newer peer. |
 | `@emotion/styled` | `11.14.1` | `11.14.1` | `11.14.1` | Low | Phase 1 complete. |
 | `@fontsource/roboto` | `5.2.10` | `5.2.10` | `5.2.10` | Low | Phase 1 complete. |
-| `@mui/icons-material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Keep at `6.4.7` on CRA. Move with MUI migration after Vite. |
-| `@mui/material` | `6.4.7` | `6.5.0` | `9.2.0` | High for major | Keep at `6.4.7` on CRA. `6.5.0` failed build validation. |
+| `@mui/icons-material` | `9.2.0` | `9.2.0` | `9.2.0` | Low | Phase 3 complete. |
+| `@mui/material` | `9.2.0` | `9.2.0` | `9.2.0` | Low | Phase 3 complete. |
 | `@testing-library/dom` | `10.4.1` | `10.4.1` | `10.4.1` | Low | Phase 1 complete. |
 | `@testing-library/jest-dom` | `6.9.1` | `6.9.1` | `6.9.1` | Low | Phase 1 complete. |
 | `@testing-library/react` | `16.3.2` | `16.3.2` | `16.3.2` | Low | Phase 1 complete. |
@@ -96,10 +119,11 @@ npm outdated --json
 
 ## Why not upgrade everything at once?
 
-Three package groups have different compatibility risks:
+The package upgrade was split into phases because each group had different compatibility risks:
 
-1. MUI v9 is a major UI-library migration. The app currently imports `Grid` from `@mui/material/Grid2` in several files; MUI v9 migration docs show Grid API cleanup and removal of legacy/deprecated APIs. This should be handled as a separate UI migration.
-2. React Router v7 minor upgrades are usually manageable, but routing needs manual verification because this site has GitHub Pages basename handling.
+1. CRA, TypeScript, Jest, and Webpack were tightly coupled through `react-scripts`, so the build-tool migration had to happen separately.
+2. MUI v9 was a major UI-library migration and required source changes for Grid imports and stricter prop types.
+3. React Router v7 minor upgrades were manageable but still required route and GitHub Pages basename validation.
 
 ## Phase 0: Baseline before package changes
 
@@ -224,20 +248,23 @@ Manual checks:
 
 ## Phase 3: MUI major migration after Vite
 
+Status: complete.
+
 Target: move the remaining outdated MUI packages to current stable majors after the toolchain is modern.
 
-Upgrade candidates:
+Completed package changes:
 
 | Package group | Target | Notes |
 | --- | --- | --- |
-| MUI | `9.2.0` | Use official MUI v7 and v9 migration guides. Do this in a dedicated branch. |
-| MUI icons | `9.2.0` | Keep the same major as `@mui/material`. |
+| MUI | `9.2.0` | Complete. |
+| MUI icons | `9.2.0` | Complete; kept on the same major as `@mui/material`. |
 
-MUI-specific checks:
+MUI-specific changes made:
 
-- Replace `@mui/material/Grid2` imports if the v9 migration requires `@mui/material/Grid`.
-- Run MUI codemods where applicable.
-- Search for removed/deprecated props:
+- Replaced `@mui/material/Grid2` imports with `@mui/material/Grid`.
+- Moved removed layout props into `sx` where required by stricter MUI v9 types.
+- Replaced `ListItemText` `primaryTypographyProps` with `slotProps.primary`.
+- Searched for removed/deprecated props:
 
 ```bash
 rg "Grid2|TransitionComponent|TransitionProps|disableEscapeKeyDown|GridLegacy|MuiTouchRipple|OutlineIcon|InfoOutline|DeleteOutline" src

@@ -14,7 +14,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleIcon from '@mui/icons-material/AddCircle';

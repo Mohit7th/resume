@@ -8,7 +8,7 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { useUserData } from "../../context/UserContext";
 import { Projects as Project } from "../../types/projects";
@@ -103,10 +103,12 @@ export default function Projects() {
                                 >
                                     <Stack
                                         direction="row"
-                                        justifyContent="space-between"
-                                        alignItems="center"
                                         spacing={2}
-                                        sx={{ mb: 1.5 }}
+                                        sx={{
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            mb: 1.5,
+                                        }}
                                     >
                                         <Typography
                                             variant="overline"
