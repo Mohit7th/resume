@@ -1,110 +1,104 @@
-import { SyntheticEvent, useState } from "react";
-import { useUserData } from "../../context/UserContext";
-import { Box, Paper, styled, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import Projects from "./Projects";
-import { useTheme } from "@mui/material/styles";
+import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import ExtensionRoundedIcon from "@mui/icons-material/ExtensionRounded";
+import QueryStatsRoundedIcon from "@mui/icons-material/QueryStatsRounded";
+import { useUserData } from "../../context/UserContext";
 
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function CustomTabPanel({ children, value, index }: TabPanelProps) {
-    return (
-        <Box sx={{ pt: 3, minHeight: "200px" }}>
-            {value === index && children}
-        </Box>
-    );
-}
-
-function a11yProps(index: number, col: string) {
-    return {
-        id: `simple-tab-${col}`,
-        "aria-controls": `simple-tabpanel-${index}`,
-    };
-}
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.primary,
-    ...theme.applyStyles("dark", {
-        backgroundColor: "#1A2027",
-    }),
-}));
+const capabilityMeta = {
+    webTechnologies: {
+        title: "Web application delivery",
+        description:
+            "Frontend architecture, REST APIs, databases, integrations, and maintainable product delivery.",
+        icon: <CodeRoundedIcon />,
+    },
+    browserExtension: {
+        title: "Browser products",
+        description:
+            "Cross-browser extensions, content scripts, store releases, and web-page integrations.",
+        icon: <ExtensionRoundedIcon />,
+    },
+    businessIntelligence: {
+        title: "Data & business intelligence",
+        description:
+            "ETL pipelines, reporting, data visualization, SQL optimization, and operational automation.",
+        icon: <QueryStatsRoundedIcon />,
+    },
+};
 
 export default function Skills() {
-    const theme = useTheme();
-    const userdata = useUserData();
-    const header = Object.keys(userdata.skills) as Array<
-        keyof typeof userdata.skills
-    >;
-
-    const [tabIndex, setTabIndex] = useState(0);
-
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
-        setTabIndex(newValue);
-    };
+    const { skills } = useUserData();
+    const categories = Object.keys(skills) as Array<keyof typeof skills>;
 
     return (
-        <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                    value={tabIndex}
-                    onChange={handleChange}
-                    aria-label="skills-tabs"
-                    centered
-                    sx={{ fontWeight: 700 }}
-                >
-                    {header.map((tabName, index) => {
-                        const displayName =
-                            tabName === "browserExtension"
-                                ? "Browser Extension"
-                                : tabName === "businessIntelligence"
-                                ? "Business Intelligence"
-                                : "Web Applications";
-                        return (
-                            <Tab
-                                key={index}
-                                label={displayName}
-                                {...a11yProps(index, tabName)}
-                                sx={{
-                                    color: theme.palette.primary.dark,
-                                }}
-                            />
-                        );
-                    })}
-                </Tabs>
-            </Box>
+        <Grid container spacing={3}>
+            {categories.map((category) => {
+                const meta = capabilityMeta[category];
 
-            <CustomTabPanel value={tabIndex} index={tabIndex}>
-                <Grid
-                    container
-                    rowSpacing={1}
-                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                >
-                    {userdata.skills[header[tabIndex]].map((data, idx) => (
-                        <Grid size={{ xs: 4, sm: 6, md: 2 }} key={idx}>
-                            <Item
+                return (
+                    <Grid size={{ xs: 12, md: 4 }} key={category}>
+                        <Paper
+                            variant="outlined"
+                            sx={{
+                                height: "100%",
+                                p: { xs: 3, md: 4 },
+                                borderRadius: 3,
+                                borderColor: "divider",
+                                boxShadow: "none",
+                            }}
+                        >
+                            <Box
                                 sx={{
-                                    backgroundColor: "rgba(120, 134, 199, 0.2)",
-                                    color: theme.palette.primary.contrastText,
+                                    display: "grid",
+                                    placeItems: "center",
+                                    width: 48,
+                                    height: 48,
+                                    borderRadius: 2,
+                                    bgcolor: "secondary.light",
+                                    color: "primary.main",
+                                    mb: 3,
                                 }}
                             >
-                                <Typography variant="h6" component="div">
-                                    {data.name}
-                                </Typography>
-                                {data.experience}
-                            </Item>
-                        </Grid>
-                    ))}
-                </Grid>
-
-                <Projects tabIndex={tabIndex} header={header} />
-            </CustomTabPanel>
-        </Box>
+                                {meta.icon}
+                            </Box>
+                            <Typography
+                                component="h3"
+                                variant="h5"
+                                sx={{ fontWeight: 700, mb: 1.5 }}
+                            >
+                                {meta.title}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                sx={{ mb: 3 }}
+                            >
+                                {meta.description}
+                            </Typography>
+                            <Stack
+                                direction="row"
+                                useFlexGap
+                                flexWrap="wrap"
+                                gap={1}
+                            >
+                                {skills[category].map((skill) => (
+                                    <Chip
+                                        key={skill._id}
+                                        label={skill.name}
+                                        variant="outlined"
+                                        size="small"
+                                        sx={{
+                                            borderColor: "divider",
+                                            color: "text.primary",
+                                            fontWeight: 500,
+                                        }}
+                                    />
+                                ))}
+                            </Stack>
+                        </Paper>
+                    </Grid>
+                );
+            })}
+        </Grid>
     );
 }

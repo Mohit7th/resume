@@ -1,24 +1,46 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
+import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
 import { useUserData } from "../../context/UserContext";
-import { useTheme } from "@mui/material/styles";
 
 export default function Summary() {
-    const userdata = useUserData();
-    const theme = useTheme();
+    const { summary } = useUserData();
+
     return (
-        <Box
-            component="section"
-            sx={{ p: { sx: 1, md: 2}, color: theme.palette.primary.contrastText }}
+        <Paper
+            variant="outlined"
+            sx={{
+                position: "relative",
+                maxWidth: 900,
+                p: { xs: 3, md: 5 },
+                borderRadius: 3,
+                borderColor: "divider",
+                boxShadow: "none",
+                bgcolor: "secondary.light",
+            }}
         >
-            <Typography
-                variant="h6"
-                gutterBottom
+            <Box
                 sx={{
-                    fontSize: { xs: '0.78rem', sm: '0.875rem', md: '1rem', lg: '1.125rem' },
+                    display: "grid",
+                    placeItems: "center",
+                    width: 48,
+                    height: 48,
+                    borderRadius: 2,
+                    bgcolor: "background.paper",
+                    color: "primary.main",
+                    mb: 3,
                 }}
             >
-                {userdata.summary.detailed}
+                <FormatQuoteRoundedIcon />
+            </Box>
+            <Typography
+                sx={{
+                    color: "text.primary",
+                    fontSize: { xs: "1rem", md: "1.125rem" },
+                    lineHeight: 1.8,
+                }}
+            >
+                {summary.detailed}
             </Typography>
-        </Box>
+        </Paper>
     );
 }
