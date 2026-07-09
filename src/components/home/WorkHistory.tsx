@@ -1,5 +1,4 @@
 import {
-    Button,
     Chip,
     Link,
     List,
@@ -121,9 +120,8 @@ export default function WorkHistory() {
                             </Grid>
                             <Grid size={{ xs: 12, md: 8 }}>
                                 <List disablePadding aria-label="Key achievements">
-                                    {work.reponsibilities
-                                        .slice(0, 5)
-                                        .map((responsibility) => (
+                                    {work.responsibilities.map(
+                                        (responsibility) => (
                                             <ListItem
                                                 key={responsibility}
                                                 disableGutters
@@ -149,16 +147,6 @@ export default function WorkHistory() {
                                             </ListItem>
                                         ))}
                                 </List>
-                                {work.reponsibilities.length > 5 && (
-                                    <Button
-                                        href="/assets/Mohit_Uniyal.pdf"
-                                        target="_blank"
-                                        size="small"
-                                        sx={{ mt: 1 }}
-                                    >
-                                        View full résumé
-                                    </Button>
-                                )}
                             </Grid>
                         </Grid>
                     </Paper>

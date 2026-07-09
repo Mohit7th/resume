@@ -12,9 +12,19 @@ import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useUserData } from "../../context/UserContext";
+import { calculateYearsAndMonths } from "../../utils/dateUtils";
 
 export default function TitleHeader() {
-    const { titleHeader, summary } = useUserData();
+    const { titleHeader, summary, workHistory } = useUserData();
+    const earliestStartDate = workHistory.reduce(
+        (earliest, work) =>
+            new Date(work.startDate) < new Date(earliest)
+                ? work.startDate
+                : earliest,
+        workHistory[0]?.startDate ?? new Date().toISOString()
+    );
+    const { years: totalExperienceYears } =
+        calculateYearsAndMonths(earliestStartDate);
     const github = titleHeader.socials.find((social) => social.name === "GitHub");
     const linkedIn = titleHeader.socials.find(
         (social) => social.name === "LinkedIn"
@@ -93,7 +103,8 @@ export default function TitleHeader() {
                                 mb: 4,
                             }}
                         >
-                            8+ years in software delivery · {summary.short}
+                            {totalExperienceYears}+ years in software delivery ·{" "}
+                            {summary.short}
                         </Typography>
                         <Stack
                             direction={{ xs: "column", sm: "row" }}

@@ -1,6 +1,6 @@
 {
   "short_name": "Mohit Uniyal",
-  "name": "Resume web app",
+  "name": "Mohit Uniyal | Full-Stack Developer",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#2D336B",
+  "background_color": "#FCFBFA"
 }

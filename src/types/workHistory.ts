@@ -5,7 +5,7 @@ export type WorkHistory = {
     startDate: string;
     endDate: string | null;
     website: string;
-    reponsibilities: string[];
+    responsibilities: string[];
     _id: string;
     image: string;
 };
