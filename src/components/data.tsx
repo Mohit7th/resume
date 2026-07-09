@@ -27,7 +27,7 @@ export const resumeData: ResumeData = {
     },
     summary: {
         detailed:
-            "Full-Stack Developer working in software delivery since 2016, with experience across the MEAN stack (MongoDB, Express.js, Angular, and Node.js) and Microsoft Business Intelligence. I build scalable web applications, REST APIs, browser extensions, third-party integrations, ETL workflows, and data visualizations. My work also includes performance optimization, client communication, technical documentation, and mentoring developers in agile teams.",
+            "Full-Stack Developer working in software delivery since 2016, with experience across the MEAN stack (MongoDB, Express.js, Angular, and Node.js) and Microsoft Business Intelligence.\n\nI build scalable web applications, REST APIs, browser extensions, third-party integrations, ETL workflows, and data visualizations. My work also includes performance optimization, client communication, technical documentation, and mentoring developers in agile teams.",
         short: "MEAN stack · Browser extensions · Data & BI",
         _id: "5",
     },

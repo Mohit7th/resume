@@ -52,7 +52,14 @@ function ResumeContent() {
         <>
             <TitleHeader />
             <Container maxWidth="lg">
-                <Box component="section" id="work" sx={{ py: { xs: 7, md: 12 } }}>
+                <Box
+                    component="section"
+                    id="work"
+                    sx={{
+                        pt: { xs: 7, md: 12 },
+                        pb: { xs: 4, md: 6 },
+                    }}
+                >
                     <SectionHeading
                         eyebrow="Selected work"
                         title="Products built for real users"
@@ -64,7 +71,7 @@ function ResumeContent() {
                 <Box
                     component="section"
                     id="experience"
-                    sx={{ py: { xs: 7, md: 12 } }}
+                    sx={{ py: { xs: 4, md: 6 } }}
                 >
                     <SectionHeading
                         eyebrow="Experience"
@@ -77,7 +84,7 @@ function ResumeContent() {
                 <Box
                     component="section"
                     id="skills"
-                    sx={{ py: { xs: 7, md: 12 } }}
+                    sx={{ py: { xs: 4, md: 6 } }}
                 >
                     <SectionHeading
                         eyebrow="Capabilities"
@@ -90,7 +97,10 @@ function ResumeContent() {
                 <Box
                     component="section"
                     id="about"
-                    sx={{ py: { xs: 7, md: 12 } }}
+                    sx={{
+                        pt: { xs: 4, md: 6 },
+                        pb: { xs: 7, md: 10 },
+                    }}
                 >
                     <SectionHeading
                         eyebrow="About"
