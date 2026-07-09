@@ -6,7 +6,7 @@ Last reviewed: 2026-07-09
 
 Upgrade the project packages to stable, current versions without breaking the resume site, GitHub Pages deployment, or basic local development.
 
-The important constraint is that this project still uses Create React App through `react-scripts@5.0.1`. React officially deprecated Create React App for new apps and recommends migrating existing apps to a framework or build tool such as Vite, Parcel, or Rsbuild. Because of that, the safest plan is not a single large version bump.
+This project originally used Create React App through `react-scripts@5.0.1`. React officially deprecated Create React App for new apps and recommends migrating existing apps to a framework or build tool such as Vite, Parcel, or Rsbuild. The project has now been migrated to Vite, so the remaining risky work is mainly the MUI major-version migration.
 
 Recommended path:
 
@@ -14,6 +14,33 @@ Recommended path:
 2. Migrate the build tool from CRA to Vite.
 3. Upgrade major packages after the build tool is modernized.
 4. Validate each phase with build, tests, and a visual pass.
+
+## Phase 2 execution status
+
+Status on 2026-07-09: complete and validated.
+
+Completed migration work:
+
+- Removed `react-scripts`.
+- Added `vite`, `@vitejs/plugin-react`, `vitest`, and `jsdom`.
+- Upgraded TypeScript to `7.0.2`.
+- Upgraded `@types/node` to `26.1.1`.
+- Replaced CRA scripts with Vite/Vitest scripts.
+- Moved the HTML entry from `public/index.html` to root `index.html`.
+- Replaced `%PUBLIC_URL%` and `process.env.REACT_APP_*` usage with Vite equivalents.
+- Converted test setup from Jest to Vitest.
+- Removed unused CRA template dependencies: `@types/jest`, `@testing-library/user-event`, and `web-vitals`.
+- Removed unused `src/reportWebVitals.ts`.
+- Lazy-loaded the `/admin` editor route so it is split from the public resume bundle.
+
+Validation passed:
+
+```bash
+npm run build
+npm test
+```
+
+Build output verified relative asset paths such as `./assets/...`, `./manifest.json`, and `./assets/Mohit_Uniyal.pdf`.
 
 ## Phase 1 execution status
 
@@ -53,26 +80,26 @@ npm outdated --json
 | `@testing-library/dom` | `10.4.1` | `10.4.1` | `10.4.1` | Low | Phase 1 complete. |
 | `@testing-library/jest-dom` | `6.9.1` | `6.9.1` | `6.9.1` | Low | Phase 1 complete. |
 | `@testing-library/react` | `16.3.2` | `16.3.2` | `16.3.2` | Low | Phase 1 complete. |
-| `@testing-library/user-event` | `13.5.0` | `13.5.0` | `14.6.1` | Medium | Delay until test migration/review because v14 has behavior/API differences. |
-| `@types/jest` | `27.5.2` | `27.5.2` | `30.0.0` | High with CRA Jest | Keep until test runner is migrated. CRA owns the Jest stack. |
-| `@types/node` | `16.18.126` | `16.18.126` | `26.1.1` | Medium | Do not jump blindly. Align with the Node version used in CI/build. |
+| `@types/node` | `26.1.1` | `26.1.1` | `26.1.1` | Low | Phase 2 complete. |
 | `@types/react` | `19.2.17` | `19.2.17` | `19.2.17` | Low | Phase 1 complete. |
 | `@types/react-dom` | `19.2.3` | `19.2.3` | `19.2.3` | Low | Phase 1 complete. |
 | `react` | `19.2.7` | `19.2.7` | `19.2.7` | Medium | Phase 1 complete. |
 | `react-dom` | `19.2.7` | `19.2.7` | `19.2.7` | Medium | Phase 1 complete. |
 | `react-router-dom` | `7.18.1` | `7.18.1` | `7.18.1` | Medium | Phase 1 complete. Verify routes manually before release. |
-| `react-scripts` | `5.0.1` | `5.0.1` | `5.0.1` | High strategic risk | Do not expect further modernization here. Replace with Vite in phase 2. |
-| `typescript` | `4.9.5` | `4.9.5` | `7.0.2` | High with CRA | Keep on CRA. Upgrade only after Vite migration. |
+| `react-scripts` | removed | removed | `5.0.1` | None | Phase 2 complete; no longer used. |
+| `typescript` | `7.0.2` | `7.0.2` | `7.0.2` | Low | Phase 2 complete. |
 | `use-immer` | not outdated | not outdated | not outdated | Low | Leave as-is. |
-| `web-vitals` | `2.1.4` | `2.1.4` | `5.3.0` | Medium | Delay unless `reportWebVitals` is actively used and migrated. |
+| `web-vitals` | removed | removed | `5.3.0` | None | Removed because metrics reporting was unused. |
+| `vite` | `8.1.4` | `8.1.4` | `8.1.4` | Low | Phase 2 complete. |
+| `@vitejs/plugin-react` | `6.0.3` | `6.0.3` | `6.0.3` | Low | Phase 2 complete. |
+| `vitest` | `4.1.10` | `4.1.10` | `4.1.10` | Low | Phase 2 complete. |
 
 ## Why not upgrade everything at once?
 
 Three package groups have different compatibility risks:
 
-1. `react-scripts`, TypeScript, Jest, and Webpack are tied together by Create React App. A major TypeScript or Jest upgrade can fail even when the application code is fine.
-2. MUI v9 is a major UI-library migration. The app currently imports `Grid` from `@mui/material/Grid2` in several files; MUI v9 migration docs show Grid API cleanup and removal of legacy/deprecated APIs. This should be handled as a separate UI migration.
-3. React Router v7 minor upgrades are usually manageable, but routing needs manual verification because this site has GitHub Pages basename handling.
+1. MUI v9 is a major UI-library migration. The app currently imports `Grid` from `@mui/material/Grid2` in several files; MUI v9 migration docs show Grid API cleanup and removal of legacy/deprecated APIs. This should be handled as a separate UI migration.
+2. React Router v7 minor upgrades are usually manageable, but routing needs manual verification because this site has GitHub Pages basename handling.
 
 ## Phase 0: Baseline before package changes
 
@@ -81,7 +108,7 @@ Run and record the current status before touching versions:
 ```bash
 npm ci
 npm run build
-npm test -- --watchAll=false
+npm test
 npm audit --omit=dev
 ```
 
@@ -91,8 +118,8 @@ Manual checks:
 - Header navigation scrolls to each section.
 - Resume PDF download works.
 - Project images load under a subfolder path.
-- `/admin` is unavailable when `REACT_APP_ENABLE_ADMIN=false`.
-- `/admin` is available locally when `REACT_APP_ENABLE_ADMIN=true`.
+- `/admin` is unavailable when `VITE_ENABLE_ADMIN=false`.
+- `/admin` is available locally when `VITE_ENABLE_ADMIN=true`.
 
 ## Phase 1: Safe CRA-compatible updates
 
@@ -118,12 +145,6 @@ Do not include MUI in this command while the project is still on CRA. `@mui/mate
 
 Do not update these in phase 1:
 
-- `react-scripts`
-- `typescript`
-- `@types/jest`
-- `@testing-library/user-event`
-- `@types/node`
-- `web-vitals`
 - `@mui/material`
 - `@mui/icons-material`
 
@@ -131,7 +152,7 @@ Validation gate:
 
 ```bash
 npm run build
-npm test -- --watchAll=false
+npm test
 ```
 
 If build fails, revert the package group and split the update into smaller sets:
@@ -143,17 +164,20 @@ If build fails, revert the package group and split the update into smaller sets:
 
 ## Phase 2: Migrate from CRA to Vite
 
+Status: complete.
+
 Target: remove the package constraint created by `react-scripts`.
 
-Planned package changes:
+Completed package changes:
 
-- Remove `react-scripts`.
-- Add `vite`.
-- Add `@vitejs/plugin-react`.
-- Add `typescript` latest stable after the Vite build is working.
-- Decide whether to keep Jest temporarily or migrate tests to Vitest.
+- Removed `react-scripts`.
+- Added `vite`.
+- Added `@vitejs/plugin-react`.
+- Added `vitest` and `jsdom`.
+- Upgraded TypeScript to latest stable.
+- Migrated tests from Jest to Vitest.
 
-Expected source changes:
+Completed source changes:
 
 - Replace CRA scripts:
 
@@ -169,18 +193,14 @@ Expected source changes:
 ```
 
 - Create `vite.config.ts` with `base: "./"` for GitHub Pages/subfolder hosting.
-- Move or adapt `public/index.html` to Vite's root `index.html` model.
+- Move `public/index.html` to Vite's root `index.html` model.
 - Replace `%PUBLIC_URL%` usage in HTML.
-- Replace CRA env naming:
-
-```env
-REACT_APP_SITE_URL=...
-```
-
-with Vite naming:
+- Replace CRA env naming with Vite naming:
 
 ```env
 VITE_SITE_URL=...
+VITE_RESUME_PDF_PATH=...
+VITE_ENABLE_ADMIN=...
 ```
 
 - Update `src/config/siteConfig.ts` from `process.env.REACT_APP_*` to `import.meta.env.VITE_*`.
@@ -202,21 +222,16 @@ Manual checks:
 - PDF download resolves.
 - Routing works on refresh where the host supports SPA fallback.
 
-## Phase 3: Major dependency upgrades after Vite
+## Phase 3: MUI major migration after Vite
 
-Target: move to current stable majors after the toolchain is modern.
+Target: move the remaining outdated MUI packages to current stable majors after the toolchain is modern.
 
 Upgrade candidates:
 
 | Package group | Target | Notes |
 | --- | --- | --- |
-| TypeScript | `7.0.2` | Upgrade after Vite is stable. Run strict type/build checks. |
 | MUI | `9.2.0` | Use official MUI v7 and v9 migration guides. Do this in a dedicated branch. |
 | MUI icons | `9.2.0` | Keep the same major as `@mui/material`. |
-| `@testing-library/user-event` | `14.6.1` | Update tests for async/user interaction changes. |
-| Jest types/test runner | latest compatible | Prefer Vitest if Vite is adopted. |
-| `web-vitals` | `5.3.0` | Only if metrics reporting is still used. |
-| `@types/node` | latest or build-runtime-aligned | Align with the Node version used by local dev and CI. |
 
 MUI-specific checks:
 

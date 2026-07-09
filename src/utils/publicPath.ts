@@ -3,7 +3,7 @@ export function getPublicAssetPath(assetPath: string) {
         return assetPath;
     }
 
-    const publicUrl = process.env.PUBLIC_URL || "";
+    const publicUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     const normalizedAssetPath = assetPath.startsWith("/")
         ? assetPath
         : `/${assetPath}`;
@@ -12,19 +12,15 @@ export function getPublicAssetPath(assetPath: string) {
 }
 
 export function getRouterBasename() {
-    const publicUrl = process.env.PUBLIC_URL;
+    const publicUrl = import.meta.env.BASE_URL;
 
-    if (publicUrl && publicUrl !== ".") {
-        try {
-            const pathname = new URL(
-                publicUrl,
-                window.location.origin
-            ).pathname.replace(/\/$/, "");
+    if (publicUrl && publicUrl !== "/") {
+        const pathname = new URL(publicUrl, window.location.origin).pathname.replace(
+            /\/$/,
+            ""
+        );
 
-            return pathname || "/";
-        } catch {
-            return "/";
-        }
+        return pathname || "/";
     }
 
     if (

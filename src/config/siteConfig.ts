@@ -11,10 +11,10 @@ function getStringEnv(value: string | undefined, defaultValue: string) {
 }
 
 export const siteConfig = {
-    siteUrl: getStringEnv(process.env.REACT_APP_SITE_URL, ""),
+    siteUrl: getStringEnv(import.meta.env.VITE_SITE_URL, ""),
     resumePdfPath: getStringEnv(
-        process.env.REACT_APP_RESUME_PDF_PATH,
+        import.meta.env.VITE_RESUME_PDF_PATH,
         "/assets/Mohit_Uniyal.pdf"
     ),
-    enableAdmin: getBooleanEnv(process.env.REACT_APP_ENABLE_ADMIN, false),
+    enableAdmin: getBooleanEnv(import.meta.env.VITE_ENABLE_ADMIN, false),
 };
