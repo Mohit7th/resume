@@ -13,9 +13,13 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useUserData } from "../../context/UserContext";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function TitleHeader() {
     const { titleHeader, summary, workHistory } = useUserData();
+    const resumePdfUrl = getPublicAssetPath("/assets/Mohit_Uniyal.pdf");
+    const heroPatternUrl = getPublicAssetPath("/assets/subtle-prism.svg");
+    const illustrationUrl = getPublicAssetPath("/assets/programming.svg");
     const earliestStartDate = workHistory.reduce(
         (earliest, work) =>
             new Date(work.startDate) < new Date(earliest)
@@ -44,7 +48,7 @@ export default function TitleHeader() {
                     content: '""',
                     position: "absolute",
                     inset: 0,
-                    backgroundImage: "url('/assets/subtle-prism.svg')",
+                    backgroundImage: `url('${heroPatternUrl}')`,
                     backgroundSize: "cover",
                     opacity: 0.22,
                     pointerEvents: "none",
@@ -112,7 +116,7 @@ export default function TitleHeader() {
                             sx={{ alignItems: { xs: "stretch", sm: "center" } }}
                         >
                             <Button
-                                href="/assets/Mohit_Uniyal.pdf"
+                                href={resumePdfUrl}
                                 download="Mohit_Uniyal_Resume.pdf"
                                 variant="contained"
                                 startIcon={<DownloadRoundedIcon />}
@@ -158,7 +162,7 @@ export default function TitleHeader() {
                     >
                         <Box
                             component="img"
-                            src="/assets/programming.svg"
+                            src={illustrationUrl}
                             alt="Developer working at a computer"
                             sx={{
                                 width: "100%",

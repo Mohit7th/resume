@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid2";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { useUserData } from "../../context/UserContext";
 import { Projects as Project } from "../../types/projects";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 const categoryLabels: Record<string, string> = {
     webTechnologies: "Web application",
@@ -83,7 +84,7 @@ export default function Projects() {
                             >
                                 <CardMedia
                                     component="img"
-                                    image={project.image}
+                                    image={getPublicAssetPath(project.image)}
                                     alt=""
                                     loading="lazy"
                                     sx={{

@@ -11,10 +11,12 @@ import {
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./Footer";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function MainLayout() {
     const location = useLocation();
     const isAdmin = location.pathname === "/admin";
+    const resumePdfUrl = getPublicAssetPath("/assets/Mohit_Uniyal.pdf");
     const navItems = [
         { label: "Work", href: "#work" },
         { label: "Experience", href: "#experience" },
@@ -99,7 +101,7 @@ export default function MainLayout() {
                             </Stack>
 
                             <Button
-                                href="/assets/Mohit_Uniyal.pdf"
+                                href={resumePdfUrl}
                                 download="Mohit_Uniyal_Resume.pdf"
                                 variant="contained"
                                 startIcon={
