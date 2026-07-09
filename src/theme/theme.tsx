@@ -1,65 +1,88 @@
-// src/theme/theme.ts
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: "#FCFBFA",
+            paper: "#FFFFFF",
+        },
         primary: {
-            main: "#FFF2F2", // Example primary color
-            light: "#7886C7", // Lighter shade
-            dark: "#2D336B", // Darker shade
-            contrastText: "#FFF2F2", // Text color on primary
+            main: "#2D336B",
+            light: "#7886C7",
+            dark: "#17204A",
+            contrastText: "#FFFFFF",
+        },
+        secondary: {
+            main: "#7886C7",
+            light: "#EEF1FA",
+            dark: "#4F5C9F",
         },
         text: {
-            primary: "#2D336B",
-            secondary: "#7886C7",
+            primary: "#252A3A",
+            secondary: "#62697A",
+        },
+        divider: "#DCE1EE",
+        action: {
+            hover: "rgba(45, 51, 107, 0.06)",
         },
     },
     typography: {
         fontFamily: "'Poppins', sans-serif",
-        h1: { fontWeight: 700 },
-        h2: { fontWeight: 600 },
-        fontSize: 14, // Default base font size
+        h1: {
+            fontWeight: 700,
+            lineHeight: 1.08,
+            letterSpacing: "-0.04em",
+        },
+        h2: {
+            fontWeight: 700,
+            lineHeight: 1.15,
+            letterSpacing: "-0.025em",
+        },
+        h3: {
+            fontWeight: 700,
+            lineHeight: 1.2,
+        },
         h6: {
-            fontSize: "1rem", // Default for h6
-            "@media (max-width:600px)": {
-                fontSize: "0.875rem", // Adjust for small screens
-            },
-            "@media (min-width:900px)": {
-                fontSize: "1.125rem", // Adjust for large screens
-            },
+            fontWeight: 600,
         },
         body1: {
             fontWeight: 400,
-            fontSize: "0.875rem",
-            "@media (max-width:600px)": {
-                fontSize: "0.75rem",
-            },
-            "@media (min-width:900px)": {
-                fontSize: "1rem",
-            },
+            fontSize: "1rem",
+            lineHeight: 1.7,
+        },
+        body2: {
+            lineHeight: 1.65,
+        },
+        button: {
+            fontWeight: 600,
+            textTransform: "none",
         },
     },
+    shape: {
+        borderRadius: 12,
+    },
     components: {
-        MuiListItem: {
+        MuiButton: {
             styleOverrides: {
                 root: {
-                    padding: "2px", // Default padding
-                    "@media (max-width:600px)": {
-                        padding: "1px", // Smaller padding on small screens
-                    },
+                    minHeight: 44,
+                    borderRadius: 12,
+                    paddingInline: 20,
                 },
             },
         },
-        MuiListItemText: {
+        MuiCard: {
             styleOverrides: {
-                primary: {
-                    fontSize: "0.8rem", // Default font size
-                    "@media (max-width:600px)": {
-                        fontSize: "0.8rem", // Smaller font for small screens
-                    },
-                    "@media (min-width:900px)": {
-                        fontSize: "0.9rem", // Larger font for big screens
-                    },
+                root: {
+                    border: "1px solid #DCE1EE",
+                    boxShadow: "0 14px 40px rgba(23, 32, 74, 0.08)",
+                },
+            },
+        },
+        MuiLink: {
+            styleOverrides: {
+                root: {
+                    textUnderlineOffset: "4px",
                 },
             },
         },

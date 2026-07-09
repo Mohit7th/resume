@@ -1,55 +1,64 @@
-import { Box, Typography, IconButton, Container } from "@mui/material";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useUserData } from "../../context/UserContext";
-import { useTheme } from "@mui/material/styles";
 
 export default function Footer() {
     const userData = useUserData();
-    const theme = useTheme();
+    const github = userData.titleHeader.socials.find(
+        (social) => social.name === "GitHub"
+    );
+    const linkedIn = userData.titleHeader.socials.find(
+        (social) => social.name === "LinkedIn"
+    );
+
     return (
         <Box
             component="footer"
             sx={{
-                position: "static",
-
-                width: "100%",
-                backgroundColor: theme.palette.primary.dark,
-                color: theme.palette.primary.light,
-                py: 1,
-                zIndex: 1000,
+                bgcolor: "#111735",
+                color: "rgba(255,255,255,0.72)",
+                py: 3,
             }}
         >
             <Container
                 maxWidth="lg"
                 sx={{
                     display: "flex",
+                    flexDirection: { xs: "column", sm: "row" },
+                    gap: 2,
                     justifyContent: "space-between",
                     alignItems: "center",
                 }}
             >
-                {/* Left Side: "Developed by" */}
                 <Typography variant="body2">
-                    Developed by {userData.titleHeader.name} in React.js
+                    © {new Date().getFullYear()} {userData.titleHeader.name}.
+                    Built with React.
                 </Typography>
-
-                {/* Right Side: Social Media Icons */}
-                <Box>
-                    <IconButton
-                        href={userData.titleHeader.socials[1].url}
-                        target="_blank"
-                        sx={{ color: "white" }}
-                    >
-                        <GitHubIcon />
-                    </IconButton>
-                    <IconButton
-                        href={userData.titleHeader.socials[0].url}
-                        target="_blank"
-                        sx={{ color: "white" }}
-                    >
-                        <LinkedInIcon />
-                    </IconButton>
-                </Box>
+                <Stack direction="row" spacing={0.5}>
+                    {github && (
+                        <IconButton
+                            href={github.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="View Mohit Uniyal on GitHub"
+                            sx={{ color: "white" }}
+                        >
+                            <GitHubIcon />
+                        </IconButton>
+                    )}
+                    {linkedIn && (
+                        <IconButton
+                            href={linkedIn.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="View Mohit Uniyal on LinkedIn"
+                            sx={{ color: "white" }}
+                        >
+                            <LinkedInIcon />
+                        </IconButton>
+                    )}
+                </Stack>
             </Container>
         </Box>
     );

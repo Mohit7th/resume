@@ -1,153 +1,161 @@
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Divider,
+    Chip,
+    Link,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
+    Paper,
+    Stack,
     Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { useUserData } from "../../context/UserContext";
-import Grid from "@mui/material/Grid2";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useTheme } from "@mui/material/styles";
-import { SyntheticEvent, useState } from "react";
-
-import CheckIcon from "@mui/icons-material/Check";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
 
+function formatDate(value: string | null) {
+    if (!value) {
+        return "Present";
+    }
+
+    return new Intl.DateTimeFormat("en", {
+        month: "short",
+        year: "numeric",
+    }).format(new Date(value));
+}
+
 export default function WorkHistory() {
-    const [expanded, setExpanded] = useState<string | false>(false);
-
-    const handleChange =
-        (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false);
-        };
-
-    const theme = useTheme();
-    const userdata = useUserData();
-    const accordianData = userdata.workHistory.map((work: any) => {
-        const { years, months } = calculateYearsAndMonths(
-            work.startDate,
-            work.endDate
-        );
-        return (
-            <Grid size={12} key={work._id}>
-                <Accordion
-                    sx={{
-                        backgroundColor: "rgba(120, 134, 199, 0.2)",
-                        color: theme.palette.primary.contrastText,
-                    }}
-                    expanded={expanded === work._id}
-                    onChange={handleChange(work._id)}
-                >
-                    <AccordionSummary
-                        expandIcon={
-                            <ExpandMoreIcon
-                                sx={{
-                                    color: theme.palette.primary.contrastText,
-                                }}
-                            />
-                        }
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                    >
-                        <Typography component="span">
-                            <b>{work.company}</b>
-                        </Typography>
-                        <Divider
-                            orientation="vertical"
-                            flexItem
-                            sx={{
-                                mx: 1,
-                                backgroundColor:
-                                    theme.palette.primary.contrastText,
-                            }}
-                        />
-                        <Typography
-                            component="span"
-                            sx={{
-                                color: theme.palette.primary.contrastText,
-                                fontWeight: 500,
-                            }}
-                        >
-                            {work.position}
-                        </Typography>
-                        <Divider
-                            orientation="vertical"
-                            flexItem
-                            sx={{
-                                mx: 1,
-                                backgroundColor:
-                                    theme.palette.primary.contrastText,
-                            }}
-                        />
-                        <Typography
-                            component="span"
-                            sx={{
-                                color: theme.palette.primary.contrastText,
-                                fontWeight: 500,
-                            }}
-                        >
-                            {years} years {months > 0 ? `${months} months` : ""}
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails
-                        sx={{
-                            backgroundColor: theme.palette.primary.contrastText,
-                            color: theme.palette.primary.dark,
-                        }}
-                    >
-                        <Grid container>
-                            <Grid
-                                size={{ xs: 12, md: 8 }}
-                                sx={{ display: "flex", alignItems: "center" }}
-                            >
-                                <List dense={true}>
-                                    {work.reponsibilities.map(
-                                        (resp: any, index: number) => (
-                                            <ListItem key={index}>
-                                                <ListItemIcon>
-                                                    <CheckIcon />
-                                                </ListItemIcon>
-                                                <ListItemText primary={resp} />
-                                            </ListItem>
-                                        )
-                                    )}
-                                </List>
-                            </Grid>
-                            <Grid
-                                size={{ xs: 4, md: 4 }}
-                                sx={{
-                                    display: {
-                                        xs: "none",
-                                        md: "flex",
-                                        justifyContent: "center", // Centers horizontally
-                                        alignItems: "center",
-                                    },
-                                }}
-                            >
-                                <img
-                                    alt="illus"
-                                    src={work.image}
-                                    style={{
-                                        width: 250,
-                                        height: 250,
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
-            </Grid>
-        );
-    });
+    const { workHistory } = useUserData();
 
     return (
-        <Grid container spacing={1} sx={{ mb: 5, mt: 5 }}>
-            {accordianData}
-        </Grid>
+        <Stack spacing={3}>
+            {workHistory.map((work, index) => {
+                const { years, months } = calculateYearsAndMonths(
+                    work.startDate,
+                    work.endDate
+                );
+                const duration = [
+                    years > 0 ? `${years} ${years === 1 ? "year" : "years"}` : "",
+                    months > 0
+                        ? `${months} ${months === 1 ? "month" : "months"}`
+                        : "",
+                ]
+                    .filter(Boolean)
+                    .join(" ");
+
+                return (
+                    <Paper
+                        key={work._id}
+                        component="article"
+                        variant="outlined"
+                        sx={{
+                            position: "relative",
+                            p: { xs: 3, md: 5 },
+                            borderRadius: 3,
+                            borderColor: "divider",
+                            boxShadow: "none",
+                            overflow: "hidden",
+                            "&::before": {
+                                content: '""',
+                                position: "absolute",
+                                top: 0,
+                                bottom: 0,
+                                left: 0,
+                                width: 5,
+                                bgcolor:
+                                    index === 0
+                                        ? "primary.main"
+                                        : "secondary.main",
+                            },
+                        }}
+                    >
+                        <Grid container spacing={{ xs: 3, md: 5 }}>
+                            <Grid size={{ xs: 12, md: 4 }}>
+                                <Chip
+                                    label={index === 0 ? "Current role" : duration}
+                                    size="small"
+                                    sx={{
+                                        bgcolor: "secondary.light",
+                                        color: "primary.dark",
+                                        fontWeight: 700,
+                                        mb: 2,
+                                    }}
+                                />
+                                <Typography
+                                    component="h3"
+                                    variant="h5"
+                                    sx={{ fontWeight: 700, mb: 0.5 }}
+                                >
+                                    {work.position}
+                                </Typography>
+                                <Link
+                                    href={work.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    underline="hover"
+                                    sx={{
+                                        display: "inline-flex",
+                                        alignItems: "center",
+                                        gap: 0.5,
+                                        color: "primary.main",
+                                        fontWeight: 600,
+                                        mb: 1.5,
+                                    }}
+                                >
+                                    {work.company}
+                                    <ArrowOutwardRoundedIcon fontSize="inherit" />
+                                </Link>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                >
+                                    {formatDate(work.startDate)} —{" "}
+                                    {formatDate(work.endDate)}
+                                    {index === 0 && duration
+                                        ? ` · ${duration}`
+                                        : ""}
+                                </Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 8 }}>
+                                <List disablePadding aria-label="Key achievements">
+                                    {work.responsibilities.map(
+                                        (responsibility) => (
+                                            <ListItem
+                                                key={responsibility}
+                                                disableGutters
+                                                alignItems="flex-start"
+                                                sx={{ py: 0.65 }}
+                                            >
+                                                <ListItemIcon
+                                                    sx={{
+                                                        minWidth: 32,
+                                                        mt: 0.4,
+                                                        color: "secondary.dark",
+                                                    }}
+                                                >
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={responsibility}
+                                                    slotProps={{
+                                                        primary: {
+                                                            color: "text.secondary",
+                                                            sx: {
+                                                                lineHeight: 1.65,
+                                                            },
+                                                        },
+                                                    }}
+                                                />
+                                            </ListItem>
+                                        ))}
+                                </List>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                );
+            })}
+        </Stack>
     );
 }

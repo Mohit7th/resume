@@ -1,116 +1,174 @@
-import React from "react";
 import {
+    Box,
     Card,
-    CardContent,
-    Typography,
-    Skeleton,
     CardActionArea,
+    CardContent,
     CardMedia,
     Chip,
-    Box,
+    Stack,
+    Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { useUserData } from "../../context/UserContext";
-import { resumeData } from "../data";
-import Grid from "@mui/material/Grid2";
-import { useTheme } from "@mui/material/styles";
-// Define props interface for type safety
-interface ProjectsProps {
-    tabIndex: number;
-    header: Array<keyof typeof resumeData.skills>;
-}
+import { Projects as Project } from "../../types/projects";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
-const Projects: React.FC<ProjectsProps> = ({ tabIndex, header }) => {
-    const theme = useTheme();
-    const selectedTab = header.find((_, index) => index === tabIndex) || {
-        type: "webTechnologies",
-    };
-
-    const userdata = useUserData();
-    const filteredProjects = userdata.projects.filter(
-        (obj) => obj.type === selectedTab
-    );
-
-    return (
-        <Grid
-            container
-            spacing={{ xs: 2, sm: 2, md: 2 }}
-            sx={{ mt: 3, mb: 5, justifyContent: "space-between" }}
-        >
-            {filteredProjects.map((project: any, idx: number) => (
-                <Grid
-                    size={{ xs: 12, sm: 6, md: 3 }}
-                    key={idx}
-                    sx={{
-                        display: "flex",
-                        justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens, left-align on medium+
-                        alignItems: "center",
-                        textAlign: { xs: "center", md: "left" }, // Center text on small screens
-                    }}
-                >
-                    <Card
-                        sx={{
-                            width: { xs: "100%", md: 300 },
-                            display: "flex",
-                            flexDirection: "column",
-                            height: "100%",
-                            // backgroundColor: theme.palette.primary.light,
-                            backgroundColor: "rgba(255, 242, 242, 0.2)",
-                            transition: "0.3s",
-                            boxShadow: 3,
-                            position: "relative", // Required for absolute positioning
-                            "&:hover": {
-                                boxShadow: 10,
-                                transform: "translateY(-5px)",
-                            },
-                        }}
-                        key={project._id}
-                    >
-                        {/* Tech Stack Chip - Positioned at top-right */}
-                        <Box
-                            sx={{
-                                position: "absolute",
-                                top: 8,
-                                right: 8,
-                                zIndex: 2, // Ensures it stays on top
-                            }}
-                        >
-                            <Chip
-                                label={project.techStack || "MEAN"}
-                                sx={{backgroundColor: theme.palette.primary.light, color: theme.palette.primary.contrastText}}
-                                size="small"
-                            />
-                        </Box>
-
-                        <CardActionArea onClick={() => window.open(project.url)}>
-                            {!project.image ? (
-                                <Skeleton variant="rounded" height={140} />
-                            ) : (
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={project.image}
-                                    alt={project.name}
-                                />
-                            )}
-                            <CardContent>
-                                <Typography gutterBottom variant="h5">
-                                    {project.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    sx={{
-                                        color: theme.palette.primary.contrastText,
-                                    }}
-                                >
-                                    {project.description}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            ))}
-        </Grid>
-    );
+const categoryLabels: Record<string, string> = {
+    webTechnologies: "Web application",
+    browserExtension: "Browser extension",
+    businessIntelligence: "Data & BI",
 };
 
-export default Projects;
+function pickFeaturedProjects(projects: Project[]) {
+    const categories = [
+        "webTechnologies",
+        "browserExtension",
+        "businessIntelligence",
+    ];
+
+    return categories
+        .map((category) => projects.find((project) => project.type === category))
+        .filter((project): project is Project => Boolean(project));
+}
+
+export default function Projects() {
+    const { projects } = useUserData();
+    const featuredProjects = pickFeaturedProjects(projects);
+
+    return (
+        <Grid container spacing={3}>
+            {featuredProjects.map((project) => {
+                const hasPublicUrl = /^https?:\/\//.test(project.url);
+                const technologies =
+                    project.technologies.length > 0
+                        ? project.technologies.slice(0, 3)
+                        : [project.techStack];
+
+                return (
+                    <Grid size={{ xs: 12, md: 4 }} key={project._id}>
+                        <Card
+                            sx={{
+                                height: "100%",
+                                overflow: "hidden",
+                                bgcolor: "background.paper",
+                                transition:
+                                    "transform 180ms ease, box-shadow 180ms ease",
+                                "&:hover": {
+                                    transform: "translateY(-4px)",
+                                    boxShadow:
+                                        "0 20px 50px rgba(23, 32, 74, 0.13)",
+                                },
+                            }}
+                        >
+                            <CardActionArea
+                                component={hasPublicUrl ? "a" : "div"}
+                                href={hasPublicUrl ? project.url : undefined}
+                                target={hasPublicUrl ? "_blank" : undefined}
+                                rel={
+                                    hasPublicUrl
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                }
+                                aria-label={
+                                    hasPublicUrl
+                                        ? `${project.name}, open project in a new tab`
+                                        : undefined
+                                }
+                                sx={{
+                                    height: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "stretch",
+                                }}
+                            >
+                                <CardMedia
+                                    component="img"
+                                    image={getPublicAssetPath(project.image)}
+                                    alt=""
+                                    loading="lazy"
+                                    sx={{
+                                        height: 190,
+                                        objectFit: "cover",
+                                        bgcolor: "secondary.light",
+                                    }}
+                                />
+                                <CardContent
+                                    sx={{
+                                        p: 3,
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Stack
+                                        direction="row"
+                                        spacing={2}
+                                        sx={{
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            mb: 1.5,
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="overline"
+                                            sx={{
+                                                color: "secondary.dark",
+                                                fontWeight: 700,
+                                                letterSpacing: "0.08em",
+                                            }}
+                                        >
+                                            {categoryLabels[project.type] ??
+                                                "Project"}
+                                        </Typography>
+                                        {hasPublicUrl && (
+                                            <ArrowOutwardRoundedIcon
+                                                aria-hidden="true"
+                                                fontSize="small"
+                                                sx={{ color: "primary.main" }}
+                                            />
+                                        )}
+                                    </Stack>
+                                    <Typography
+                                        component="h3"
+                                        variant="h5"
+                                        sx={{ fontWeight: 700, mb: 1.5 }}
+                                    >
+                                        {project.name}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="text.secondary"
+                                        sx={{ mb: 3, flexGrow: 1 }}
+                                    >
+                                        {project.description}
+                                    </Typography>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            flexWrap: "wrap",
+                                            gap: 1,
+                                        }}
+                                    >
+                                        {technologies.map((technology) => (
+                                            <Chip
+                                                key={technology}
+                                                label={technology}
+                                                size="small"
+                                                sx={{
+                                                    bgcolor: "secondary.light",
+                                                    color: "primary.dark",
+                                                    fontWeight: 600,
+                                                }}
+                                            />
+                                        ))}
+                                    </Box>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                );
+            })}
+        </Grid>
+    );
+}

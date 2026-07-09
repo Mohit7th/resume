@@ -1,5 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { useUserData } from "../../context/UserContext";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 interface ProjectModalProps {
     projectId: string;
@@ -19,7 +20,10 @@ export default function ProjectModal({ projectId }: ProjectModalProps) {
 
     return (
         <>
-            <img src={selectedProject.image} />
+            <img
+                src={getPublicAssetPath(selectedProject.image)}
+                alt={selectedProject.name}
+            />
             <h1>
                 {selectedProject.name}
                 <span>
