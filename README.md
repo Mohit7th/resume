@@ -2,6 +2,22 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Configuration
+
+Copy `.env.example` to `.env.local` for local overrides:
+
+```bash
+cp .env.example .env.local
+```
+
+Available public build-time settings:
+
+- `REACT_APP_SITE_URL`: deployed site URL, useful for future canonical/analytics configuration.
+- `REACT_APP_RESUME_PDF_PATH`: path or URL for the downloadable resume PDF.
+- `REACT_APP_ENABLE_ADMIN`: set to `true` only when the `/admin` editor route should be available.
+
+For GitHub Pages/subfolder hosting, `package.json` uses `"homepage": "."` so the production build uses relative asset paths.
+
 ## Available Scripts
 
 In the project directory, you can run:

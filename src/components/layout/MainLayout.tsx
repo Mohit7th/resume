@@ -10,13 +10,14 @@ import {
 } from "@mui/material";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import { Outlet, useLocation } from "react-router-dom";
+import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
 import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function MainLayout() {
     const location = useLocation();
     const isAdmin = location.pathname === "/admin";
-    const resumePdfUrl = getPublicAssetPath("/assets/Mohit_Uniyal.pdf");
+    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
     const navItems = [
         { label: "Work", href: "#work" },
         { label: "Experience", href: "#experience" },

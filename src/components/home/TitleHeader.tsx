@@ -11,13 +11,14 @@ import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { siteConfig } from "../../config/siteConfig";
 import { useUserData } from "../../context/UserContext";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
 import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function TitleHeader() {
     const { titleHeader, summary, workHistory } = useUserData();
-    const resumePdfUrl = getPublicAssetPath("/assets/Mohit_Uniyal.pdf");
+    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
     const heroPatternUrl = getPublicAssetPath("/assets/subtle-prism.svg");
     const illustrationUrl = getPublicAssetPath("/assets/programming.svg");
     const earliestStartDate = workHistory.reduce(

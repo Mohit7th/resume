@@ -5,6 +5,7 @@ import AdminPanel from "./pages/Admin Panel/AdminPanel";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./components/layout/MainLayout";
 import { AuthProvider } from "./context/AuthContext";
+import { siteConfig } from "./config/siteConfig";
 import { getRouterBasename } from "./utils/publicPath";
 
 const App: React.FC = () => {
@@ -14,7 +15,9 @@ const App: React.FC = () => {
                 <Routes>
                     <Route element={<MainLayout />}>
                         <Route path="/" element={<ResumeHome />} />
-                        <Route path="/admin" element={<AdminPanel />} />
+                        {siteConfig.enableAdmin && (
+                            <Route path="/admin" element={<AdminPanel />} />
+                        )}
                         {/* Catch-all 404 Route (Must be at the end) */}
                         <Route path="*" element={<NotFound />} />
                     </Route>
