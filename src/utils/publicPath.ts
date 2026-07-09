@@ -14,7 +14,9 @@ export function getPublicAssetPath(assetPath: string) {
 export function getRouterBasename() {
     const publicUrl = import.meta.env.BASE_URL;
 
-    if (publicUrl && publicUrl !== "/") {
+    // Only trust an absolute base path (e.g. "/resume/"). A relative base such
+    // as "./" carries no subpath, so fall through to hostname detection below.
+    if (publicUrl && publicUrl !== "/" && !publicUrl.startsWith(".")) {
         const pathname = new URL(publicUrl, window.location.origin).pathname.replace(
             /\/$/,
             ""
