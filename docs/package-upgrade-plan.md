@@ -272,14 +272,27 @@ rg "Grid2|TransitionComponent|TransitionProps|disableEscapeKeyDown|GridLegacy|Mu
 
 ## Phase 4: Cleanup and release
 
+Status on 2026-07-09: complete.
+
 After all package upgrades:
 
 ```bash
 npm dedupe
 npm audit --omit=dev
+npm run typecheck
 npm run build
 npm test
 ```
+
+Validation result:
+
+- `npm dedupe`: complete; dependency tree already up to date.
+- `npm audit --omit=dev`: 0 production vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `npm test`: passed.
+- `npm outdated --json`: returned `{}`.
+- GitHub Pages build output uses relative paths such as `./assets/...`, `./manifest.json`, and `./assets/Mohit_Uniyal.pdf`.
 
 Then manually verify:
 
