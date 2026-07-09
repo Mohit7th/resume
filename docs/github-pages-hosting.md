@@ -36,6 +36,14 @@ npm test
 npm run build
 ```
 
+Or use the release helper:
+
+```bash
+powershell -ExecutionPolicy Bypass -File scripts/create-release.ps1
+```
+
+The helper validates the repo, runs the release checks, creates a local release tag, and prints push commands. It does not push unless you pass `-Push`.
+
 Confirm the generated `build/index.html` uses relative paths such as:
 
 ```html
@@ -150,6 +158,14 @@ Then push:
 ```bash
 git push origin main
 ```
+
+You can also run:
+
+```bash
+powershell -ExecutionPolicy Bypass -File scripts/create-release.ps1 -Push
+```
+
+The script defaults to the `main` branch because the GitHub Pages workflow deploys from `main`.
 
 ## Option B: Generic GitHub Actions setup
 
