@@ -2,6 +2,18 @@
 
 This project is ready to host as a static site on GitHub Pages.
 
+Target repository:
+
+```text
+https://github.com/Mohit7th/resume
+```
+
+Expected GitHub Pages URL:
+
+```text
+https://mohit7th.github.io/resume
+```
+
 The app uses Vite and builds into the `build` folder. `vite.config.ts` is configured with:
 
 ```ts
@@ -45,7 +57,7 @@ cp .env.example .env.local
 Useful deployment values:
 
 ```env
-VITE_SITE_URL=https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME
+VITE_SITE_URL=https://mohit7th.github.io/resume
 VITE_RESUME_PDF_PATH=/assets/Mohit_Uniyal.pdf
 VITE_ENABLE_ADMIN=false
 ```
@@ -55,6 +67,7 @@ Notes:
 - `VITE_SITE_URL` is currently available for site-level config/future metadata.
 - `VITE_RESUME_PDF_PATH` can be a local public asset path or a full URL.
 - `VITE_ENABLE_ADMIN=false` keeps `/admin` unavailable in the public build.
+- Production defaults are committed in `.env.production` for the `Mohit7th/resume` GitHub Pages deployment.
 
 ## Option A: Host from a separate GitHub Pages repo
 
@@ -107,7 +120,38 @@ git push
 
 GitHub will show the published URL after the Pages build finishes.
 
-## Option B: Host from this repo with GitHub Actions
+## Recommended: Host this repo with GitHub Actions
+
+This repo now includes:
+
+```text
+.github/workflows/deploy.yml
+```
+
+Use this path for `Mohit7th/resume`.
+
+In GitHub:
+
+- Go to `https://github.com/Mohit7th/resume`.
+- Open Settings > Pages.
+- Set Source to `GitHub Actions`.
+- Push to `main`.
+- Open the Actions tab and confirm the deployment completes.
+- After it finishes, open `https://mohit7th.github.io/resume`.
+
+If your local `origin` still points to an old repo, update it:
+
+```bash
+git remote set-url origin https://github.com/Mohit7th/resume.git
+```
+
+Then push:
+
+```bash
+git push origin main
+```
+
+## Option B: Generic GitHub Actions setup
 
 Use this if you want GitHub to build and deploy automatically whenever you push.
 
@@ -157,6 +201,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          VITE_SITE_URL: https://mohit7th.github.io/resume
+          VITE_RESUME_PDF_PATH: /assets/Mohit_Uniyal.pdf
           VITE_ENABLE_ADMIN: "false"
 
       - name: Configure Pages
