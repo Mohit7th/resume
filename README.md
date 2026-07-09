@@ -45,15 +45,22 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
 color palette
+
 #FFF2F2
+
 #A9B5DF
+
 #7886C7
+
 #2D336B
 
 dark
+
 #222831
+
 #31363F
+
 #76ABAE
+
 #EEEEEE
