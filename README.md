@@ -1,66 +1,61 @@
-# Getting Started with Create React App
+# Mohit Uniyal Resume
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal resume website built with React, TypeScript, Material UI, and Vite.
 
-## Available Scripts
+## Configuration
 
-In the project directory, you can run:
+Copy `.env.example` to `.env.local` for local overrides:
 
-### `npm start`
+```bash
+cp .env.example .env.local
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Available public build-time settings:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- `VITE_SITE_URL`: deployed site URL, useful for future canonical/analytics configuration.
+- `VITE_RESUME_PDF_PATH`: path or URL for the downloadable resume PDF.
+- `VITE_ENABLE_ADMIN`: set to `true` only when the `/admin` editor route should be available.
 
-### `npm test`
+For GitHub Pages/subfolder hosting, `vite.config.ts` uses `base: "./"` so the production build uses relative asset paths.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts
 
-### `npm run build`
+Run the local dev server:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Build for production:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run build
+```
 
-### `npm run eject`
+Run tests:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm test
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Preview the production build locally:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm run preview
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Color palette
 
-## Learn More
+Light:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `#FFF2F2`
+- `#A9B5DF`
+- `#7886C7`
+- `#2D336B`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Dark:
 
-color palette
-
-#FFF2F2
-
-#A9B5DF
-
-#7886C7
-
-#2D336B
-
-dark
-
-#222831
-
-#31363F
-
-#76ABAE
-
-#EEEEEE
+- `#222831`
+- `#31363F`
+- `#76ABAE`
+- `#EEEEEE`

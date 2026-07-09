@@ -1,132 +1,183 @@
-import Grid from "@mui/material/Grid2";
-import { useState } from "react";
+import Grid from "@mui/material/Grid";
+import {
+    Box,
+    Button,
+    Container,
+    IconButton,
+    Stack,
+    Typography,
+} from "@mui/material";
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { siteConfig } from "../../config/siteConfig";
 import { useUserData } from "../../context/UserContext";
-import { Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import RatingFormDialog from "../ui/RatingFormDialog";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useTheme } from "@mui/material/styles";
+import { calculateYearsAndMonths } from "../../utils/dateUtils";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function TitleHeader() {
-    const [openDialog, setOpenDialog] = useState<boolean>(false);
-    const userdata = useUserData();
-    const { titleHeader, summary } = userdata;
-    const theme = useTheme();
-
-    function handleDownloadCV() {
-        const date = new Date();
-        const pdfFilePath = "/assets/Mohit_Uniyal.pdf"; // Update with your actual PDF file path
-        const link = document.createElement("a");
-        link.href = pdfFilePath;
-        link.download = `Mohit_Uniyal_${date}.pdf`; // Change this to desired file name
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    function handleContactMe(recipientEmail: string) {
-        window.location.href = `mailto:${recipientEmail}`;
-    }
-
-    const handleOpenDialog = () => {
-        setOpenDialog(true);
-    };
-
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
-
-    const primaryTextColor = theme.palette.primary.contrastText;
+    const { titleHeader, summary, workHistory } = useUserData();
+    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
+    const heroPatternUrl = getPublicAssetPath("/assets/subtle-prism.svg");
+    const illustrationUrl = getPublicAssetPath("/assets/programming.svg");
+    const earliestStartDate = workHistory.reduce(
+        (earliest, work) =>
+            new Date(work.startDate) < new Date(earliest)
+                ? work.startDate
+                : earliest,
+        workHistory[0]?.startDate ?? new Date().toISOString()
+    );
+    const { years: totalExperienceYears } =
+        calculateYearsAndMonths(earliestStartDate);
+    const github = titleHeader.socials.find((social) => social.name === "GitHub");
+    const linkedIn = titleHeader.socials.find(
+        (social) => social.name === "LinkedIn"
+    );
 
     return (
         <Box
+            component="section"
+            id="top"
             sx={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 1,
-                bgcolor: "rgba(45, 51, 107, 0.7)",
-                pt: 5,
-                mt: 8,
+                position: "relative",
+                overflow: "hidden",
+                bgcolor: "secondary.light",
+                borderBottom: "1px solid",
+                borderColor: "divider",
+                "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    inset: 0,
+                    backgroundImage: `url('${heroPatternUrl}')`,
+                    backgroundSize: "cover",
+                    opacity: 0.22,
+                    pointerEvents: "none",
+                },
             }}
         >
-            <Grid container spacing={2} sx={{ mb: 5 }} alignItems="center">
-                {/* Profile Picture */}
+            <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
                 <Grid
-                    size={{ xs: 12, md: 6 }}
+                    container
+                    spacing={{ xs: 5, md: 8 }}
                     sx={{
-                        display: "flex",
-                        justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens, left-align on medium+
                         alignItems: "center",
-                        pl: { md: 4 }, // Add padding only on medium+ screens
-                        textAlign: { xs: "center", md: "left" }, // Center text on small screens
+                        minHeight: { md: 640 },
+                        py: { xs: 8, md: 10 },
                     }}
                 >
-                    <img
-                        alt={titleHeader.name}
-                        src="/assets/programming.svg"
-                        style={{
-                            width: 250,
-                            height: 250,
-                        }}
-                    />
-                </Grid>
-
-                {/* User Information */}
-                <Grid
-                    size={{ xs: 12, md: 6 }}
-                    sx={{
-                        display: "flex",
-                        justifyContent: { xs: "center", md: "flex-end" }, // Center on small screens, right-align on medium+
-                        textAlign: { xs: "center", md: "right" }, // Center text on small screens
-                    }}
-                >
-                    <Box sx={{ p: 3 }}>
-                        <Typography variant="h3">{titleHeader.name}</Typography>
-                        <Typography variant="h5">
-                            {titleHeader.title}
+                    <Grid size={{ xs: 12, md: 7 }}>
+                        <Typography
+                            component="p"
+                            sx={{
+                                color: "secondary.dark",
+                                fontWeight: 700,
+                                mb: 2,
+                            }}
+                        >
+                            {titleHeader.title} · {titleHeader.contact.address}
                         </Typography>
-                        <Typography variant="h6">
-                            {titleHeader.contact.email}
+                        <Typography
+                            component="h1"
+                            variant="h1"
+                            sx={{
+                                color: "primary.dark",
+                                fontSize: {
+                                    xs: "3rem",
+                                    sm: "4rem",
+                                    md: "5rem",
+                                },
+                                mb: 3,
+                            }}
+                        >
+                            {titleHeader.name}
                         </Typography>
-                        <Typography variant="body1">{summary.short}</Typography>
-
-                        {/* Action Buttons */}
-                        <Stack direction="row" spacing={2} mt={2}>
-                            <Tooltip title="PDF" placement="top" arrow>
-                                <Chip
-                                    label="Download CV"
-                                    variant="outlined"
-                                    onClick={handleDownloadCV}
-                                    sx={{ color: primaryTextColor }}
-                                />
-                            </Tooltip>
-                            <Tooltip title="Email" placement="top" arrow>
-                                <Chip
-                                    label="Contact"
-                                    variant="outlined"
-                                    onClick={() =>
-                                        handleContactMe(
-                                            titleHeader.contact.email
-                                        )
-                                    }
-                                    sx={{ color: primaryTextColor }}
-                                />
-                            </Tooltip>
-                            <Tooltip title="Rate Website" placement="top" arrow>
-                                <Chip
-                                    icon={<FavoriteIcon color="primary" />}
-                                    label="Rate"
-                                    variant="outlined"
-                                    onClick={handleOpenDialog}
-                                    sx={{ color: primaryTextColor }}
-                                />
-                            </Tooltip>
+                        <Typography
+                            sx={{
+                                maxWidth: 680,
+                                color: "text.secondary",
+                                fontSize: { xs: "1.1rem", md: "1.3rem" },
+                                lineHeight: 1.65,
+                                mb: 2,
+                            }}
+                        >
+                            I build scalable web applications, browser
+                            extensions, and data products from idea to delivery.
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: "primary.main",
+                                fontWeight: 600,
+                                mb: 4,
+                            }}
+                        >
+                            {totalExperienceYears}+ years in software delivery ·{" "}
+                            {summary.short}
+                        </Typography>
+                        <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            spacing={1.5}
+                            sx={{ alignItems: { xs: "stretch", sm: "center" } }}
+                        >
+                            <Button
+                                href={resumePdfUrl}
+                                download="Mohit_Uniyal_Resume.pdf"
+                                variant="contained"
+                                startIcon={<DownloadRoundedIcon />}
+                            >
+                                Download résumé
+                            </Button>
+                            <Button
+                                href={`mailto:${titleHeader.contact.email}`}
+                                variant="outlined"
+                                startIcon={<EmailRoundedIcon />}
+                            >
+                                Contact me
+                            </Button>
+                            <Stack direction="row" spacing={0.5}>
+                                {github && (
+                                    <IconButton
+                                        href={github.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="View Mohit Uniyal on GitHub"
+                                        sx={{ color: "primary.main" }}
+                                    >
+                                        <GitHubIcon />
+                                    </IconButton>
+                                )}
+                                {linkedIn && (
+                                    <IconButton
+                                        href={linkedIn.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="View Mohit Uniyal on LinkedIn"
+                                        sx={{ color: "primary.main" }}
+                                    >
+                                        <LinkedInIcon />
+                                    </IconButton>
+                                )}
+                            </Stack>
                         </Stack>
-                    </Box>
+                    </Grid>
+                    <Grid
+                        size={{ xs: 12, md: 5 }}
+                        sx={{ display: "flex", justifyContent: "center" }}
+                    >
+                        <Box
+                            component="img"
+                            src={illustrationUrl}
+                            alt="Developer working at a computer"
+                            sx={{
+                                width: "100%",
+                                maxWidth: 430,
+                                height: "auto",
+                                filter: "drop-shadow(0 24px 36px rgba(23,32,74,.15))",
+                            }}
+                        />
+                    </Grid>
                 </Grid>
-            </Grid>
-
-            {/* Dialog Component */}
-            <RatingFormDialog open={openDialog} onRatingDialogClose={handleCloseDialog} />
+            </Container>
         </Box>
     );
 }

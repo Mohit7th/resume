@@ -1,24 +1,66 @@
-import { Box, Typography } from "@mui/material";
+import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
+import { Box, Paper, Typography } from "@mui/material";
 import { useUserData } from "../../context/UserContext";
-import { useTheme } from "@mui/material/styles";
 
 export default function Summary() {
-    const userdata = useUserData();
-    const theme = useTheme();
+    const { summary } = useUserData();
+    const paragraphs = summary.detailed.split("\n\n");
+
     return (
-        <Box
-            component="section"
-            sx={{ p: { sx: 1, md: 2}, color: theme.palette.primary.contrastText }}
+        <Paper
+            variant="outlined"
+            sx={{
+                width: "100%",
+                p: { xs: 3, md: 5 },
+                borderRadius: 4,
+                borderColor: "divider",
+                borderLeft: "5px solid",
+                borderLeftColor: "primary.main",
+                boxShadow: "none",
+                bgcolor: "secondary.light",
+            }}
         >
-            <Typography
-                variant="h6"
-                gutterBottom
+            <Box
                 sx={{
-                    fontSize: { xs: '0.78rem', sm: '0.875rem', md: '1rem', lg: '1.125rem' },
+                    maxWidth: "72ch",
+                    mx: "auto",
                 }}
             >
-                {userdata.summary.detailed}
-            </Typography>
-        </Box>
+                <Box
+                    aria-hidden="true"
+                    sx={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: "50%",
+                        display: "grid",
+                        placeItems: "center",
+                        mb: 3,
+                        mx: "auto",
+                        bgcolor: "background.paper",
+                        color: "primary.main",
+                    }}
+                >
+                    <FormatQuoteRoundedIcon />
+                </Box>
+
+                {paragraphs.map((paragraph) => (
+                    <Typography
+                        key={paragraph}
+                        sx={{
+                            color: "text.primary",
+                            fontSize: { xs: "1rem", md: "1.075rem" },
+                            lineHeight: 1.75,
+                            textAlign: "center",
+                            mb: 2,
+                            "&:last-of-type": {
+                                mb: 0,
+                            },
+                        }}
+                    >
+                        {paragraph}
+                    </Typography>
+                ))}
+            </Box>
+        </Paper>
     );
 }

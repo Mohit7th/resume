@@ -11,7 +11,7 @@ import {
     useTheme,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { ChangeEvent, useState } from "react";
 interface FormDialogProps {
     open: boolean;

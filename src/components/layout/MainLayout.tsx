@@ -3,37 +3,28 @@ import {
     Avatar,
     Box,
     Button,
+    Container,
+    Stack,
     Toolbar,
     Typography,
 } from "@mui/material";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import { Outlet, useLocation } from "react-router-dom";
+import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
-import { useTheme } from "@mui/material/styles";
-import LoginFormDialog from "../ui/LoginFormDialog";
-import { useState } from "react";
+import { getPublicAssetPath } from "../../utils/publicPath";
 
 export default function MainLayout() {
     const location = useLocation();
-    const navigate = useNavigate();
-    const auth = useAuth();
-
-    const hideAppBarRoutes = ["/login"];
-    const shouldHideAppBar = hideAppBarRoutes.includes(location.pathname);
-
-    const hideFooterRoutes = ["/admin"];
-    const shouldHideFooter = hideFooterRoutes.includes(location.pathname);
-    const theme = useTheme();
-
-    const [openDialog, setOpenDialog] = useState<boolean>(false);
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
-
-    function handleAdminLogin() {
-        setOpenDialog(true);
-        // navigate("/admin");
-    }
+    const isAdmin = location.pathname === "/admin";
+    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
+    const navItems = [
+        { label: "Work", href: "#work" },
+        { label: "Experience", href: "#experience" },
+        { label: "Skills", href: "#skills" },
+        { label: "About", href: "#about" },
+        { label: "Contact", href: "#contact" },
+    ];
 
     return (
         <Box
@@ -43,60 +34,105 @@ export default function MainLayout() {
                 minHeight: "100vh",
             }}
         >
-            {!shouldHideAppBar && (
+            <a className="skip-link" href="#main-content">
+                Skip to content
+            </a>
+
+            {!isAdmin && (
                 <AppBar
-                    position="fixed"
+                    component="header"
+                    position="sticky"
+                    elevation={0}
                     sx={{
-                        backgroundColor: theme.palette.primary.dark,
-                        mb: 4,
+                        bgcolor: "rgba(252, 251, 250, 0.9)",
+                        color: "text.primary",
+                        borderBottom: "1px solid",
+                        borderColor: "divider",
+                        backdropFilter: "blur(14px)",
                     }}
                 >
-                    <Toolbar>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{ flexGrow: 1 }}
-                            onClick={() => navigate("/")}
-                        >
-                            <Avatar
-                                sx={{ bgcolor: theme.palette.primary.light }}
+                    <Container maxWidth="lg">
+                        <Toolbar disableGutters sx={{ minHeight: 72 }}>
+                            <Button
+                                href="#top"
+                                color="inherit"
+                                aria-label="Mohit Uniyal, back to top"
+                                sx={{ minWidth: 0, p: 0, mr: "auto" }}
                             >
-                                MU
-                            </Avatar>
-                        </Typography>
-                        <Button color="inherit" onClick={handleAdminLogin}>
-                            Admin
-                        </Button>
-                        {auth?.isAuthenticated && (
-                            <Button color="inherit" onClick={auth?.logout}>
-                                Logout
+                                <Avatar
+                                    sx={{
+                                        width: 42,
+                                        height: 42,
+                                        bgcolor: "primary.main",
+                                        fontSize: "0.95rem",
+                                        fontWeight: 700,
+                                    }}
+                                >
+                                    MU
+                                </Avatar>
+                                <Typography
+                                    component="span"
+                                    sx={{
+                                        display: { xs: "none", sm: "block" },
+                                        ml: 1.5,
+                                        fontWeight: 700,
+                                    }}
+                                >
+                                    Mohit Uniyal
+                                </Typography>
                             </Button>
-                        )}
-                    </Toolbar>
+
+                            <Stack
+                                component="nav"
+                                aria-label="Primary navigation"
+                                direction="row"
+                                spacing={0.5}
+                                sx={{ display: { xs: "none", md: "flex" } }}
+                            >
+                                {navItems.map((item) => (
+                                    <Button
+                                        key={item.href}
+                                        href={item.href}
+                                        color="inherit"
+                                        size="small"
+                                    >
+                                        {item.label}
+                                    </Button>
+                                ))}
+                            </Stack>
+
+                            <Button
+                                href={resumePdfUrl}
+                                download="Mohit_Uniyal_Resume.pdf"
+                                variant="contained"
+                                startIcon={
+                                    <DownloadRoundedIcon
+                                        sx={{
+                                            display: {
+                                                xs: "none",
+                                                sm: "block",
+                                            },
+                                        }}
+                                    />
+                                }
+                                sx={{ ml: { xs: 1, md: 2 } }}
+                            >
+                                Résumé
+                            </Button>
+                        </Toolbar>
+                    </Container>
                 </AppBar>
             )}
 
-            {/* Page Content */}
             <Box
-                sx={{
-                    flexGrow: 1,
-                    padding: 2,
-                    backgroundImage: "url('assets/liquid-cheese.svg')",
-                    backgroundSize: "cover",
-                    backgroundAttachment: "fixed",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    minHeight: "100vh",
-                }}
+                component="main"
+                id="main-content"
+                sx={{ flexGrow: 1, bgcolor: "background.default" }}
             >
-                <Outlet /> {/* 👈 Renders the page content dynamically */}
+                <Outlet />
             </Box>
 
-            {!shouldHideFooter && <Footer />}
-            <LoginFormDialog
-                open={openDialog}
-                onCloseDialog={handleCloseDialog}
-            />
+            {!isAdmin && <Footer />}
         </Box>
     );
 }

@@ -27,8 +27,8 @@ export const resumeData: ResumeData = {
     },
     summary: {
         detailed:
-            "Full Stack Developer with 8 years of experience, including 5 years in MEAN stack (MongoDB, Express.js, Angular, Node.js) and 3 years in MSBI (Microsoft Business Intelligence). Skilled in building scalable web applications, developing RESTful APIs, browser extensions, and integrating third-party APIs. Experienced in data visualization, automation, and performance optimization. Strong in problem-solving, team mentoring, and client communication. Currently expanding expertise in React.js while thriving in agile environments.",
-        short: "MEAN STACK (5 Years) | MSBI (3 years)",
+            "Full-Stack Developer working in software delivery since 2016, with experience across the MEAN stack (MongoDB, Express.js, Angular, and Node.js) and Microsoft Business Intelligence.\n\nI build scalable web applications, REST APIs, browser extensions, third-party integrations, ETL workflows, and data visualizations. My work also includes performance optimization, client communication, technical documentation, and mentoring developers in agile teams.",
+        short: "MEAN stack · Browser extensions · Data & BI",
         _id: "5",
     },
     skills: {
@@ -42,7 +42,7 @@ export const resumeData: ResumeData = {
             },
             {
                 name: "React",
-                experience: "2 Months",
+                experience: "Developing",
                 _id: "7",
                 image: "",
                 type: "web",
@@ -105,7 +105,7 @@ export const resumeData: ResumeData = {
             },
             {
                 name: "Material UI",
-                experience: "1 month",
+                experience: "Developing",
                 _id: "30",
                 image: "",
                 type: "web",
@@ -172,21 +172,21 @@ export const resumeData: ResumeData = {
             },
             {
                 name: "Power BI",
-                experience: "1 years",
+                experience: "1 year",
                 _id: "24",
                 image: "",
                 type: "reporting",
             },
             {
                 name: "Crystal Reports",
-                experience: "1 years",
+                experience: "1 year",
                 _id: "25",
                 image: "",
                 type: "reporing",
             },
             {
                 name: "Qlik View",
-                experience: "1 years",
+                experience: "1 year",
                 _id: "26",
                 image: "",
                 type: "reporting",
@@ -199,7 +199,7 @@ export const resumeData: ResumeData = {
                 type: "IDE",
             },
             {
-                name: "Github",
+                name: "GitHub",
                 experience: "8 years",
                 _id: "28",
                 image: "",
@@ -245,7 +245,7 @@ export const resumeData: ResumeData = {
         {
             name: "Join Cherry",
             description:
-                "Built a web and Chrome extension-based platform that allows users to search for hotel and flight deals while displaying relevant browser extension data within a user-friendly dashboard",
+                "Built a web and Chrome extension platform that helps users find hotel and flight deals while presenting relevant extension data in a clear dashboard.",
             technologies: ["MEAN Stack"],
             url: "https://www.joincherry.com/",
             _id: "32",
@@ -269,7 +269,7 @@ export const resumeData: ResumeData = {
         {
             name: "Minimine",
             description:
-                "The minimine web application allows user manage jobs from LinkedIn portal. User can save jobs using the Chrome extension that works with LinkedIn.",
+                "Built a web application and Chrome extension that help users save and manage job opportunities from LinkedIn.",
             technologies: ["MEAN Stack"],
             url: "",
             _id: "34",
@@ -281,8 +281,8 @@ export const resumeData: ResumeData = {
         {
             name: "Quick Snip",
             description:
-                "A small browser extension to capture screenshot of web browser tabs, region or full page. Managing chrome store deployment, bug fixing etc",
-            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+                "Maintained a browser extension for capturing visible tabs, selected regions, and full pages, including Chrome Web Store releases and bug fixes.",
+            technologies: ["HTML", "CSS", "jQuery", "Bootstrap"],
             url: "https://chromewebstore.google.com/detail/Quick%20Snip/gjjhmphibjpmjbeghgjgecennojdohgc?hl=en&authuser=0",
             _id: "35",
             type: "browserExtension",
@@ -292,8 +292,9 @@ export const resumeData: ResumeData = {
         },
         {
             name: "Al-go",
-            description: "Browser extension to customize youtube feed.",
-            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+            description:
+                "Built a browser extension that allows users to customize their YouTube feed.",
+            technologies: ["HTML", "CSS", "jQuery", "Bootstrap"],
             url: "https://chromewebstore.google.com/detail/al-go/adjbkhalicehnbjboobhmhkakcgkmelb?hl=en",
             _id: "36",
             type: "browserExtension",
@@ -305,7 +306,7 @@ export const resumeData: ResumeData = {
             name: "i-search",
             description:
                 "allows Internet users to search the web in complete privacy and provides the essentials to take control of their personal information: tracker blocking, smarter encryption, and private search.",
-            technologies: ["HTML", "CSS", "JQuery", "Bootstrap"],
+            technologies: ["HTML", "CSS", "jQuery", "Bootstrap"],
             url: "https://addons.mozilla.org/en-US/firefox/addon/isearch/",
             _id: "37",
             type: "browserExtension",
@@ -328,7 +329,7 @@ export const resumeData: ResumeData = {
         {
             name: "Financial Data Mart",
             description:
-                "It was a Financial/Loyalty Data Mart, the main responsibilites included ETL pacakges implementation and deployment.",
+                "Implemented and deployed ETL packages for a financial and loyalty data mart.",
             technologies: ["SSIS", "Power BI", "SQL Server"],
             url: "https://www.hyperwallet.com",
             _id: "39",
@@ -350,10 +351,10 @@ export const resumeData: ResumeData = {
             responsibilities: [],
         },
         {
-            name: "Real State Service",
+            name: "Real Estate Service",
             description:
-                "Contributed to the development & maintance of MSBI ETL packages, implementing QlickView reports. Handled US-based client calls regarding project.",
-            technologies: ["SSIS", "T-SQL", "QlickView"],
+                "Developed and maintained MSBI ETL packages, implemented QlikView reports, and coordinated project work with a US-based client.",
+            technologies: ["SSIS", "T-SQL", "QlikView"],
             url: "https://cginfinity.com/data-analytics-ai",
             _id: "41",
             type: "businessIntelligence",
@@ -364,7 +365,7 @@ export const resumeData: ResumeData = {
         {
             name: "Patent Analytics",
             description:
-                "Contributed in optimizing the slow running queries, made stored procedure to avoid mutliple database queries.",
+                "Optimized slow-running queries and created stored procedures that consolidated repeated database operations.",
             technologies: ["MySQL"],
             url: "https://www.contata.com/case-studies/invent-management-system-for-an-ip-law-consulting-firm/",
             _id: "42",
@@ -381,7 +382,7 @@ export const resumeData: ResumeData = {
             startDate: "2019-07-01",
             endDate: null,
             website: "https://www.frootystudios.com",
-            reponsibilities: [
+            responsibilities: [
                 "Developed a white-labeling system to automate Chrome extension customization for clients.",
                 "Managed daily communication with UK-based clients for project coordination",
                 "Led and mentored junior developers, ensuring best practices.",
@@ -402,7 +403,7 @@ export const resumeData: ResumeData = {
             startDate: "2018-08-01",
             endDate: "2019-08-01",
             website: "https://cginfinity.com",
-            reponsibilities: [
+            responsibilities: [
                 "Developed and optimized QlikView reports for data visualization.",
                 "Debugged and implemented MSBI ETL packages for efficient data processing",
                 "Collaborated with clients to manage project tasks and deliverables.",
@@ -417,7 +418,7 @@ export const resumeData: ResumeData = {
             startDate: "2016-01-01",
             endDate: "2018-08-01",
             website: "https://www.contata.com",
-            reponsibilities: [
+            responsibilities: [
                 "Developed and managed ETL packages for data processing",
                 "Optimized T-SQL stored procedures for improved performance",
                 "Designed Power BI reports for data visualization.",
