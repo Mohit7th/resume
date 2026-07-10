@@ -4,12 +4,14 @@ import {
     useReducer,
     ReactNode,
     useContext,
+    useEffect,
 } from "react";
 import { ResumeData } from "../types"; // Import type
-import { resumeData } from "../components/data";
+import { loadResumeData, saveResumeData } from "../data/resumeStorage";
 
 // Define action type
 type Action =
+    | { type: "SET_RESUME"; payload: ResumeData }
     | { type: "UPDATE_TITLE_HEADER"; payload: ResumeData["titleHeader"] }
     | { type: "UPDATE_SUMMARY"; payload: ResumeData["summary"] }
     | { type: "UPDATE_SKILLS"; payload: ResumeData["skills"] }
@@ -22,7 +24,7 @@ type UserDataState = ResumeData;
 // Define the type of dispatch function
 type UserDataDispatch = Dispatch<Action>;
 
-export const UserDataContext = createContext<UserDataState>(resumeData);
+export const UserDataContext = createContext<UserDataState>(loadResumeData());
 export const UserDataDispatchContext = createContext<UserDataDispatch>(() => {
     throw new Error("UserDataDispatchContext is not provided");
 });
@@ -41,7 +43,18 @@ interface UserDataProviderProps {
 }
 
 export function UserDataProvider({ children }: UserDataProviderProps) {
-    const [userdata, dispatch] = useReducer(userDataReducer, resumeData);
+    // Lazily initialise from local storage (falls back to the bundled seed).
+    const [userdata, dispatch] = useReducer(
+        userDataReducer,
+        undefined,
+        loadResumeData
+    );
+
+    // Persist every change so admin edits survive a refresh and are reflected
+    // on the public site (within the same browser).
+    useEffect(() => {
+        saveResumeData(userdata);
+    }, [userdata]);
 
     return (
         <UserDataContext.Provider value={userdata}>
@@ -55,6 +68,9 @@ export function UserDataProvider({ children }: UserDataProviderProps) {
 // Properly Typed Reducer Function
 function userDataReducer(userdata: ResumeData, action: Action): ResumeData {
     switch (action.type) {
+        case "SET_RESUME":
+            return action.payload;
+
         case "UPDATE_TITLE_HEADER":
             return { ...userdata, titleHeader: action.payload };
 

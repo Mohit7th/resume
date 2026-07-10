@@ -15,6 +15,7 @@ import { siteConfig } from "../../config/siteConfig";
 import { useUserData } from "../../context/UserContext";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
 import { getPublicAssetPath } from "../../utils/publicPath";
+import Reveal from "../ui/Reveal";
 
 export default function TitleHeader() {
     const { titleHeader, summary, workHistory } = useUserData();
@@ -67,6 +68,7 @@ export default function TitleHeader() {
                     }}
                 >
                     <Grid size={{ xs: 12, md: 7 }}>
+                        <Reveal offset={16}>
                         <Typography
                             component="p"
                             sx={{
@@ -125,7 +127,7 @@ export default function TitleHeader() {
                                 variant="contained"
                                 startIcon={<DownloadRoundedIcon />}
                             >
-                                Download résumé
+                                Download Resume
                             </Button>
                             <Button
                                 href={`mailto:${titleHeader.contact.email}`}
@@ -159,11 +161,16 @@ export default function TitleHeader() {
                                 )}
                             </Stack>
                         </Stack>
+                        </Reveal>
                     </Grid>
                     <Grid
                         size={{ xs: 12, md: 5 }}
-                        sx={{ display: "flex", justifyContent: "center" }}
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            justifyContent: "center",
+                        }}
                     >
+                        <Reveal delay={150} offset={16} sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
                         <Box
                             component="img"
                             src={illustrationUrl}
@@ -175,6 +182,7 @@ export default function TitleHeader() {
                                 filter: "drop-shadow(0 24px 36px rgba(23,32,74,.15))",
                             }}
                         />
+                        </Reveal>
                     </Grid>
                 </Grid>
             </Container>
