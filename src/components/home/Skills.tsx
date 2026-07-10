@@ -90,6 +90,13 @@ export default function Skills() {
                                             borderColor: "divider",
                                             color: "text.primary",
                                             fontWeight: 500,
+                                            transition:
+                                                "transform 160ms ease, border-color 160ms ease, background-color 160ms ease",
+                                            "&:hover": {
+                                                transform: "scale(1.06)",
+                                                borderColor: "primary.main",
+                                                bgcolor: "secondary.light",
+                                            },
                                         }}
                                     />
                                 ))}

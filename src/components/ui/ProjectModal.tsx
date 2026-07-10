@@ -6,6 +6,7 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
+    Grow,
     IconButton,
     List,
     ListItem,
@@ -47,6 +48,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             maxWidth="sm"
             fullWidth
             scroll="paper"
+            slots={{ transition: Grow }}
+            transitionDuration={280}
         >
             {project && (
                 <>

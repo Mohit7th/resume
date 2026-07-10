@@ -5,6 +5,7 @@ import TitleHeader from "../components/home/TitleHeader";
 import Summary from "../components/home/Summary";
 import WorkHistory from "../components/home/WorkHistory";
 import Projects from "../components/home/Projects";
+import Reveal from "../components/ui/Reveal";
 import { useUserData } from "../context/UserContext";
 
 function SectionHeading({
@@ -57,12 +58,16 @@ function ResumeContent() {
                         pb: { xs: 4, md: 6 },
                     }}
                 >
-                    <SectionHeading
-                        eyebrow="Selected work"
-                        title="Products built for real users"
-                        description="Web platforms, browser extensions, and data systems I have helped deliver. Filter by category, or open a project for details."
-                    />
-                    <Projects />
+                    <Reveal>
+                        <SectionHeading
+                            eyebrow="Selected work"
+                            title="Products built for real users"
+                            description="Web platforms, browser extensions, and data systems I have helped deliver. Filter by category, or open a project for details."
+                        />
+                    </Reveal>
+                    <Reveal delay={80}>
+                        <Projects />
+                    </Reveal>
                 </Box>
 
                 <Box
@@ -70,11 +75,13 @@ function ResumeContent() {
                     id="experience"
                     sx={{ py: { xs: 4, md: 6 } }}
                 >
-                    <SectionHeading
-                        eyebrow="Experience"
-                        title="A track record of end-to-end delivery"
-                        description="Roles spanning full-stack engineering, browser products, data platforms, client collaboration, and team mentoring."
-                    />
+                    <Reveal>
+                        <SectionHeading
+                            eyebrow="Experience"
+                            title="A track record of end-to-end delivery"
+                            description="Roles spanning full-stack engineering, browser products, data platforms, client collaboration, and team mentoring."
+                        />
+                    </Reveal>
                     <WorkHistory />
                 </Box>
 
@@ -83,12 +90,16 @@ function ResumeContent() {
                     id="skills"
                     sx={{ py: { xs: 4, md: 6 } }}
                 >
-                    <SectionHeading
-                        eyebrow="Capabilities"
-                        title="Tools organized around outcomes"
-                        description="The technologies I use to ship maintainable products across the frontend, backend, browser, and data stack."
-                    />
-                    <Skills />
+                    <Reveal>
+                        <SectionHeading
+                            eyebrow="Capabilities"
+                            title="Tools organized around outcomes"
+                            description="The technologies I use to ship maintainable products across the frontend, backend, browser, and data stack."
+                        />
+                    </Reveal>
+                    <Reveal delay={80}>
+                        <Skills />
+                    </Reveal>
                 </Box>
 
                 <Box
@@ -99,12 +110,16 @@ function ResumeContent() {
                         pb: { xs: 7, md: 10 },
                     }}
                 >
-                    <SectionHeading
-                        eyebrow="About"
-                        title="Engineering with context"
-                        description="I work across implementation, technical decisions, communication, and mentoring—not just isolated tickets."
-                    />
-                    <Summary />
+                    <Reveal>
+                        <SectionHeading
+                            eyebrow="About"
+                            title="Engineering with context"
+                            description="I work across implementation, technical decisions, communication, and mentoring—not just isolated tickets."
+                        />
+                    </Reveal>
+                    <Reveal delay={80}>
+                        <Summary />
+                    </Reveal>
                 </Box>
             </Container>
 
@@ -118,6 +133,7 @@ function ResumeContent() {
                 }}
             >
                 <Container maxWidth="md" sx={{ textAlign: "center" }}>
+                    <Reveal>
                     <Typography
                         component="p"
                         sx={{
@@ -161,6 +177,7 @@ function ResumeContent() {
                     >
                         Email me
                     </Button>
+                    </Reveal>
                 </Container>
             </Box>
         </>

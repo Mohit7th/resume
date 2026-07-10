@@ -14,6 +14,7 @@ import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { useUserData } from "../../context/UserContext";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
+import Reveal from "../ui/Reveal";
 
 function formatDate(value: string | null) {
     if (!value) {
@@ -46,8 +47,8 @@ export default function WorkHistory() {
                     .join(" ");
 
                 return (
+                    <Reveal key={work._id} delay={index * 90}>
                     <Paper
-                        key={work._id}
                         component="article"
                         variant="outlined"
                         sx={{
@@ -154,6 +155,7 @@ export default function WorkHistory() {
                             </Grid>
                         </Grid>
                     </Paper>
+                    </Reveal>
                 );
             })}
         </Stack>

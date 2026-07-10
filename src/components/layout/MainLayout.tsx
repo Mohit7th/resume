@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
 import { getPublicAssetPath } from "../../utils/publicPath";
@@ -17,6 +18,14 @@ import { getPublicAssetPath } from "../../utils/publicPath";
 export default function MainLayout() {
     const location = useLocation();
     const isAdmin = location.pathname === "/admin";
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 8);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
     const navItems = [
         { label: "Work", href: "#work" },
@@ -49,10 +58,21 @@ export default function MainLayout() {
                         borderBottom: "1px solid",
                         borderColor: "divider",
                         backdropFilter: "blur(14px)",
+                        boxShadow: scrolled
+                            ? "0 8px 24px rgba(23, 32, 74, 0.08)"
+                            : "none",
+                        transition:
+                            "box-shadow 220ms ease, background-color 220ms ease",
                     }}
                 >
                     <Container maxWidth="lg">
-                        <Toolbar disableGutters sx={{ minHeight: 72 }}>
+                        <Toolbar
+                            disableGutters
+                            sx={{
+                                minHeight: scrolled ? 60 : 72,
+                                transition: "min-height 220ms ease",
+                            }}
+                        >
                             <Button
                                 href="#top"
                                 color="inherit"
