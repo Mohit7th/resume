@@ -14,6 +14,8 @@ import {
     ListItemText,
     Stack,
     Typography,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
@@ -33,6 +35,8 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const hasPublicUrl = project ? /^https?:\/\//.test(project.url) : false;
     const technologies =
         project && project.technologies.length > 0
@@ -47,6 +51,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             onClose={onClose}
             maxWidth="sm"
             fullWidth
+            fullScreen={fullScreen}
             scroll="paper"
             slots={{ transition: Grow }}
             transitionDuration={280}

@@ -36,7 +36,7 @@ export default function Skills() {
                 const meta = capabilityMeta[category];
 
                 return (
-                    <Grid size={{ xs: 12, md: 4 }} key={category}>
+                    <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category}>
                         <Paper
                             variant="outlined"
                             sx={{
