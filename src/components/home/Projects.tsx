@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import Grid from "@mui/material/Grid";
 import { useUserData } from "../../context/UserContext";
 import { Projects as Project } from "../../types/projects";
@@ -33,7 +34,10 @@ const FILTERS = [
     { value: "webTechnologies", label: "Web apps" },
     { value: "browserExtension", label: "Extensions" },
     { value: "businessIntelligence", label: "Data & BI" },
+    { value: "ai", label: "AI", highlight: true },
 ];
+
+const AI_GRADIENT = "linear-gradient(135deg, #7886C7 0%, #2D336B 100%)";
 
 const PREVIEW_COUNT = 3;
 
@@ -43,13 +47,11 @@ export default function Projects() {
     const [showAll, setShowAll] = useState(false);
     const [selected, setSelected] = useState<Project | null>(null);
 
-    const matchingProjects = useMemo(
-        () =>
-            filter === "all"
-                ? projects
-                : projects.filter((project) => project.type === filter),
-        [projects, filter]
-    );
+    const matchingProjects = useMemo(() => {
+        if (filter === "all") return projects;
+        if (filter === "ai") return projects.filter((project) => project.ai);
+        return projects.filter((project) => project.type === filter);
+    }, [projects, filter]);
 
     const previewProjects = matchingProjects.slice(0, PREVIEW_COUNT);
     const extraProjects = matchingProjects.slice(PREVIEW_COUNT);
@@ -95,17 +97,39 @@ export default function Projects() {
                                 alignItems: "stretch",
                             }}
                         >
-                            <CardMedia
-                                component="img"
-                                image={getPublicAssetPath(project.image)}
-                                alt=""
-                                loading="lazy"
-                                sx={{
-                                    height: 180,
-                                    objectFit: "cover",
-                                    bgcolor: "secondary.light",
-                                }}
-                            />
+                            <Box sx={{ position: "relative", width: "100%" }}>
+                                <CardMedia
+                                    component="img"
+                                    image={getPublicAssetPath(project.image)}
+                                    alt=""
+                                    loading="lazy"
+                                    sx={{
+                                        height: 180,
+                                        objectFit: "cover",
+                                        bgcolor: "secondary.light",
+                                    }}
+                                />
+                                {project.ai && (
+                                    <Chip
+                                        icon={<AutoAwesomeRoundedIcon />}
+                                        label="AI"
+                                        size="small"
+                                        sx={{
+                                            position: "absolute",
+                                            top: 12,
+                                            right: 12,
+                                            fontWeight: 700,
+                                            color: "#fff",
+                                            background: AI_GRADIENT,
+                                            boxShadow:
+                                                "0 6px 16px rgba(23,32,74,0.35)",
+                                            "& .MuiChip-icon": {
+                                                color: "#fff",
+                                            },
+                                        }}
+                                    />
+                                )}
+                            </Box>
                             <CardContent
                                 sx={{
                                     p: 3,
@@ -204,7 +228,30 @@ export default function Projects() {
                 }}
             >
                 {FILTERS.map((option) => (
-                    <ToggleButton key={option.value} value={option.value}>
+                    <ToggleButton
+                        key={option.value}
+                        value={option.value}
+                        sx={
+                            option.highlight
+                                ? {
+                                      gap: 0.5,
+                                      color: "primary.main",
+                                      fontWeight: 700,
+                                      borderColor: "primary.main !important",
+                                      bgcolor: "secondary.light",
+                                      "&.Mui-selected": {
+                                          color: "#fff",
+                                          background: AI_GRADIENT,
+                                          borderColor: "transparent !important",
+                                          "&:hover": { background: AI_GRADIENT },
+                                      },
+                                  }
+                                : undefined
+                        }
+                    >
+                        {option.highlight && (
+                            <AutoAwesomeRoundedIcon fontSize="small" />
+                        )}
                         {option.label}
                     </ToggleButton>
                 ))}

@@ -34,6 +34,8 @@ const ICONS = {
     droplet: `<path d="M50 16 C50 16 76 46 76 62 A26 26 0 0 1 24 62 C24 46 50 16 50 16 Z"/>`,
     house: `<path d="M20 50 L50 22 L80 50"/><path d="M30 46 L30 82 L70 82 L70 46"/>`,
     bulb: `<path d="M50 16 A24 24 0 0 1 66 58 L66 66 L34 66 L34 58 A24 24 0 0 1 50 16 Z"/><path d="M40 74 L60 74 M44 82 L56 82"/>`,
+    briefcase: `<rect x="18" y="34" width="64" height="44" rx="8"/><path d="M38 34 L38 26 A6 6 0 0 1 44 20 L56 20 A6 6 0 0 1 62 26 L62 34"/><path d="M18 54 L82 54"/>`,
+    bolt: `<path d="M54 14 L28 54 L46 54 L42 86 L72 44 L52 44 Z"/>`,
 };
 
 const PLACEHOLDERS = [
@@ -53,6 +55,8 @@ const PLACEHOLDERS = [
     { file: "oil-gas-reporting.png", tag: "Data & BI", title: "Oil & Gas Reporting", icon: "droplet" },
     { file: "real-estate-service.png", tag: "Data & BI", title: "Real Estate Service", icon: "house" },
     { file: "patent-analytics.png", tag: "Data & BI", title: "Patent Analytics", icon: "bulb" },
+    { file: "clikjob-platform.png", tag: "Web application", title: "ClikJob AI Platform", icon: "briefcase" },
+    { file: "clikjob-extension.png", tag: "Browser extension", title: "ClikJob Autofill Extension", icon: "bolt" },
 ];
 
 function escapeXml(text) {

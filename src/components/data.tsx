@@ -223,6 +223,57 @@ export const resumeData: ResumeData = {
     },
     projects: [
         {
+            name: "ClikJob — AI Job Application Platform",
+            description:
+                "Multi-tenant SaaS for AI-assisted job applications. Angular 19 admin & candidate portals backed by a Node/Express + MongoDB API with role-based access control, organization/candidate/invitation management, and full Stripe subscription billing — plan upgrades/downgrades with proration, immediate-vs-scheduled change routing, and monthly credit/parse metering with mid-cycle carry-forward. A dedicated OpenAI-powered microservice parses resumes and answers dynamic application questions, rate-limited via a job queue.",
+            technologies: [
+                "Angular 19",
+                "TypeScript",
+                "Node.js",
+                "MongoDB",
+                "Stripe",
+                "OpenAI",
+            ],
+            url: "",
+            _id: "51",
+            type: "webTechnologies",
+            ai: true,
+            image: "/assets/clikjob-platform.png",
+            techStack: "Angular · Node/Express · MongoDB · Stripe · OpenAI",
+            responsibilities: [
+                "Owned client communication, project management, and delivery.",
+                "Led and mentored a team of two junior developers.",
+                "Architected the multi-tenant solution and ran code reviews.",
+                "Built the OpenAI-powered microservice for resume parsing and dynamic question answering.",
+                "Implemented Stripe subscription billing with proration and credit metering.",
+            ],
+        },
+        {
+            name: "ClikJob — Job Application Autofill Extension",
+            description:
+                "A Manifest V3 Chrome extension that autofills job applications across 25+ ATS portals (Workday, Greenhouse, iCIMS, Oracle Cloud, SuccessFactors, Bullhorn, and more). It reads the candidate's saved profile, injects its UI through a shadow-DOM overlay, and calls the AI service to answer dynamic, non-mapped application questions — cutting apply time from minutes to seconds while tracking credit usage against the user's plan.",
+            technologies: [
+                "TypeScript",
+                "Chrome Extension (MV3)",
+                "Content Scripts",
+                "Service Worker",
+                "Shadow DOM",
+            ],
+            url: "",
+            _id: "52",
+            type: "browserExtension",
+            ai: true,
+            image: "/assets/clikjob-extension.png",
+            techStack: "TypeScript · Chrome Extension (MV3) · REST APIs",
+            responsibilities: [
+                "Owned client communication, project management, and delivery.",
+                "Led and mentored a team of two junior developers.",
+                "Architected the autofill engine across 25+ ATS portals with a shadow-DOM overlay.",
+                "Integrated the AI service to answer dynamic, non-mapped application questions.",
+                "Ran code reviews and drove product delivery.",
+            ],
+        },
+        {
             name: "Sanskrit Sansadhan",
             description:
                 "Digital library and interactive Sanskrit learning portal for Uttarakhand Sanskrit Vishwavidyalaya — a manuscript viewer, searchable dictionary, and a canvas-based learning module for Hindi speakers.",
@@ -250,6 +301,7 @@ export const resumeData: ResumeData = {
             url: "",
             _id: "48",
             type: "webTechnologies",
+            ai: true,
             image: "/assets/samd-pre-regulatory-web.png",
             techStack: "Angular 18 + Tailwind + Node/Express + MongoDB + OpenAI",
             responsibilities: [

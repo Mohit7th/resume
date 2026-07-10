@@ -20,6 +20,7 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import { Projects as Project } from "../../types/projects";
 import { getPublicAssetPath } from "../../utils/publicPath";
 
@@ -71,6 +72,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                 display: "block",
                             }}
                         />
+                        {project.ai && (
+                            <Chip
+                                icon={<AutoAwesomeRoundedIcon />}
+                                label="AI"
+                                size="small"
+                                sx={{
+                                    position: "absolute",
+                                    top: 12,
+                                    left: 12,
+                                    fontWeight: 700,
+                                    color: "#fff",
+                                    background:
+                                        "linear-gradient(135deg, #7886C7 0%, #2D336B 100%)",
+                                    boxShadow: "0 6px 16px rgba(23,32,74,0.35)",
+                                    "& .MuiChip-icon": { color: "#fff" },
+                                }}
+                            />
+                        )}
                         <IconButton
                             aria-label="Close"
                             onClick={onClose}

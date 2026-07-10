@@ -9,4 +9,6 @@ export type Projects = {
     image: string;
     techStack: string;
     responsibilities: string[];
+    /** Marks projects that use AI — surfaced via the highlighted "AI" filter. */
+    ai?: boolean;
 };
