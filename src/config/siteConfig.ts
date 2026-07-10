@@ -17,4 +17,8 @@ export const siteConfig = {
         "/assets/Mohit_Uniyal.pdf"
     ),
     enableAdmin: getBooleanEnv(import.meta.env.VITE_ENABLE_ADMIN, false),
+    // NOTE: This is a static site with no backend, so this "password" only
+    // hides the editor UI — it is not real security. Set it via
+    // VITE_ADMIN_PASSWORD; the default below is for local development only.
+    adminPassword: getStringEnv(import.meta.env.VITE_ADMIN_PASSWORD, "admin"),
 };

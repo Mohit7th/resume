@@ -1,50 +1,176 @@
-import { useTheme } from "@emotion/react";
-import { useUserData } from "../../context/UserContext";
+import {
+    Box,
+    Button,
+    Chip,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Stack,
+    Typography,
+} from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import { Projects as Project } from "../../types/projects";
 import { getPublicAssetPath } from "../../utils/publicPath";
 
+const categoryLabels: Record<string, string> = {
+    webTechnologies: "Web application",
+    browserExtension: "Browser extension",
+    businessIntelligence: "Data & BI",
+};
+
 interface ProjectModalProps {
-    projectId: string;
+    project: Project | null;
+    onClose: () => void;
 }
 
-export default function ProjectModal({ projectId }: ProjectModalProps) {
-    const userdata = useUserData();
-    const theme = useTheme;
-
-    const selectedProject = userdata.projects.find(
-        (project) => project._id === projectId
-    );
-
-    if (!selectedProject) {
-        return <h1>No projects</h1>;
-    }
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+    const hasPublicUrl = project ? /^https?:\/\//.test(project.url) : false;
+    const technologies =
+        project && project.technologies.length > 0
+            ? project.technologies
+            : project
+            ? [project.techStack]
+            : [];
 
     return (
-        <>
-            <img
-                src={getPublicAssetPath(selectedProject.image)}
-                alt={selectedProject.name}
-            />
-            <h1>
-                {selectedProject.name}
-                <span>
-                    <a
-                        href={selectedProject.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Link
-                    </a>
-                </span>
-            </h1>
+        <Dialog
+            open={Boolean(project)}
+            onClose={onClose}
+            maxWidth="sm"
+            fullWidth
+            scroll="paper"
+        >
+            {project && (
+                <>
+                    <Box sx={{ position: "relative" }}>
+                        <Box
+                            component="img"
+                            src={getPublicAssetPath(project.image)}
+                            alt=""
+                            sx={{
+                                width: "100%",
+                                height: 220,
+                                objectFit: "cover",
+                                bgcolor: "secondary.light",
+                                display: "block",
+                            }}
+                        />
+                        <IconButton
+                            aria-label="Close"
+                            onClick={onClose}
+                            sx={{
+                                position: "absolute",
+                                top: 8,
+                                right: 8,
+                                bgcolor: "rgba(255,255,255,0.9)",
+                                "&:hover": { bgcolor: "white" },
+                            }}
+                        >
+                            <CloseRoundedIcon />
+                        </IconButton>
+                    </Box>
 
-            <p>{selectedProject.description}</p>
-            <div>
-                <ul className="project-responsibilities">
-                    {selectedProject.responsibilities.map((resp, indx) => (
-                        <li key={indx}>{resp}</li>
-                    ))}
-                </ul>
-            </div>
-        </>
+                    <DialogTitle sx={{ pb: 1 }}>
+                        <Typography
+                            variant="overline"
+                            sx={{ color: "secondary.dark", fontWeight: 700 }}
+                        >
+                            {categoryLabels[project.type] ?? "Project"}
+                        </Typography>
+                        <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                            {project.name}
+                        </Typography>
+                    </DialogTitle>
+
+                    <DialogContent dividers>
+                        <Typography color="text.secondary" sx={{ mb: 2 }}>
+                            {project.description}
+                        </Typography>
+
+                        <Stack
+                            direction="row"
+                            sx={{ flexWrap: "wrap", gap: 1, mb: 2 }}
+                        >
+                            {technologies.map((technology) => (
+                                <Chip
+                                    key={technology}
+                                    label={technology}
+                                    size="small"
+                                    sx={{
+                                        bgcolor: "secondary.light",
+                                        color: "primary.dark",
+                                        fontWeight: 600,
+                                    }}
+                                />
+                            ))}
+                        </Stack>
+
+                        {project.responsibilities.length > 0 && (
+                            <>
+                                <Typography
+                                    variant="subtitle2"
+                                    sx={{ fontWeight: 700, mb: 0.5 }}
+                                >
+                                    Highlights
+                                </Typography>
+                                <List disablePadding>
+                                    {project.responsibilities.map((item) => (
+                                        <ListItem
+                                            key={item}
+                                            disableGutters
+                                            alignItems="flex-start"
+                                            sx={{ py: 0.4 }}
+                                        >
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 30,
+                                                    mt: 0.4,
+                                                    color: "secondary.dark",
+                                                }}
+                                            >
+                                                <CheckRoundedIcon fontSize="small" />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={item}
+                                                slotProps={{
+                                                    primary: {
+                                                        color: "text.secondary",
+                                                    },
+                                                }}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </>
+                        )}
+                    </DialogContent>
+
+                    <DialogActions sx={{ px: 3, py: 2 }}>
+                        <Button onClick={onClose} color="inherit">
+                            Close
+                        </Button>
+                        {hasPublicUrl && (
+                            <Button
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                variant="contained"
+                                endIcon={<ArrowOutwardRoundedIcon />}
+                            >
+                                Visit project
+                            </Button>
+                        )}
+                    </DialogActions>
+                </>
+            )}
+        </Dialog>
     );
 }

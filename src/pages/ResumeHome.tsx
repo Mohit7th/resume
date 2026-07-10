@@ -5,10 +5,7 @@ import TitleHeader from "../components/home/TitleHeader";
 import Summary from "../components/home/Summary";
 import WorkHistory from "../components/home/WorkHistory";
 import Projects from "../components/home/Projects";
-import {
-    UserDataProvider,
-    useUserData,
-} from "../context/UserContext";
+import { useUserData } from "../context/UserContext";
 
 function SectionHeading({
     eyebrow,
@@ -63,7 +60,7 @@ function ResumeContent() {
                     <SectionHeading
                         eyebrow="Selected work"
                         title="Products built for real users"
-                        description="A cross-section of web platforms, browser extensions, and data systems I have helped deliver."
+                        description="Web platforms, browser extensions, and data systems I have helped deliver. Filter by category, or open a project for details."
                     />
                     <Projects />
                 </Box>
@@ -171,9 +168,5 @@ function ResumeContent() {
 }
 
 export default function ResumeHome() {
-    return (
-        <UserDataProvider>
-            <ResumeContent />
-        </UserDataProvider>
-    );
+    return <ResumeContent />;
 }
