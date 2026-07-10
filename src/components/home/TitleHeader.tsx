@@ -165,7 +165,10 @@ export default function TitleHeader() {
                     </Grid>
                     <Grid
                         size={{ xs: 12, md: 5 }}
-                        sx={{ display: "flex", justifyContent: "center" }}
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            justifyContent: "center",
+                        }}
                     >
                         <Reveal delay={150} offset={16} sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
                         <Box

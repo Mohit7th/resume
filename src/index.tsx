@@ -1,5 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// Self-hosted Poppins (latin subset, weights used across the theme). Replaces
+// the render-blocking Google Fonts <link> and keeps the site self-contained.
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
 import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "@mui/material";
