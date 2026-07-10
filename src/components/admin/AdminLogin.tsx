@@ -66,7 +66,7 @@ export default function AdminLogin() {
                             Admin access
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Enter the admin password to edit résumé content.
+                            Enter the admin password to edit resume content.
                         </Typography>
                     </Stack>
 

@@ -136,7 +136,7 @@ export default function AdminPanel() {
                 <Container maxWidth="lg">
                     <Toolbar disableGutters sx={{ gap: 1, flexWrap: "wrap", py: 1 }}>
                         <Typography sx={{ fontWeight: 700, mr: 1 }}>
-                            Résumé admin
+                            Resume admin
                         </Typography>
                         {isDirty ? (
                             <Chip

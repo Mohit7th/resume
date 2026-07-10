@@ -23,7 +23,7 @@ function renderAdmin() {
 test("admin panel mounts and shows the header editor with seed data", () => {
     renderAdmin();
 
-    expect(screen.getByText("Résumé admin")).toBeInTheDocument();
+    expect(screen.getByText("Resume admin")).toBeInTheDocument();
     // Header section is expanded by default and reflects the seed content.
     expect(screen.getByDisplayValue("Mohit Uniyal")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /save/i })).toBeDisabled();

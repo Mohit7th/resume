@@ -137,7 +137,7 @@ export default function MainLayout() {
                                 }
                                 sx={{ ml: { xs: 1, md: 2 } }}
                             >
-                                Résumé
+                                Resume
                             </Button>
                         </Toolbar>
                     </Container>

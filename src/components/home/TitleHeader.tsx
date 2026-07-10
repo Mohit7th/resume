@@ -127,7 +127,7 @@ export default function TitleHeader() {
                                 variant="contained"
                                 startIcon={<DownloadRoundedIcon />}
                             >
-                                Download résumé
+                                Download Resume
                             </Button>
                             <Button
                                 href={`mailto:${titleHeader.contact.email}`}
