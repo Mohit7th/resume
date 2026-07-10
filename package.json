@@ -28,7 +28,8 @@
         "build": "tsc --noEmit && vite build",
         "preview": "vite preview",
         "test": "vitest run",
-        "test:watch": "vitest"
+        "test:watch": "vitest",
+        "generate:og": "node scripts/generate-og-image.mjs"
     },
     "browserslist": {
         "production": [
@@ -43,6 +44,7 @@
         ]
     },
     "devDependencies": {
+        "@resvg/resvg-js": "^2.6.2",
         "@types/node": "^26.1.1",
         "@vitejs/plugin-react": "^6.0.3",
         "jsdom": "^29.1.1",
