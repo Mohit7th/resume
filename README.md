@@ -15,6 +15,24 @@ Available public build-time settings:
 - `VITE_SITE_URL`: deployed site URL, useful for future canonical/analytics configuration.
 - `VITE_RESUME_PDF_PATH`: path or URL for the downloadable resume PDF.
 - `VITE_ENABLE_ADMIN`: set to `true` only when the `/admin` editor route should be available.
+- `VITE_ADMIN_PASSWORD`: password for the `/admin` editor. **This is a static
+  site with no backend, so this only hides the editor UI — it is not real
+  security.** Change it from the default before enabling admin in production.
+
+## Editing content (`/admin`)
+
+The site content lives in `src/components/data.tsx` (the bundled default). A
+lightweight editor is available at `/admin` when `VITE_ENABLE_ADMIN=true`:
+
+1. Run locally with the editor enabled: `VITE_ENABLE_ADMIN=true npm start`.
+2. Visit `/admin` and sign in with `VITE_ADMIN_PASSWORD`.
+3. Edit the header, summary, skills, projects, and work history. Click **Save**.
+
+Edits are stored in the browser's `localStorage`, so they persist across
+refreshes and appear on the public site **in that browser**. To publish changes
+for everyone, use **Export** to download `resume-data.json` and commit it (or
+paste its values into `src/components/data.tsx`), then redeploy. **Import** and
+**Reset to defaults** are also available.
 
 For GitHub Pages/subfolder hosting, `vite.config.ts` uses `base: "./"` so the production build uses relative asset paths.
 

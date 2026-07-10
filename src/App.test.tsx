@@ -17,7 +17,7 @@ test("renders the resume hero and primary actions", () => {
         screen.getByRole("heading", { name: "Mohit Uniyal", level: 1 })
     ).toBeInTheDocument();
     expect(
-        screen.getByRole("link", { name: /download résumé/i })
+        screen.getByRole("link", { name: /download resume/i })
     ).toBeInTheDocument();
     expect(
         screen.getByRole("link", { name: /contact me/i })

@@ -182,7 +182,7 @@ export const resumeData: ResumeData = {
                 experience: "1 year",
                 _id: "25",
                 image: "",
-                type: "reporing",
+                type: "reporting",
             },
             {
                 name: "Qlik View",
@@ -215,7 +215,7 @@ export const resumeData: ResumeData = {
             {
                 name: "SQL Server",
                 experience: "4 years",
-                _id: "30",
+                _id: "46",
                 image: "",
                 type: "database",
             },
@@ -243,7 +243,7 @@ export const resumeData: ResumeData = {
             ],
         },
         {
-            name: "Join Cherry",
+            name: "Join Cherry — Web Platform",
             description:
                 "Built a web and Chrome extension platform that helps users find hotel and flight deals while presenting relevant extension data in a clear dashboard.",
             technologies: ["MEAN Stack"],
@@ -255,7 +255,7 @@ export const resumeData: ResumeData = {
             responsibilities: [],
         },
         {
-            name: "Join Cherry",
+            name: "Join Cherry — Browser Extension",
             description:
                 "Designed and developed a browser extension that integrates with various OTA platforms (e.g., Booking.com, Expedia) to provide users with exclusive discounts on hotels, attractions, and flights.",
             technologies: ["HTML", "CSS", "JavaScript"],
@@ -319,7 +319,7 @@ export const resumeData: ResumeData = {
             description:
                 "The current resume site with admin panel to update resume",
             technologies: ["MERN Stack"],
-            url: "navigate('/')",
+            url: "https://mohit7th.github.io/resume/",
             _id: "38",
             type: "webTechnologies",
             image: "/assets/resume.svg",

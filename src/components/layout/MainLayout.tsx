@@ -4,27 +4,48 @@ import {
     Box,
     Button,
     Container,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
     Stack,
     Toolbar,
     Typography,
 } from "@mui/material";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
 import { getPublicAssetPath } from "../../utils/publicPath";
 
+const navItems = [
+    { label: "Work", href: "#work" },
+    { label: "Experience", href: "#experience" },
+    { label: "Skills", href: "#skills" },
+    { label: "About", href: "#about" },
+    { label: "Contact", href: "#contact" },
+];
+
 export default function MainLayout() {
     const location = useLocation();
     const isAdmin = location.pathname === "/admin";
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 8);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
-    const navItems = [
-        { label: "Work", href: "#work" },
-        { label: "Experience", href: "#experience" },
-        { label: "Skills", href: "#skills" },
-        { label: "About", href: "#about" },
-        { label: "Contact", href: "#contact" },
-    ];
 
     return (
         <Box
@@ -49,10 +70,22 @@ export default function MainLayout() {
                         borderBottom: "1px solid",
                         borderColor: "divider",
                         backdropFilter: "blur(14px)",
+                        boxShadow: scrolled
+                            ? "0 8px 24px rgba(23, 32, 74, 0.08)"
+                            : "none",
+                        transition:
+                            "box-shadow 220ms ease, background-color 220ms ease",
                     }}
                 >
                     <Container maxWidth="lg">
-                        <Toolbar disableGutters sx={{ minHeight: 72 }}>
+                        <Toolbar
+                            disableGutters
+                            sx={{
+                                minHeight: scrolled ? 60 : 72,
+                                transition: "min-height 220ms ease",
+                                gap: 1,
+                            }}
+                        >
                             <Button
                                 href="#top"
                                 color="inherit"
@@ -115,14 +148,82 @@ export default function MainLayout() {
                                         }}
                                     />
                                 }
-                                sx={{ ml: { xs: 1, md: 2 } }}
+                                sx={{ ml: { md: 2 } }}
                             >
-                                Résumé
+                                Resume
                             </Button>
+
+                            <IconButton
+                                color="inherit"
+                                aria-label="Open navigation menu"
+                                edge="end"
+                                onClick={() => setMobileOpen(true)}
+                                sx={{ display: { xs: "inline-flex", md: "none" } }}
+                            >
+                                <MenuRoundedIcon />
+                            </IconButton>
                         </Toolbar>
                     </Container>
                 </AppBar>
             )}
+
+            <Drawer
+                anchor="right"
+                open={mobileOpen}
+                onClose={() => setMobileOpen(false)}
+                slotProps={{
+                    paper: { sx: { width: { xs: "78vw", sm: 320 } } },
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        px: 2,
+                        py: 1.5,
+                    }}
+                >
+                    <Typography sx={{ fontWeight: 700 }}>Mohit Uniyal</Typography>
+                    <IconButton
+                        aria-label="Close navigation menu"
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        <CloseRoundedIcon />
+                    </IconButton>
+                </Box>
+                <Divider />
+                <List component="nav" aria-label="Primary navigation">
+                    {navItems.map((item) => (
+                        <ListItem key={item.href} disablePadding>
+                            <ListItemButton
+                                component="a"
+                                href={item.href}
+                                onClick={() => setMobileOpen(false)}
+                            >
+                                <ListItemText
+                                    primary={item.label}
+                                    slotProps={{
+                                        primary: { sx: { fontWeight: 600 } },
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Box sx={{ p: 2, mt: "auto" }}>
+                    <Button
+                        fullWidth
+                        href={resumePdfUrl}
+                        download="Mohit_Uniyal_Resume.pdf"
+                        variant="contained"
+                        startIcon={<DownloadRoundedIcon />}
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        Download Resume
+                    </Button>
+                </Box>
+            </Drawer>
 
             <Box
                 component="main"
