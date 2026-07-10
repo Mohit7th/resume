@@ -30,11 +30,11 @@ const categoryLabels: Record<string, string> = {
 };
 
 const FILTERS = [
-    { value: "all", label: "All" },
+    { value: "ai", label: "AI", highlight: true },
     { value: "webTechnologies", label: "Web apps" },
     { value: "browserExtension", label: "Extensions" },
     { value: "businessIntelligence", label: "Data & BI" },
-    { value: "ai", label: "AI", highlight: true },
+    { value: "all", label: "All" },
 ];
 
 const AI_GRADIENT = "linear-gradient(135deg, #7886C7 0%, #2D336B 100%)";
