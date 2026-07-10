@@ -1,13 +1,31 @@
 import { ResumeData } from "../types";
 import { resumeData as seedData } from "../components/data";
 
-// Bump the version suffix if the shape of ResumeData changes in a
-// backwards-incompatible way so stale drafts are ignored.
-const STORAGE_KEY = "mohit-resume-data:v1";
+// Bump the version suffix if the stored shape changes incompatibly.
+const STORAGE_KEY = "mohit-resume-data:v2";
+
+// Cheap, stable string hash (djb2) used to detect when the committed seed has
+// changed since a local draft was saved.
+function hashString(value: string): string {
+    let hash = 5381;
+    for (let i = 0; i < value.length; i += 1) {
+        hash = ((hash << 5) + hash) ^ value.charCodeAt(i);
+    }
+    return (hash >>> 0).toString(36);
+}
+
+function seedHash(): string {
+    return hashString(JSON.stringify(seedData));
+}
+
+interface StoredDraft {
+    seedHash: string;
+    data: ResumeData;
+}
 
 /**
- * The built-in résumé content shipped in the bundle. Used as the default when
- * nothing has been saved locally and as the target of "Reset to defaults".
+ * The built-in résumé content shipped in the bundle. This is the source of
+ * truth — a locally-saved draft only wins while it was based on this exact seed.
  */
 export function getSeedData(): ResumeData {
     return seedData;
@@ -15,8 +33,9 @@ export function getSeedData(): ResumeData {
 
 /**
  * Load the working résumé data. Prefers a locally-saved draft (from the admin
- * editor) and falls back to the bundled seed. Any parse/quota error falls back
- * to the seed so the public site can never be broken by bad local storage.
+ * editor) ONLY when it was saved against the current committed seed. If the seed
+ * has since changed (e.g. a new deploy), the stale draft is discarded so the
+ * committed content always wins. Any error also falls back to the seed.
  */
 export function loadResumeData(): ResumeData {
     if (typeof window === "undefined") {
@@ -29,22 +48,28 @@ export function loadResumeData(): ResumeData {
             return seedData;
         }
 
-        const parsed = JSON.parse(raw) as Partial<ResumeData>;
-        // Shallow-merge over the seed so a partial/old draft still renders.
-        return { ...seedData, ...parsed } as ResumeData;
+        const parsed = JSON.parse(raw) as Partial<StoredDraft>;
+        if (!parsed || parsed.seedHash !== seedHash() || !parsed.data) {
+            // Draft predates the current seed (or is malformed) — drop it.
+            window.localStorage.removeItem(STORAGE_KEY);
+            return seedData;
+        }
+
+        return { ...seedData, ...parsed.data } as ResumeData;
     } catch {
         return seedData;
     }
 }
 
-/** Persist the current résumé data to local storage. */
+/** Persist the current résumé data, tagged with the seed it was based on. */
 export function saveResumeData(data: ResumeData): void {
     if (typeof window === "undefined") {
         return;
     }
 
     try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        const payload: StoredDraft = { seedHash: seedHash(), data };
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch {
         // Ignore quota / private-mode failures — persistence is best-effort.
     }

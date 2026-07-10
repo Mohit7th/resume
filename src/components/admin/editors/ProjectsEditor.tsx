@@ -4,10 +4,12 @@ import {
     AccordionSummary,
     Box,
     Button,
+    FormControlLabel,
     Grid,
     IconButton,
     MenuItem,
     Stack,
+    Switch,
     TextField,
     Typography,
 } from "@mui/material";
@@ -148,6 +150,22 @@ export default function ProjectsEditor({
                                                     e.target.value;
                                             })
                                         }
+                                    />
+                                </Grid>
+                                <Grid size={12}>
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={Boolean(project.ai)}
+                                                onChange={(e) =>
+                                                    update((d) => {
+                                                        d.projects[index].ai =
+                                                            e.target.checked;
+                                                    })
+                                                }
+                                            />
+                                        }
+                                        label="Uses AI (shows in the highlighted AI filter)"
                                     />
                                 </Grid>
                                 <Grid size={12}>
