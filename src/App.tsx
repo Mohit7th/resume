@@ -1,6 +1,7 @@
 import "./App.css";
 import { lazy, Suspense } from "react";
 import ResumeHome from "./pages/ResumeHome";
+import ResumePage from "./pages/ResumePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./components/layout/MainLayout";
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<ResumeHome />} />
+                            <Route path="/resume" element={<ResumePage />} />
                             {siteConfig.enableAdmin && (
                                 <Route
                                     path="/admin"

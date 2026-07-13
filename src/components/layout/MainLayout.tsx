@@ -15,14 +15,12 @@ import {
     Toolbar,
     Typography,
 } from "@mui/material";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, Link as RouterLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
-import { getPublicAssetPath } from "../../utils/publicPath";
 
 const navItems = [
     { label: "Work", href: "#work" },
@@ -34,7 +32,8 @@ const navItems = [
 
 export default function MainLayout() {
     const location = useLocation();
-    const isAdmin = location.pathname === "/admin";
+    const hideChrome =
+        location.pathname === "/admin" || location.pathname === "/resume";
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -44,8 +43,6 @@ export default function MainLayout() {
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
-    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
 
     return (
         <Box
@@ -59,7 +56,7 @@ export default function MainLayout() {
                 Skip to content
             </a>
 
-            {!isAdmin && (
+            {!hideChrome && (
                 <AppBar
                     component="header"
                     position="sticky"
@@ -135,11 +132,11 @@ export default function MainLayout() {
                             </Stack>
 
                             <Button
-                                href={resumePdfUrl}
-                                download="Mohit_Uniyal_Resume.pdf"
+                                component={RouterLink}
+                                to="/resume"
                                 variant="contained"
                                 startIcon={
-                                    <DownloadRoundedIcon
+                                    <DescriptionRoundedIcon
                                         sx={{
                                             display: {
                                                 xs: "none",
@@ -214,13 +211,13 @@ export default function MainLayout() {
                 <Box sx={{ p: 2, mt: "auto" }}>
                     <Button
                         fullWidth
-                        href={resumePdfUrl}
-                        download="Mohit_Uniyal_Resume.pdf"
+                        component={RouterLink}
+                        to="/resume"
                         variant="contained"
-                        startIcon={<DownloadRoundedIcon />}
+                        startIcon={<DescriptionRoundedIcon />}
                         onClick={() => setMobileOpen(false)}
                     >
-                        Download Resume
+                        View Resume
                     </Button>
                 </Box>
             </Drawer>
@@ -233,7 +230,7 @@ export default function MainLayout() {
                 <Outlet />
             </Box>
 
-            {!isAdmin && <Footer />}
+            {!hideChrome && <Footer />}
         </Box>
     );
 }
