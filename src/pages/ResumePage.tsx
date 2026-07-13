@@ -1,6 +1,6 @@
 import "./resume.css";
-import { useEffect } from "react";
-import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import { Link as RouterLink } from "react-router-dom";
@@ -40,6 +40,7 @@ const BULLETS_PER_ROLE = 3;
 export default function ResumePage() {
     const { titleHeader, summary, skills, projects, workHistory, education } =
         useUserData();
+    const [atsView, setAtsView] = useState(false);
 
     useEffect(() => {
         const previousTitle = document.title;
@@ -68,16 +69,37 @@ export default function ResumePage() {
                 >
                     Back to site
                 </Button>
-                <Button
-                    variant="contained"
-                    startIcon={<DownloadRoundedIcon />}
-                    onClick={() => window.print()}
-                >
-                    Download PDF
-                </Button>
+                <div className="resume-toolbar-actions">
+                    <ToggleButtonGroup
+                        size="small"
+                        exclusive
+                        value={atsView ? "ats" : "web"}
+                        onChange={(_event, next) => {
+                            if (next) setAtsView(next === "ats");
+                        }}
+                        aria-label="Resume view"
+                    >
+                        <ToggleButton value="web">Web view</ToggleButton>
+                        <ToggleButton value="ats">ATS view</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Button
+                        variant="contained"
+                        startIcon={<DownloadRoundedIcon />}
+                        onClick={() => window.print()}
+                    >
+                        Download PDF
+                    </Button>
+                </div>
             </div>
 
-            <article className="resume">
+            <p className="resume-note no-print">
+                The PDF always downloads as an{" "}
+                <strong>ATS-optimized single-column layout</strong> (no columns
+                or graphics) — best for recruiter screening systems. Use{" "}
+                <strong>ATS view</strong> to preview it.
+            </p>
+
+            <article className={`resume${atsView ? " ats" : ""}`}>
                 {/* ---------- Sidebar ---------- */}
                 <aside className="resume-sidebar">
                     {titleHeader.image && (
@@ -106,7 +128,10 @@ export default function ResumePage() {
                         {titleHeader.contact.phone}
                     </div>
                     {titleHeader.socials.map((social) => (
-                        <div className="resume-contact-item" key={social._id}>
+                        <div
+                            className="resume-contact-item resume-contact-link"
+                            key={social._id}
+                        >
                             <span className="label">{social.name}</span>
                             <a
                                 href={social.url}

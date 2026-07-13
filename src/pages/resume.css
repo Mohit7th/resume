@@ -1,6 +1,10 @@
-/* Screen + print styles for the two-column, ATS-tolerant resume page.
-   DOM order is sidebar (identity/contact/skills) then main (summary →
-   experience → projects → education), so extracted text stays logical. */
+/* Resume styles.
+   - Screen (default): a polished two-column layout for the website.
+   - Screen + `.ats` class: single-column ATS preview (via the toggle).
+   - Print: ALWAYS single-column, minimal, parser-friendly — this is what
+     downloads/gets sent to recruiters, so it flows cleanly across pages.
+   `@media screen` / `@media print` are mutually exclusive, so the preview
+   overrides never leak into the printed PDF. */
 
 .resume-page {
     background: #eef1f5;
@@ -10,11 +14,26 @@
 
 .resume-toolbar {
     max-width: 900px;
-    margin: 0 auto 16px;
+    margin: 0 auto 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.resume-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.resume-note {
+    max-width: 900px;
+    margin: 0 auto 16px;
+    font-size: 12.5px;
+    color: #5a6172;
 }
 
 .resume {
@@ -196,18 +215,82 @@
     margin-top: 3px;
 }
 
-/* ---------- Responsive (screen) ---------- */
-@media (max-width: 640px) {
-    .resume {
-        grid-template-columns: 1fr;
+/* ---------- ATS single-column layout ---------- */
+/* On-screen preview (screen media only, so it never affects the printed PDF). */
+@media screen {
+    .resume.ats {
+        display: block;
+        max-width: 780px;
+        padding: 44px 52px;
     }
-    .resume-entry {
-        grid-template-columns: 64px 1fr;
-        gap: 10px;
+    .resume.ats .resume-sidebar {
+        background: transparent;
+        color: #1a1f2b;
+        padding: 0;
+        margin-bottom: 8px;
+    }
+    .resume.ats .resume-photo {
+        display: none;
+    }
+    .resume.ats .resume-name {
+        color: #17204a;
+        text-align: left;
+    }
+    .resume.ats .resume-sidebar .resume-role {
+        color: #2d336b;
+        text-align: left;
+        margin-bottom: 6px;
+    }
+    .resume.ats .resume-side-h {
+        color: #2d336b;
+        border-bottom-color: #d7dcea;
+        margin: 14px 0 6px;
+    }
+    .resume.ats .resume-contact-item {
+        display: inline;
+        color: #3a4152;
+        margin-bottom: 0;
+    }
+    .resume.ats .resume-contact-item .label {
+        display: none;
+    }
+    .resume.ats .resume-contact-item a {
+        color: #2d336b;
+    }
+    /* Links add clutter to a PDF resume — hide them in the ATS layout. */
+    .resume.ats .resume-contact-link {
+        display: none;
+    }
+    .resume.ats .resume-contact-item:not(:first-child)::before {
+        content: " · ";
+        color: #9aa2b4;
+    }
+    /* Skills as compact comma-separated text instead of chunky pills. */
+    .resume.ats .resume-pills {
+        display: block;
+    }
+    .resume.ats .resume-pill {
+        display: inline;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        color: #3a4152;
+        font-size: 12px;
+    }
+    .resume.ats .resume-pill:not(:last-child)::after {
+        content: ", ";
+    }
+    .resume.ats .resume-main {
+        padding: 0;
+        margin-top: 8px;
     }
 }
 
-/* ---------- Print ---------- */
+/* ---------- Print (always single-column ATS) ---------- */
+/* margin: 0 removes the browser's auto header/footer (date, title, URL, page
+   number), which it draws in the page margin box. Page margins are recreated
+   as padding on the content below. */
 @page {
     size: A4;
     margin: 0;
@@ -232,19 +315,81 @@
     }
 
     .resume {
+        display: block;
         max-width: none;
         margin: 0;
+        padding: 14mm;
         box-shadow: none;
         border-radius: 0;
-        grid-template-columns: 33% 67%;
+        overflow: visible;
         font-size: 10.5pt;
-        -webkit-print-color-adjust: exact;
+        color: #000000;
         print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
     }
 
-    .resume-sidebar,
+    .resume-sidebar {
+        background: transparent !important;
+        color: #1a1f2b;
+        padding: 0;
+        margin-bottom: 8px;
+    }
+    .resume-photo {
+        display: none;
+    }
+    .resume-name {
+        color: #17204a;
+        text-align: left;
+        font-size: 22pt;
+    }
+    .resume-sidebar .resume-role {
+        color: #2d336b;
+        text-align: left;
+        margin-bottom: 6px;
+    }
+    .resume-side-h {
+        color: #2d336b;
+        border-bottom-color: #cfd5e6;
+        margin: 12px 0 5px;
+    }
+    .resume-contact-item {
+        display: inline;
+        color: #333333;
+        font-size: 9.5pt;
+        margin-bottom: 0;
+    }
+    .resume-contact-item .label {
+        display: none;
+    }
+    .resume-contact-item a {
+        color: #17204a;
+    }
+    /* Links add clutter to a PDF resume — hide them. */
+    .resume-contact-link {
+        display: none;
+    }
+    .resume-contact-item:not(:first-child)::before {
+        content: " · ";
+        color: #888888;
+    }
+    /* Skills as compact comma-separated text instead of chunky pills. */
+    .resume-pills {
+        display: block;
+    }
+    .resume-pill {
+        display: inline;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        color: #1a1f2b;
+    }
+    .resume-pill:not(:last-child)::after {
+        content: ", ";
+    }
     .resume-main {
-        padding: 22px 20px;
+        padding: 0;
+        margin-top: 8px;
     }
 
     .resume-section,
