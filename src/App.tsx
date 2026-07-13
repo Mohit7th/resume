@@ -1,6 +1,7 @@
 import "./App.css";
 import { lazy, Suspense } from "react";
 import ResumeHome from "./pages/ResumeHome";
+import ResumePage from "./pages/ResumePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./components/layout/MainLayout";
@@ -11,6 +12,7 @@ import { siteConfig } from "./config/siteConfig";
 import { getRouterBasename } from "./utils/publicPath";
 
 const AdminPanel = lazy(() => import("./pages/admin/AdminPanel"));
+const LearnApp = lazy(() => import("./features/learn/LearnApp"));
 
 const App: React.FC = () => {
     return (
@@ -20,6 +22,15 @@ const App: React.FC = () => {
                     <Routes>
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<ResumeHome />} />
+                            <Route path="/resume" element={<ResumePage />} />
+                            <Route
+                                path="/learn/*"
+                                element={
+                                    <Suspense fallback={null}>
+                                        <LearnApp />
+                                    </Suspense>
+                                }
+                            />
                             {siteConfig.enableAdmin && (
                                 <Route
                                     path="/admin"

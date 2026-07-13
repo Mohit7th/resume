@@ -15,14 +15,17 @@ import {
     Toolbar,
     Typography,
 } from "@mui/material";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { Outlet, useLocation } from "react-router-dom";
+import {
+    Outlet,
+    useLocation,
+    useNavigate,
+    Link as RouterLink,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
-import { siteConfig } from "../../config/siteConfig";
 import Footer from "./Footer";
-import { getPublicAssetPath } from "../../utils/publicPath";
 
 const navItems = [
     { label: "Work", href: "#work" },
@@ -34,7 +37,14 @@ const navItems = [
 
 export default function MainLayout() {
     const location = useLocation();
-    const isAdmin = location.pathname === "/admin";
+    const navigate = useNavigate();
+    const segments = location.pathname.split("/").filter(Boolean);
+    // Lesson player (/learn/:track/:topic/:lesson) runs full-screen.
+    const isLessonPlayer = segments[0] === "learn" && segments.length === 4;
+    const hideChrome =
+        location.pathname === "/admin" ||
+        location.pathname === "/resume" ||
+        isLessonPlayer;
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -45,7 +55,36 @@ export default function MainLayout() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const resumePdfUrl = getPublicAssetPath(siteConfig.resumePdfPath);
+    // Scroll to the section named by the URL hash after navigation (also on a
+    // direct visit to e.g. /#about). The hash is the source of truth.
+    useEffect(() => {
+        if (!location.hash) return;
+        const target = document.querySelector(location.hash);
+        if (!target) return;
+        const raf = requestAnimationFrame(() =>
+            requestAnimationFrame(() =>
+                target.scrollIntoView({ behavior: "smooth", block: "start" })
+            )
+        );
+        return () => cancelAnimationFrame(raf);
+    }, [location.key, location.hash]);
+
+    // Section links set the URL hash (routing home first when needed), so the
+    // address bar reflects the section and it scrolls into view from any page.
+    function handleSectionNav(hash: string) {
+        setMobileOpen(false);
+        navigate({ pathname: "/", hash });
+    }
+
+    function handleHomeClick() {
+        setMobileOpen(false);
+        if (location.pathname === "/") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            navigate("/");
+            requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+        }
+    }
 
     return (
         <Box
@@ -59,7 +98,7 @@ export default function MainLayout() {
                 Skip to content
             </a>
 
-            {!isAdmin && (
+            {!hideChrome && (
                 <AppBar
                     component="header"
                     position="sticky"
@@ -87,9 +126,9 @@ export default function MainLayout() {
                             }}
                         >
                             <Button
-                                href="#top"
+                                onClick={handleHomeClick}
                                 color="inherit"
-                                aria-label="Mohit Uniyal, back to top"
+                                aria-label="Mohit Uniyal, home"
                                 sx={{ minWidth: 0, p: 0, mr: "auto" }}
                             >
                                 <Avatar
@@ -125,7 +164,9 @@ export default function MainLayout() {
                                 {navItems.map((item) => (
                                     <Button
                                         key={item.href}
-                                        href={item.href}
+                                        onClick={() =>
+                                            handleSectionNav(item.href)
+                                        }
                                         color="inherit"
                                         size="small"
                                     >
@@ -135,11 +176,11 @@ export default function MainLayout() {
                             </Stack>
 
                             <Button
-                                href={resumePdfUrl}
-                                download="Mohit_Uniyal_Resume.pdf"
+                                component={RouterLink}
+                                to="/resume"
                                 variant="contained"
                                 startIcon={
-                                    <DownloadRoundedIcon
+                                    <DescriptionRoundedIcon
                                         sx={{
                                             display: {
                                                 xs: "none",
@@ -197,9 +238,7 @@ export default function MainLayout() {
                     {navItems.map((item) => (
                         <ListItem key={item.href} disablePadding>
                             <ListItemButton
-                                component="a"
-                                href={item.href}
-                                onClick={() => setMobileOpen(false)}
+                                onClick={() => handleSectionNav(item.href)}
                             >
                                 <ListItemText
                                     primary={item.label}
@@ -214,13 +253,13 @@ export default function MainLayout() {
                 <Box sx={{ p: 2, mt: "auto" }}>
                     <Button
                         fullWidth
-                        href={resumePdfUrl}
-                        download="Mohit_Uniyal_Resume.pdf"
+                        component={RouterLink}
+                        to="/resume"
                         variant="contained"
-                        startIcon={<DownloadRoundedIcon />}
+                        startIcon={<DescriptionRoundedIcon />}
                         onClick={() => setMobileOpen(false)}
                     >
-                        Download Resume
+                        View Resume
                     </Button>
                 </Box>
             </Drawer>
@@ -233,7 +272,7 @@ export default function MainLayout() {
                 <Outlet />
             </Box>
 
-            {!isAdmin && <Footer />}
+            {!hideChrome && <Footer />}
         </Box>
     );
 }

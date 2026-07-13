@@ -1,0 +1,399 @@
+/* Resume styles.
+   - Screen (default): a polished two-column layout for the website.
+   - Screen + `.ats` class: single-column ATS preview (via the toggle).
+   - Print: ALWAYS single-column, minimal, parser-friendly — this is what
+     downloads/gets sent to recruiters, so it flows cleanly across pages.
+   `@media screen` / `@media print` are mutually exclusive, so the preview
+   overrides never leak into the printed PDF. */
+
+.resume-page {
+    background: #eef1f5;
+    min-height: 100vh;
+    padding: 24px 16px 64px;
+}
+
+.resume-toolbar {
+    max-width: 900px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.resume-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.resume-note {
+    max-width: 900px;
+    margin: 0 auto 16px;
+    font-size: 12.5px;
+    color: #5a6172;
+}
+
+.resume {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 33% 67%;
+    background: #ffffff;
+    box-shadow: 0 10px 40px rgba(23, 32, 74, 0.12);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    color: #1a1f2b;
+    line-height: 1.5;
+    font-size: 13.5px;
+}
+
+/* ---------- Sidebar ---------- */
+.resume-sidebar {
+    background: #2d336b;
+    color: #ffffff;
+    padding: 32px 24px 36px;
+}
+
+.resume-photo {
+    width: 116px;
+    height: 116px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.25);
+    display: block;
+    margin: 0 auto 16px;
+}
+
+.resume-name {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 4px;
+    line-height: 1.15;
+}
+
+.resume-sidebar .resume-role {
+    color: #b9c3ea;
+    text-align: center;
+    font-size: 12.5px;
+    margin: 0 0 8px;
+}
+
+.resume-side-h {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    padding-bottom: 5px;
+    margin: 24px 0 12px;
+}
+
+.resume-contact-item {
+    margin-bottom: 11px;
+    font-size: 11.5px;
+    word-break: break-word;
+}
+
+.resume-contact-item .label {
+    display: block;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1px;
+}
+
+.resume-contact-item,
+.resume-contact-item a {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+}
+
+.resume-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.resume-pill {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 4px 11px;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* ---------- Main column ---------- */
+.resume-main {
+    padding: 34px 36px 40px;
+}
+
+.resume-section {
+    margin-bottom: 20px;
+}
+
+.resume-section:last-child {
+    margin-bottom: 0;
+}
+
+.resume-section h2 {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #2d336b;
+    border-bottom: 1px solid #e0e4f0;
+    padding-bottom: 5px;
+    margin: 0 0 12px;
+}
+
+.resume-summary {
+    margin: 0;
+    color: #3a4152;
+}
+
+.resume-entry {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    break-inside: avoid;
+}
+
+.resume-entry:last-child {
+    margin-bottom: 0;
+}
+
+.resume-entry-date {
+    font-size: 11px;
+    color: #6b7280;
+    line-height: 1.35;
+    padding-top: 2px;
+}
+
+.resume-entry h3 {
+    font-size: 14px;
+    margin: 0;
+    color: #17204a;
+}
+
+.resume-entry-company {
+    font-style: italic;
+    color: #5a6172;
+    margin: 1px 0 5px;
+    font-size: 12.5px;
+}
+
+.resume-entry ul {
+    margin: 4px 0 0;
+    padding-left: 16px;
+}
+
+.resume-entry li {
+    margin-bottom: 2px;
+}
+
+.resume-entry p {
+    margin: 0 0 4px;
+}
+
+.resume-tech {
+    color: #6b7280;
+    font-size: 11.5px;
+    margin: 3px 0 0;
+}
+
+.resume-entry-link {
+    display: block;
+    font-size: 11px;
+    color: #2d336b;
+    text-decoration: none;
+    margin-top: 3px;
+}
+
+/* ---------- ATS single-column layout ---------- */
+/* On-screen preview (screen media only, so it never affects the printed PDF). */
+@media screen {
+    .resume.ats {
+        display: block;
+        max-width: 780px;
+        padding: 44px 52px;
+    }
+    .resume.ats .resume-sidebar {
+        background: transparent;
+        color: #1a1f2b;
+        padding: 0;
+        margin-bottom: 8px;
+    }
+    .resume.ats .resume-photo {
+        display: none;
+    }
+    .resume.ats .resume-name {
+        color: #17204a;
+        text-align: left;
+    }
+    .resume.ats .resume-sidebar .resume-role {
+        color: #2d336b;
+        text-align: left;
+        margin-bottom: 6px;
+    }
+    .resume.ats .resume-side-h {
+        color: #2d336b;
+        border-bottom-color: #d7dcea;
+        margin: 14px 0 6px;
+    }
+    .resume.ats .resume-contact-item {
+        display: inline;
+        color: #3a4152;
+        margin-bottom: 0;
+    }
+    .resume.ats .resume-contact-item .label {
+        display: none;
+    }
+    .resume.ats .resume-contact-item a {
+        color: #2d336b;
+    }
+    /* Links add clutter to a PDF resume — hide them in the ATS layout. */
+    .resume.ats .resume-contact-link {
+        display: none;
+    }
+    .resume.ats .resume-contact-item:not(:first-child)::before {
+        content: " · ";
+        color: #9aa2b4;
+    }
+    /* Skills as compact comma-separated text instead of chunky pills. */
+    .resume.ats .resume-pills {
+        display: block;
+    }
+    .resume.ats .resume-pill {
+        display: inline;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        color: #3a4152;
+        font-size: 12px;
+    }
+    .resume.ats .resume-pill:not(:last-child)::after {
+        content: ", ";
+    }
+    .resume.ats .resume-main {
+        padding: 0;
+        margin-top: 8px;
+    }
+}
+
+/* ---------- Print (always single-column ATS) ---------- */
+/* margin: 0 removes the browser's auto header/footer (date, title, URL, page
+   number), which it draws in the page margin box. Page margins are recreated
+   as padding on the content below. */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    html,
+    body,
+    #root,
+    main {
+        background: #ffffff !important;
+    }
+
+    .resume-page {
+        background: #ffffff;
+        padding: 0;
+        min-height: 0;
+    }
+
+    .resume {
+        display: block;
+        max-width: none;
+        margin: 0;
+        padding: 14mm;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+        font-size: 10.5pt;
+        color: #000000;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .resume-sidebar {
+        background: transparent !important;
+        color: #1a1f2b;
+        padding: 0;
+        margin-bottom: 8px;
+    }
+    .resume-photo {
+        display: none;
+    }
+    .resume-name {
+        color: #17204a;
+        text-align: left;
+        font-size: 22pt;
+    }
+    .resume-sidebar .resume-role {
+        color: #2d336b;
+        text-align: left;
+        margin-bottom: 6px;
+    }
+    .resume-side-h {
+        color: #2d336b;
+        border-bottom-color: #cfd5e6;
+        margin: 12px 0 5px;
+    }
+    .resume-contact-item {
+        display: inline;
+        color: #333333;
+        font-size: 9.5pt;
+        margin-bottom: 0;
+    }
+    .resume-contact-item .label {
+        display: none;
+    }
+    .resume-contact-item a {
+        color: #17204a;
+    }
+    /* Links add clutter to a PDF resume — hide them. */
+    .resume-contact-link {
+        display: none;
+    }
+    .resume-contact-item:not(:first-child)::before {
+        content: " · ";
+        color: #888888;
+    }
+    /* Skills as compact comma-separated text instead of chunky pills. */
+    .resume-pills {
+        display: block;
+    }
+    .resume-pill {
+        display: inline;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        color: #1a1f2b;
+    }
+    .resume-pill:not(:last-child)::after {
+        content: ", ";
+    }
+    .resume-main {
+        padding: 0;
+        margin-top: 8px;
+    }
+
+    .resume-section,
+    .resume-entry {
+        break-inside: avoid;
+    }
+}

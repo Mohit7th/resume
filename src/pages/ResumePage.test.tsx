@@ -1,16 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
-import TitleHeader from "./components/home/TitleHeader";
-import { UserDataProvider } from "./context/UserContext";
-import theme from "./theme/theme";
+import ResumePage from "./ResumePage";
+import { UserDataProvider } from "../context/UserContext";
+import theme from "../theme/theme";
 
-test("renders the resume hero and primary actions", () => {
+test("resume page renders name, sections, and download action", () => {
     render(
         <ThemeProvider theme={theme}>
             <UserDataProvider>
                 <MemoryRouter>
-                    <TitleHeader />
+                    <ResumePage />
                 </MemoryRouter>
             </UserDataProvider>
         </ThemeProvider>
@@ -20,9 +20,12 @@ test("renders the resume hero and primary actions", () => {
         screen.getByRole("heading", { name: "Mohit Uniyal", level: 1 })
     ).toBeInTheDocument();
     expect(
-        screen.getByRole("link", { name: /view resume/i })
+        screen.getByRole("heading", { name: /experience/i, level: 2 })
     ).toBeInTheDocument();
     expect(
-        screen.getByRole("link", { name: /contact me/i })
+        screen.getByRole("heading", { name: /skills/i, level: 2 })
+    ).toBeInTheDocument();
+    expect(
+        screen.getByRole("button", { name: /download pdf/i })
     ).toBeInTheDocument();
 });
