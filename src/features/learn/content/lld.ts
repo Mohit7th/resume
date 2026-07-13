@@ -10,7 +10,7 @@ export const lld: Track = {
     topics: [
         {
             id: "srp",
-            title: "Single Responsibility Principle",
+            title: "Single Responsibility",
             summary:
                 "A class should have one reason to change. Split concerns that vary independently.",
             difficulty: "core",
@@ -19,34 +19,68 @@ export const lld: Track = {
                 {
                     id: "intro",
                     title: "One reason to change",
-                    estMinutes: 7,
-                    blocks: [
+                    estMinutes: 5,
+                    steps: [
                         {
-                            type: "text",
-                            md: "The **Single Responsibility Principle** says a class should do one thing. When a class both *computes* something and *decides how to present or persist* it, a change to either concern forces you to touch — and risk breaking — the other.",
+                            blocks: [
+                                {
+                                    type: "text",
+                                    md: "Here's an `Invoice` class. Read what it does — then we'll ask a question.",
+                                },
+                                {
+                                    type: "code",
+                                    lang: "ts",
+                                    caption: "One class, several jobs",
+                                    code: "class Invoice {\n  total() { /* pricing & tax rules */ }\n  toPdf() { /* presentation */ }\n  save() { /* database access */ }\n}",
+                                },
+                            ],
+                            check: {
+                                kind: "choice",
+                                prompt:
+                                    "How many independent reasons does this class have to change?",
+                                options: ["One", "Two", "Three"],
+                                answer: 2,
+                                explain:
+                                    "Pricing rules (total), presentation format (toPdf), and storage/schema (save) each change for different reasons — three axes.",
+                            },
                         },
                         {
-                            type: "code",
-                            lang: "ts",
-                            caption: "Too many responsibilities",
-                            code: "class Invoice {\n  constructor(private items: Item[]) {}\n  total() { /* business logic */ }\n  toPdf() { /* formatting */ }\n  save() { /* database access */ }\n}",
+                            blocks: [
+                                {
+                                    type: "text",
+                                    md: "The **Single Responsibility Principle** says: split those out so each class has *one* reason to change.",
+                                },
+                                {
+                                    type: "code",
+                                    lang: "ts",
+                                    caption: "Split by reason-to-change",
+                                    code: "class Invoice { total() {} }\nclass InvoicePdfRenderer { render(i: Invoice) {} }\nclass InvoiceRepository { save(i: Invoice) {} }",
+                                },
+                            ],
+                            check: {
+                                kind: "truefalse",
+                                prompt:
+                                    "SRP is really about the number of methods a class has.",
+                                answer: false,
+                                explain:
+                                    "It's about reasons to change, not method count. Many cohesive methods that always change together are fine.",
+                            },
                         },
                         {
-                            type: "code",
-                            lang: "ts",
-                            caption: "Split by reason-to-change",
-                            code: "class Invoice {\n  constructor(private items: Item[]) {}\n  total() { /* business logic only */ }\n}\n\nclass InvoicePdfRenderer { render(inv: Invoice) { /* ... */ } }\nclass InvoiceRepository { save(inv: Invoice) { /* ... */ } }",
-                        },
-                        {
-                            type: "callout",
-                            variant: "note",
-                            md: "SRP is about **reasons to change**, not method count. A class with many cohesive methods that all change together is fine.",
-                        },
-                        {
-                            type: "exercise",
-                            prompt: "Name the three reasons the first `Invoice` could change.",
-                            solution:
-                                "Pricing/tax rules (total), presentation format (toPdf), and storage/schema (save) — three independent axes of change.",
+                            check: {
+                                kind: "multi",
+                                prompt:
+                                    "Which of these are separate responsibilities worth splitting out? (Select all)",
+                                options: [
+                                    "Business calculation",
+                                    "Rendering / formatting",
+                                    "Persistence",
+                                    "Being an Invoice",
+                                ],
+                                answers: [0, 1, 2],
+                                explain:
+                                    "Calculation, formatting, and persistence each vary independently. 'Being an Invoice' is the class's core identity, not a separable job.",
+                            },
                         },
                     ],
                 },

@@ -1,8 +1,19 @@
 # Learning Module — Implementation Approach
 
-_Status: Draft (core approach only). The concrete topics/concepts (LLD, HLD,
-DSA, …) are intentionally **not** decided here — this document defines the
-flexible framework they will plug into later._
+_Status: Draft. The concrete topics/concepts (LLD, HLD, DSA, …) are
+intentionally **not** decided here — this document defines the flexible
+framework they will plug into later._
+
+> **Update — v2 (Brilliant-style):** the lesson experience is now an
+> **interactive, step-by-step player** rather than a scroll of blocks. A
+> `Lesson` is a list of **`Step`s**; each step shows teaching **`Block`s**
+> (`text`/`code`/`callout`/`diagram`) and/or an interactive **`Check`**
+> (`choice`/`multi`/`truefalse`/`input`) that gates progression with instant
+> feedback. The full-screen `LessonPlayer` shows one step at a time with a
+> progress bar and a Check → Continue → Finish flow. See
+> `src/features/learn/types.ts` (source of truth). The block-registry and
+> data-driven principles below still hold; §4's `Lesson.blocks` is now
+> `Lesson.steps`, and quizzes/exercises became `Check`s.
 
 ## 1. Goal
 

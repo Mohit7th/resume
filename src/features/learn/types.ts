@@ -1,28 +1,56 @@
-// Content model for the Learn module. Everything is data — see
-// docs/learning-module-approach.md for the rationale.
+// Content model for the Learn module — a Brilliant-style, step-by-step,
+// learn-by-doing flow. See docs/learning-module-approach.md.
 
 export type Difficulty = "intro" | "core" | "advanced";
 
-/** A block is one unit of lesson content. Add a variant + a renderer to extend. */
+/** Teaching content (non-interactive) shown within a step. */
 export type Block =
     | { type: "text"; md: string }
     | { type: "code"; lang: string; code: string; caption?: string }
     | { type: "callout"; variant: "tip" | "note" | "warn"; md: string }
+    | { type: "diagram"; alt: string; src?: string; mermaid?: string };
+
+/** An interactive checkpoint that gates progression to the next step. */
+export type Check =
     | {
-          type: "quiz";
-          question: string;
+          kind: "choice";
+          prompt: string;
           options: string[];
-          answer: number;
+          answer: number; // index of the correct option
           explain?: string;
       }
-    | { type: "exercise"; prompt: string; solution: string }
-    | { type: "diagram"; alt: string; src?: string; mermaid?: string };
+    | {
+          kind: "multi";
+          prompt: string;
+          options: string[];
+          answers: number[]; // indices of all correct options
+          explain?: string;
+      }
+    | {
+          kind: "truefalse";
+          prompt: string;
+          answer: boolean;
+          explain?: string;
+      }
+    | {
+          kind: "input";
+          prompt: string;
+          accept: string[]; // accepted answers (case-insensitive)
+          placeholder?: string;
+          explain?: string;
+      };
+
+/** One screen of a lesson: some teaching, an optional interaction, or both. */
+export type Step = {
+    blocks?: Block[];
+    check?: Check;
+};
 
 export type Lesson = {
     id: string;
     title: string;
     estMinutes?: number;
-    blocks: Block[];
+    steps: Step[];
 };
 
 export type Topic = {

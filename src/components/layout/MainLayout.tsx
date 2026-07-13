@@ -32,8 +32,13 @@ const navItems = [
 
 export default function MainLayout() {
     const location = useLocation();
+    const segments = location.pathname.split("/").filter(Boolean);
+    // Lesson player (/learn/:track/:topic/:lesson) runs full-screen.
+    const isLessonPlayer = segments[0] === "learn" && segments.length === 4;
     const hideChrome =
-        location.pathname === "/admin" || location.pathname === "/resume";
+        location.pathname === "/admin" ||
+        location.pathname === "/resume" ||
+        isLessonPlayer;
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 

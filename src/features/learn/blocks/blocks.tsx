@@ -1,17 +1,7 @@
-import { useState } from "react";
-import {
-    Box,
-    Button,
-    Collapse,
-    Paper,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import LightbulbRoundedIcon from "@mui/icons-material/LightbulbRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import { Block } from "../types";
 import Markdown from "./Markdown";
 
@@ -83,100 +73,6 @@ export function CalloutBlock({ block }: { block: Of<"callout"> }) {
             <Box sx={{ "& p": { m: 0 } }}>
                 <Markdown>{block.md}</Markdown>
             </Box>
-        </Paper>
-    );
-}
-
-export function QuizBlock({ block }: { block: Of<"quiz"> }) {
-    const [selected, setSelected] = useState<number | null>(null);
-    const answered = selected !== null;
-
-    return (
-        <Paper variant="outlined" sx={{ my: 2, p: 2.5, borderColor: "divider" }}>
-            <Typography sx={{ fontWeight: 700, mb: 1.5 }}>
-                {block.question}
-            </Typography>
-            <Stack spacing={1}>
-                {block.options.map((option, index) => {
-                    const isCorrect = index === block.answer;
-                    const isChosen = index === selected;
-                    let borderColor = "divider";
-                    let icon = null;
-                    if (answered && isCorrect) {
-                        borderColor = "success.main";
-                        icon = (
-                            <CheckCircleRoundedIcon
-                                fontSize="small"
-                                color="success"
-                            />
-                        );
-                    } else if (answered && isChosen && !isCorrect) {
-                        borderColor = "error.main";
-                        icon = (
-                            <CancelRoundedIcon fontSize="small" color="error" />
-                        );
-                    }
-                    return (
-                        <Button
-                            key={index}
-                            variant="outlined"
-                            disabled={answered}
-                            onClick={() => setSelected(index)}
-                            endIcon={icon}
-                            sx={{
-                                justifyContent: "space-between",
-                                textAlign: "left",
-                                color: "text.primary",
-                                borderColor,
-                                "&.Mui-disabled": { borderColor },
-                            }}
-                        >
-                            {option}
-                        </Button>
-                    );
-                })}
-            </Stack>
-            {answered && block.explain && (
-                <Box
-                    sx={{
-                        mt: 1.5,
-                        "& p": { m: 0, fontSize: "0.9rem" },
-                    }}
-                >
-                    <Markdown>{block.explain}</Markdown>
-                </Box>
-            )}
-        </Paper>
-    );
-}
-
-export function ExerciseBlock({ block }: { block: Of<"exercise"> }) {
-    const [show, setShow] = useState(false);
-    return (
-        <Paper variant="outlined" sx={{ my: 2, p: 2.5, borderColor: "divider" }}>
-            <Typography
-                variant="overline"
-                sx={{ color: "secondary.dark", fontWeight: 700 }}
-            >
-                Exercise
-            </Typography>
-            <Typography sx={{ mb: 1.5 }}>{block.prompt}</Typography>
-            <Button size="small" onClick={() => setShow((s) => !s)}>
-                {show ? "Hide solution" : "Show solution"}
-            </Button>
-            <Collapse in={show}>
-                <Box
-                    sx={{
-                        mt: 1.5,
-                        p: 1.5,
-                        borderRadius: 1,
-                        bgcolor: "secondary.light",
-                        "& p": { m: 0 },
-                    }}
-                >
-                    <Markdown>{block.solution}</Markdown>
-                </Box>
-            </Collapse>
         </Paper>
     );
 }
