@@ -8,4 +8,6 @@ export type WorkHistory = {
     responsibilities: string[];
     _id: string;
     image: string;
+    /** Optional highlight, e.g. "Co-founder", shown as a small chip. */
+    badge?: string;
 };

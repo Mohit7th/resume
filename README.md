@@ -28,11 +28,13 @@ lightweight editor is available at `/admin` when `VITE_ENABLE_ADMIN=true`:
 2. Visit `/admin` and sign in with `VITE_ADMIN_PASSWORD`.
 3. Edit the header, summary, skills, projects, and work history. Click **Save**.
 
-Edits are stored in the browser's `localStorage`, so they persist across
-refreshes and appear on the public site **in that browser**. To publish changes
-for everyone, use **Export** to download `resume-data.json` and commit it (or
-paste its values into `src/components/data.tsx`), then redeploy. **Import** and
-**Reset to defaults** are also available.
+The **public site always renders the committed content** in
+`src/components/data.tsx`, so any change there (or a redeploy) shows immediately.
+Admin edits are a **local draft** saved to your browser's `localStorage`; saving
+also previews them on the site within the current session. To publish for
+everyone, use **Export** to download `resume-data.json` and commit it (or paste
+its values into `src/components/data.tsx`), then redeploy. **Import** and **Reset
+to defaults** are also available.
 
 For GitHub Pages/subfolder hosting, `vite.config.ts` uses `base: "./"` so the production build uses relative asset paths.
 

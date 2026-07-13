@@ -1,6 +1,7 @@
 import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Link as RouterLink } from "react-router-dom";
 import { useUserData } from "../../context/UserContext";
 
 export default function Footer() {
@@ -32,8 +33,21 @@ export default function Footer() {
                 }}
             >
                 <Typography variant="body2">
-                    © {new Date().getFullYear()} {userData.titleHeader.name}.
-                    Built with React.
+                    © {new Date().getFullYear()} {userData.titleHeader.name}.{" "}
+                    {/* Hidden entry point to /learn — styled to read as plain
+                        text (no underline, no pointer cursor). */}
+                    <Box
+                        component={RouterLink}
+                        to="/learn"
+                        sx={{
+                            color: "inherit",
+                            textDecoration: "none",
+                            cursor: "inherit",
+                            "&:hover, &:focus": { textDecoration: "none" },
+                        }}
+                    >
+                        Built with React.
+                    </Box>
                 </Typography>
                 <Stack direction="row" spacing={0.5}>
                     {github && (
