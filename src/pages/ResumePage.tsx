@@ -17,17 +17,6 @@ function formatMonthYear(value: string | null) {
     }).format(date);
 }
 
-function isExternalUrl(url: string) {
-    return /^https?:\/\//.test(url);
-}
-
-function prettyUrl(url: string) {
-    return url
-        .replace(/^https?:\/\//, "")
-        .replace(/^www\./, "")
-        .replace(/\/$/, "");
-}
-
 // Keep the resume scannable: one line per project.
 function firstSentence(text: string) {
     const match = text.match(/^[^.]*\./);
@@ -127,21 +116,6 @@ export default function ResumePage() {
                         <span className="label">Phone</span>
                         {titleHeader.contact.phone}
                     </div>
-                    {titleHeader.socials.map((social) => (
-                        <div
-                            className="resume-contact-item resume-contact-link"
-                            key={social._id}
-                        >
-                            <span className="label">{social.name}</span>
-                            <a
-                                href={social.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {prettyUrl(social.url)}
-                            </a>
-                        </div>
-                    ))}
 
                     <h2 className="resume-side-h">Skills</h2>
                     <div className="resume-pills">
@@ -162,6 +136,25 @@ export default function ResumePage() {
                                 </span>
                             ))}
                     </div>
+
+                    {education.length > 0 && (
+                        <>
+                            <h2 className="resume-side-h">Education</h2>
+                            {education.map((edu) => (
+                                <div className="resume-side-item" key={edu._id}>
+                                    <div className="resume-side-item-title">
+                                        {edu.degree}
+                                    </div>
+                                    <div className="resume-side-item-sub">
+                                        {edu.institution}
+                                    </div>
+                                    <div className="resume-side-item-meta">
+                                        {edu.startYear} — {edu.endYear}
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    )}
                 </aside>
 
                 {/* ---------- Main ---------- */}
@@ -229,40 +222,11 @@ export default function ResumePage() {
                                         <p className="resume-tech">
                                             {tech.join(" · ")}
                                         </p>
-                                        {isExternalUrl(project.url) && (
-                                            <a
-                                                className="resume-entry-link"
-                                                href={project.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                {prettyUrl(project.url)}
-                                            </a>
-                                        )}
                                     </div>
                                 </div>
                             );
                         })}
                     </section>
-
-                    {education.length > 0 && (
-                        <section className="resume-section">
-                            <h2>Education</h2>
-                            {education.map((edu) => (
-                                <div className="resume-entry" key={edu._id}>
-                                    <div className="resume-entry-date">
-                                        {edu.startYear} — {edu.endYear}
-                                    </div>
-                                    <div>
-                                        <h3>{edu.degree}</h3>
-                                        <p className="resume-entry-company">
-                                            {edu.institution}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </section>
-                    )}
                 </div>
             </article>
         </div>
