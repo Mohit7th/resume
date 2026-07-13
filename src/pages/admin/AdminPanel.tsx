@@ -40,6 +40,7 @@ import SummaryEditor from "../../components/admin/editors/SummaryEditor";
 import SkillsEditor from "../../components/admin/editors/SkillsEditor";
 import ProjectsEditor from "../../components/admin/editors/ProjectsEditor";
 import WorkHistoryEditor from "../../components/admin/editors/WorkHistoryEditor";
+import EducationEditor from "../../components/admin/editors/EducationEditor";
 
 const SECTIONS = [
     { id: "header", label: "Header & contact" },
@@ -47,6 +48,7 @@ const SECTIONS = [
     { id: "skills", label: "Skills" },
     { id: "projects", label: "Projects" },
     { id: "work", label: "Work history" },
+    { id: "education", label: "Education" },
 ];
 
 export default function AdminPanel() {
@@ -277,6 +279,12 @@ export default function AdminPanel() {
                             {section.id === "work" && (
                                 <WorkHistoryEditor
                                     data={draft.workHistory}
+                                    update={updateDraft}
+                                />
+                            )}
+                            {section.id === "education" && (
+                                <EducationEditor
+                                    data={draft.education}
                                     update={updateDraft}
                                 />
                             )}

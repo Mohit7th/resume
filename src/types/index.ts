@@ -5,3 +5,4 @@ export * from "./summary";
 export * from "./skills";
 export * from "./projects";
 export * from "./workHistory";
+export * from "./education";

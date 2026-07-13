@@ -566,4 +566,20 @@ export const resumeData: ResumeData = {
             image: "/assets/data.svg",
         },
     ],
+    education: [
+        {
+            degree: "Master of Computer Applications (MCA)",
+            institution: "Graphic Era University",
+            startYear: "2014",
+            endYear: "2016",
+            _id: "60",
+        },
+        {
+            degree: "Bachelor of Computer Applications (BCA)",
+            institution: "Graphic Era University",
+            startYear: "2011",
+            endYear: "2014",
+            _id: "61",
+        },
+    ],
 };

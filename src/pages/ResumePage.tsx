@@ -27,10 +27,17 @@ function prettyUrl(url: string) {
         .replace(/\/$/, "");
 }
 
-const PROJECT_LIMIT = 6;
+// Keep the resume scannable: one line per project.
+function firstSentence(text: string) {
+    const match = text.match(/^[^.]*\./);
+    return match ? match[0].trim() : text;
+}
+
+const PROJECT_LIMIT = 4;
+const BULLETS_PER_ROLE = 4;
 
 export default function ResumePage() {
-    const { titleHeader, summary, skills, projects, workHistory } =
+    const { titleHeader, summary, skills, projects, workHistory, education } =
         useUserData();
 
     useEffect(() => {
@@ -46,7 +53,7 @@ export default function ResumePage() {
         ? `${titleHeader.title} · ${currentRole.badge}`
         : titleHeader.title;
 
-    const paragraphs = summary.detailed.split("\n\n");
+    const summaryText = summary.detailed.split("\n\n")[0];
     const featuredProjects = projects.slice(0, PROJECT_LIMIT);
 
     const skillGroups = [
@@ -104,9 +111,7 @@ export default function ResumePage() {
 
                 <section className="resume-section">
                     <h2>Summary</h2>
-                    {paragraphs.map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                    ))}
+                    <p>{summaryText}</p>
                 </section>
 
                 <section className="resume-section">
@@ -126,9 +131,11 @@ export default function ResumePage() {
                             <p className="resume-company">{role.company}</p>
                             {role.responsibilities.length > 0 && (
                                 <ul>
-                                    {role.responsibilities.map((item, index) => (
-                                        <li key={index}>{item}</li>
-                                    ))}
+                                    {role.responsibilities
+                                        .slice(0, BULLETS_PER_ROLE)
+                                        .map((item, index) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
                                 </ul>
                             )}
                         </div>
@@ -172,7 +179,7 @@ export default function ResumePage() {
                                         </a>
                                     )}
                                 </div>
-                                <p>{project.description}</p>
+                                <p>{firstSentence(project.description)}</p>
                                 <p className="resume-tech">
                                     {tech.join(" · ")}
                                 </p>
@@ -180,6 +187,25 @@ export default function ResumePage() {
                         );
                     })}
                 </section>
+
+                {education.length > 0 && (
+                    <section className="resume-section">
+                        <h2>Education</h2>
+                        {education.map((edu) => (
+                            <div className="resume-entry" key={edu._id}>
+                                <div className="resume-entry-head">
+                                    <h3>{edu.degree}</h3>
+                                    <span className="resume-dates">
+                                        {edu.startYear} — {edu.endYear}
+                                    </span>
+                                </div>
+                                <p className="resume-company">
+                                    {edu.institution}
+                                </p>
+                            </div>
+                        ))}
+                    </section>
+                )}
             </article>
         </div>
     );

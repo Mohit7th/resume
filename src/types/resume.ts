@@ -1,3 +1,4 @@
+import { Education } from "./education";
 import { Projects } from "./projects";
 import { Skills } from "./skills";
 import { Summary } from "./summary";
@@ -10,4 +11,5 @@ export type ResumeData = {
     skills: Skills;
     projects: Projects[];
     workHistory: WorkHistory[];
+    education: Education[];
 };
