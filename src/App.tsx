@@ -12,6 +12,7 @@ import { siteConfig } from "./config/siteConfig";
 import { getRouterBasename } from "./utils/publicPath";
 
 const AdminPanel = lazy(() => import("./pages/admin/AdminPanel"));
+const LearnApp = lazy(() => import("./features/learn/LearnApp"));
 
 const App: React.FC = () => {
     return (
@@ -22,6 +23,14 @@ const App: React.FC = () => {
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<ResumeHome />} />
                             <Route path="/resume" element={<ResumePage />} />
+                            <Route
+                                path="/learn/*"
+                                element={
+                                    <Suspense fallback={null}>
+                                        <LearnApp />
+                                    </Suspense>
+                                }
+                            />
                             {siteConfig.enableAdmin && (
                                 <Route
                                     path="/admin"

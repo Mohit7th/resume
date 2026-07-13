@@ -129,6 +129,14 @@ export default function MainLayout() {
                                         {item.label}
                                     </Button>
                                 ))}
+                                <Button
+                                    component={RouterLink}
+                                    to="/learn"
+                                    color="inherit"
+                                    size="small"
+                                >
+                                    Learn
+                                </Button>
                             </Stack>
 
                             <Button
@@ -207,6 +215,20 @@ export default function MainLayout() {
                             </ListItemButton>
                         </ListItem>
                     ))}
+                    <ListItem disablePadding>
+                        <ListItemButton
+                            component={RouterLink}
+                            to="/learn"
+                            onClick={() => setMobileOpen(false)}
+                        >
+                            <ListItemText
+                                primary="Learn"
+                                slotProps={{
+                                    primary: { sx: { fontWeight: 600 } },
+                                }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
                 <Box sx={{ p: 2, mt: "auto" }}>
                     <Button
