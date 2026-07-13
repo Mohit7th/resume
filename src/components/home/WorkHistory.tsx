@@ -12,6 +12,7 @@ import {
 import Grid from "@mui/material/Grid";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import WorkspacePremiumRoundedIcon from "@mui/icons-material/WorkspacePremiumRounded";
 import { useUserData } from "../../context/UserContext";
 import { calculateYearsAndMonths } from "../../utils/dateUtils";
 import Reveal from "../ui/Reveal";
@@ -74,16 +75,40 @@ export default function WorkHistory() {
                     >
                         <Grid container spacing={{ xs: 3, md: 5 }}>
                             <Grid size={{ xs: 12, md: 4 }}>
-                                <Chip
-                                    label={index === 0 ? "Current role" : duration}
-                                    size="small"
-                                    sx={{
-                                        bgcolor: "secondary.light",
-                                        color: "primary.dark",
-                                        fontWeight: 700,
-                                        mb: 2,
-                                    }}
-                                />
+                                <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    sx={{ flexWrap: "wrap", gap: 1, mb: 2 }}
+                                >
+                                    <Chip
+                                        label={
+                                            index === 0
+                                                ? "Current role"
+                                                : duration
+                                        }
+                                        size="small"
+                                        sx={{
+                                            bgcolor: "secondary.light",
+                                            color: "primary.dark",
+                                            fontWeight: 700,
+                                        }}
+                                    />
+                                    {work.badge && (
+                                        <Chip
+                                            icon={<WorkspacePremiumRoundedIcon />}
+                                            label={work.badge}
+                                            size="small"
+                                            sx={{
+                                                bgcolor: "primary.main",
+                                                color: "#fff",
+                                                fontWeight: 700,
+                                                "& .MuiChip-icon": {
+                                                    color: "#fff",
+                                                },
+                                            }}
+                                        />
+                                    )}
+                                </Stack>
                                 <Typography
                                     component="h3"
                                     variant="h5"

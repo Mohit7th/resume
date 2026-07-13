@@ -105,7 +105,7 @@ export default function WorkHistoryEditor({
                                             }
                                         />
                                     </Grid>
-                                    <Grid size={12}>
+                                    <Grid size={{ xs: 12, sm: 8 }}>
                                         <TextField
                                             label="Company website"
                                             value={role.website}
@@ -116,6 +116,22 @@ export default function WorkHistoryEditor({
                                                     d.workHistory[
                                                         index
                                                     ].website = e.target.value;
+                                                })
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 4 }}>
+                                        <TextField
+                                            label="Badge (optional)"
+                                            placeholder="e.g. Co-founder"
+                                            value={role.badge ?? ""}
+                                            fullWidth
+                                            size="small"
+                                            onChange={(e) =>
+                                                update((d) => {
+                                                    d.workHistory[index].badge =
+                                                        e.target.value ||
+                                                        undefined;
                                                 })
                                             }
                                         />

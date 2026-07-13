@@ -511,6 +511,7 @@ export const resumeData: ResumeData = {
             startDate: "2019-07-01",
             endDate: null,
             website: "https://www.frootystudios.com",
+            badge: "Co-founder",
             responsibilities: [
                 "Developed a white-labeling system to automate Chrome extension customization for clients.",
                 "Managed daily communication with UK-based clients for project coordination",
