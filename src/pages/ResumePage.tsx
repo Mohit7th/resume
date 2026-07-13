@@ -1,6 +1,6 @@
 import "./resume.css";
-import { useEffect, useState } from "react";
-import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useEffect } from "react";
+import { Button } from "@mui/material";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import { Link as RouterLink } from "react-router-dom";
@@ -24,12 +24,12 @@ function firstSentence(text: string) {
 }
 
 const PROJECT_LIMIT = 4;
-const BULLETS_PER_ROLE = 3;
+// Most recent role gets more detail; older roles are trimmed to fit one page.
+const bulletsForRole = (roleIndex: number) => (roleIndex === 0 ? 3 : 2);
 
 export default function ResumePage() {
     const { titleHeader, summary, skills, projects, workHistory, education } =
         useUserData();
-    const [atsView, setAtsView] = useState(false);
 
     useEffect(() => {
         const previousTitle = document.title;
@@ -58,37 +58,16 @@ export default function ResumePage() {
                 >
                     Back to site
                 </Button>
-                <div className="resume-toolbar-actions">
-                    <ToggleButtonGroup
-                        size="small"
-                        exclusive
-                        value={atsView ? "ats" : "web"}
-                        onChange={(_event, next) => {
-                            if (next) setAtsView(next === "ats");
-                        }}
-                        aria-label="Resume view"
-                    >
-                        <ToggleButton value="web">Web view</ToggleButton>
-                        <ToggleButton value="ats">ATS view</ToggleButton>
-                    </ToggleButtonGroup>
-                    <Button
-                        variant="contained"
-                        startIcon={<DownloadRoundedIcon />}
-                        onClick={() => window.print()}
-                    >
-                        Download PDF
-                    </Button>
-                </div>
+                <Button
+                    variant="contained"
+                    startIcon={<DownloadRoundedIcon />}
+                    onClick={() => window.print()}
+                >
+                    Download PDF
+                </Button>
             </div>
 
-            <p className="resume-note no-print">
-                The PDF always downloads as an{" "}
-                <strong>ATS-optimized single-column layout</strong> (no columns
-                or graphics) — best for recruiter screening systems. Use{" "}
-                <strong>ATS view</strong> to preview it.
-            </p>
-
-            <article className={`resume${atsView ? " ats" : ""}`}>
+            <article className="resume">
                 {/* ---------- Sidebar ---------- */}
                 <aside className="resume-sidebar">
                     {titleHeader.image && (
@@ -166,7 +145,7 @@ export default function ResumePage() {
 
                     <section className="resume-section">
                         <h2>Experience</h2>
-                        {workHistory.map((role) => (
+                        {workHistory.map((role, roleIndex) => (
                             <div className="resume-entry" key={role._id}>
                                 <div className="resume-entry-date">
                                     {formatMonthYear(role.startDate)} —{" "}
@@ -183,7 +162,10 @@ export default function ResumePage() {
                                     {role.responsibilities.length > 0 && (
                                         <ul>
                                             {role.responsibilities
-                                                .slice(0, BULLETS_PER_ROLE)
+                                                .slice(
+                                                    0,
+                                                    bulletsForRole(roleIndex)
+                                                )
                                                 .map((item, index) => (
                                                     <li key={index}>{item}</li>
                                                 ))}

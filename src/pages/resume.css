@@ -235,91 +235,10 @@
     margin-top: 3px;
 }
 
-/* ---------- ATS single-column layout ---------- */
-/* On-screen preview (screen media only, so it never affects the printed PDF). */
-@media screen {
-    .resume.ats {
-        display: block;
-        max-width: 780px;
-        padding: 44px 52px;
-    }
-    .resume.ats .resume-sidebar {
-        background: transparent;
-        color: #1a1f2b;
-        padding: 0;
-        margin-bottom: 8px;
-    }
-    .resume.ats .resume-photo {
-        display: none;
-    }
-    .resume.ats .resume-name {
-        color: #17204a;
-        text-align: left;
-    }
-    .resume.ats .resume-sidebar .resume-role {
-        color: #2d336b;
-        text-align: left;
-        margin-bottom: 6px;
-    }
-    .resume.ats .resume-side-h {
-        color: #2d336b;
-        border-bottom-color: #d7dcea;
-        margin: 14px 0 6px;
-    }
-    .resume.ats .resume-contact-item {
-        display: inline;
-        color: #3a4152;
-        margin-bottom: 0;
-    }
-    .resume.ats .resume-contact-item .label {
-        display: none;
-    }
-    .resume.ats .resume-contact-item a {
-        color: #2d336b;
-    }
-    /* Links add clutter to a PDF resume — hide them in the ATS layout. */
-    .resume.ats .resume-contact-link {
-        display: none;
-    }
-    .resume.ats .resume-contact-item:not(:first-child)::before {
-        content: " · ";
-        color: #9aa2b4;
-    }
-    /* Skills as compact comma-separated text instead of chunky pills. */
-    .resume.ats .resume-pills {
-        display: block;
-    }
-    .resume.ats .resume-pill {
-        display: inline;
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        color: #3a4152;
-        font-size: 12px;
-    }
-    .resume.ats .resume-pill:not(:last-child)::after {
-        content: ", ";
-    }
-    .resume.ats .resume-main {
-        padding: 0;
-        margin-top: 8px;
-    }
-    .resume.ats .resume-side-item-title {
-        color: #17204a;
-    }
-    .resume.ats .resume-side-item-sub {
-        color: #3a4152;
-    }
-    .resume.ats .resume-side-item-meta {
-        color: #6b7280;
-    }
-}
-
-/* ---------- Print (always single-column ATS) ---------- */
-/* margin: 0 removes the browser's auto header/footer (date, title, URL, page
-   number), which it draws in the page margin box. Page margins are recreated
-   as padding on the content below. */
+/* ---------- Print: the same two-column resume, compact for one A4 page ----------
+   @page margin: 0 removes the browser's auto header/footer (date, title, URL,
+   page number). The colored sidebar bleeds to the page edges; internal padding
+   keeps text off the trim. Spacing/fonts are tightened so it lands on one page. */
 @page {
     size: A4;
     margin: 0;
@@ -344,93 +263,65 @@
     }
 
     .resume {
-        display: block;
         max-width: none;
         margin: 0;
-        padding: 14mm;
         box-shadow: none;
         border-radius: 0;
         overflow: visible;
-        font-size: 10.5pt;
-        color: #000000;
+        min-height: 290mm; /* fill the page so the sidebar colour spans it */
+        font-size: 9.2pt;
+        line-height: 1.4;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
 
-    .resume-sidebar {
-        background: transparent !important;
-        color: #1a1f2b;
-        padding: 0;
-        margin-bottom: 8px;
-    }
-    .resume-photo {
-        display: none;
-    }
-    .resume-name {
-        color: #17204a;
-        text-align: left;
-        font-size: 22pt;
-    }
-    .resume-sidebar .resume-role {
-        color: #2d336b;
-        text-align: left;
-        margin-bottom: 6px;
-    }
-    .resume-side-h {
-        color: #2d336b;
-        border-bottom-color: #cfd5e6;
-        margin: 12px 0 5px;
-    }
-    .resume-contact-item {
-        display: inline;
-        color: #333333;
-        font-size: 9.5pt;
-        margin-bottom: 0;
-    }
-    .resume-contact-item .label {
-        display: none;
-    }
-    .resume-contact-item a {
-        color: #17204a;
-    }
-    /* Links add clutter to a PDF resume — hide them. */
-    .resume-contact-link {
-        display: none;
-    }
-    .resume-contact-item:not(:first-child)::before {
-        content: " · ";
-        color: #888888;
-    }
-    /* Skills as compact comma-separated text instead of chunky pills. */
-    .resume-pills {
-        display: block;
-    }
-    .resume-pill {
-        display: inline;
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        color: #1a1f2b;
-    }
-    .resume-pill:not(:last-child)::after {
-        content: ", ";
-    }
-    .resume-main {
-        padding: 0;
-        margin-top: 8px;
-    }
-    .resume-side-item-title {
-        color: #17204a;
-    }
-    .resume-side-item-sub {
-        color: #3a4152;
-    }
-    .resume-side-item-meta {
-        color: #6b7280;
+    /* The site's skip-link is fixed-positioned; keep it out of the PDF. */
+    .skip-link {
+        display: none !important;
     }
 
-    .resume-section,
+    /* Balanced spacing: fills the A4 page without spilling to a second one. */
+    .resume-sidebar {
+        padding: 10mm 8mm;
+    }
+    .resume-main {
+        padding: 10mm 9mm;
+    }
+    .resume-photo {
+        width: 94px;
+        height: 94px;
+    }
+    .resume-name {
+        font-size: 17pt;
+    }
+    .resume-side-h {
+        margin: 12px 0 6px;
+    }
+    .resume-side-item {
+        margin-bottom: 7px;
+    }
+    .resume-section {
+        margin-bottom: 12px;
+    }
+    .resume-section h2 {
+        font-size: 10.5pt;
+        margin-bottom: 6px;
+    }
+    .resume-entry {
+        margin-bottom: 9px;
+    }
+    .resume-entry ul {
+        margin-top: 2px;
+    }
+    .resume-entry li {
+        margin-bottom: 1px;
+    }
+    .resume-summary {
+        line-height: 1.45;
+    }
+
+    /* Only avoid splitting an individual entry; a section may start lower and
+       flow if needed, rather than jumping wholesale to a second page. */
     .resume-entry {
         break-inside: avoid;
     }
