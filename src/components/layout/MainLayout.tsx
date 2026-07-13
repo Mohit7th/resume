@@ -55,24 +55,25 @@ export default function MainLayout() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Section links (and the logo) work from any page: scroll if already on the
-    // home page, otherwise navigate home first, then scroll to the section.
-    function scrollToHash(hash: string) {
-        document
-            .querySelector(hash)
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    // Scroll to the section named by the URL hash after navigation (also on a
+    // direct visit to e.g. /#about). The hash is the source of truth.
+    useEffect(() => {
+        if (!location.hash) return;
+        const target = document.querySelector(location.hash);
+        if (!target) return;
+        const raf = requestAnimationFrame(() =>
+            requestAnimationFrame(() =>
+                target.scrollIntoView({ behavior: "smooth", block: "start" })
+            )
+        );
+        return () => cancelAnimationFrame(raf);
+    }, [location.key, location.hash]);
 
+    // Section links set the URL hash (routing home first when needed), so the
+    // address bar reflects the section and it scrolls into view from any page.
     function handleSectionNav(hash: string) {
         setMobileOpen(false);
-        if (location.pathname === "/") {
-            scrollToHash(hash);
-        } else {
-            navigate("/");
-            requestAnimationFrame(() =>
-                requestAnimationFrame(() => scrollToHash(hash))
-            );
-        }
+        navigate({ pathname: "/", hash });
     }
 
     function handleHomeClick() {
@@ -81,6 +82,7 @@ export default function MainLayout() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
             navigate("/");
+            requestAnimationFrame(() => window.scrollTo({ top: 0 }));
         }
     }
 
