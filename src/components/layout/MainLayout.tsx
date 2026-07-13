@@ -18,7 +18,12 @@ import {
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { Outlet, useLocation, Link as RouterLink } from "react-router-dom";
+import {
+    Outlet,
+    useLocation,
+    useNavigate,
+    Link as RouterLink,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
 
@@ -32,6 +37,7 @@ const navItems = [
 
 export default function MainLayout() {
     const location = useLocation();
+    const navigate = useNavigate();
     const segments = location.pathname.split("/").filter(Boolean);
     // Lesson player (/learn/:track/:topic/:lesson) runs full-screen.
     const isLessonPlayer = segments[0] === "learn" && segments.length === 4;
@@ -48,6 +54,35 @@ export default function MainLayout() {
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Section links (and the logo) work from any page: scroll if already on the
+    // home page, otherwise navigate home first, then scroll to the section.
+    function scrollToHash(hash: string) {
+        document
+            .querySelector(hash)
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function handleSectionNav(hash: string) {
+        setMobileOpen(false);
+        if (location.pathname === "/") {
+            scrollToHash(hash);
+        } else {
+            navigate("/");
+            requestAnimationFrame(() =>
+                requestAnimationFrame(() => scrollToHash(hash))
+            );
+        }
+    }
+
+    function handleHomeClick() {
+        setMobileOpen(false);
+        if (location.pathname === "/") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            navigate("/");
+        }
+    }
 
     return (
         <Box
@@ -89,9 +124,9 @@ export default function MainLayout() {
                             }}
                         >
                             <Button
-                                href="#top"
+                                onClick={handleHomeClick}
                                 color="inherit"
-                                aria-label="Mohit Uniyal, back to top"
+                                aria-label="Mohit Uniyal, home"
                                 sx={{ minWidth: 0, p: 0, mr: "auto" }}
                             >
                                 <Avatar
@@ -127,21 +162,15 @@ export default function MainLayout() {
                                 {navItems.map((item) => (
                                     <Button
                                         key={item.href}
-                                        href={item.href}
+                                        onClick={() =>
+                                            handleSectionNav(item.href)
+                                        }
                                         color="inherit"
                                         size="small"
                                     >
                                         {item.label}
                                     </Button>
                                 ))}
-                                <Button
-                                    component={RouterLink}
-                                    to="/learn"
-                                    color="inherit"
-                                    size="small"
-                                >
-                                    Learn
-                                </Button>
                             </Stack>
 
                             <Button
@@ -207,9 +236,7 @@ export default function MainLayout() {
                     {navItems.map((item) => (
                         <ListItem key={item.href} disablePadding>
                             <ListItemButton
-                                component="a"
-                                href={item.href}
-                                onClick={() => setMobileOpen(false)}
+                                onClick={() => handleSectionNav(item.href)}
                             >
                                 <ListItemText
                                     primary={item.label}
@@ -220,20 +247,6 @@ export default function MainLayout() {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                    <ListItem disablePadding>
-                        <ListItemButton
-                            component={RouterLink}
-                            to="/learn"
-                            onClick={() => setMobileOpen(false)}
-                        >
-                            <ListItemText
-                                primary="Learn"
-                                slotProps={{
-                                    primary: { sx: { fontWeight: 600 } },
-                                }}
-                            />
-                        </ListItemButton>
-                    </ListItem>
                 </List>
                 <Box sx={{ p: 2, mt: "auto" }}>
                     <Button
