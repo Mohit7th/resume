@@ -4,10 +4,9 @@ import {
     useReducer,
     ReactNode,
     useContext,
-    useEffect,
 } from "react";
 import { ResumeData } from "../types"; // Import type
-import { loadResumeData, saveResumeData } from "../data/resumeStorage";
+import { resumeData } from "../components/data";
 
 // Define action type
 type Action =
@@ -24,7 +23,7 @@ type UserDataState = ResumeData;
 // Define the type of dispatch function
 type UserDataDispatch = Dispatch<Action>;
 
-export const UserDataContext = createContext<UserDataState>(loadResumeData());
+export const UserDataContext = createContext<UserDataState>(resumeData);
 export const UserDataDispatchContext = createContext<UserDataDispatch>(() => {
     throw new Error("UserDataDispatchContext is not provided");
 });
@@ -43,18 +42,11 @@ interface UserDataProviderProps {
 }
 
 export function UserDataProvider({ children }: UserDataProviderProps) {
-    // Lazily initialise from local storage (falls back to the bundled seed).
-    const [userdata, dispatch] = useReducer(
-        userDataReducer,
-        undefined,
-        loadResumeData
-    );
-
-    // Persist every change so admin edits survive a refresh and are reflected
-    // on the public site (within the same browser).
-    useEffect(() => {
-        saveResumeData(userdata);
-    }, [userdata]);
+    // The committed seed is the source of truth for the public site, so a
+    // content change in data.tsx (or a redeploy) always shows immediately.
+    // The admin editor persists its own draft to local storage separately and
+    // may dispatch SET_RESUME to preview changes within the current session.
+    const [userdata, dispatch] = useReducer(userDataReducer, resumeData);
 
     return (
         <UserDataContext.Provider value={userdata}>

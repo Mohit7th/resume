@@ -27,8 +27,8 @@ export const resumeData: ResumeData = {
     },
     summary: {
         detailed:
-            "Full-Stack Developer working in software delivery since 2016, with experience across the MEAN stack (MongoDB, Express.js, Angular, and Node.js) and Microsoft Business Intelligence.\n\nI build scalable web applications, REST APIs, browser extensions, third-party integrations, ETL workflows, and data visualizations. My work also includes performance optimization, client communication, technical documentation, and mentoring developers in agile teams.",
-        short: "MEAN stack · Browser extensions · Data & BI",
+            "Full-Stack Developer working in software delivery since 2016. I work across the modern TypeScript stack — Angular, React, and Node.js — and increasingly build AI-powered products with LLMs, alongside a background in browser extensions and Microsoft Business Intelligence.\n\nMy work spans scalable web applications, REST APIs, browser extensions, third-party and payment integrations, AI microservices, ETL workflows, and data visualizations. It also includes architecture, performance optimization, client communication, technical documentation, and mentoring developers in agile teams.",
+        short: "Full-stack web · AI-powered products · Browser extensions",
         _id: "5",
     },
     skills: {
@@ -46,6 +46,13 @@ export const resumeData: ResumeData = {
                 _id: "7",
                 image: "",
                 type: "web",
+            },
+            {
+                name: "OpenAI / LLMs",
+                experience: "1 year",
+                _id: "53",
+                image: "",
+                type: "ai",
             },
             {
                 name: "TypeScript",
@@ -355,12 +362,12 @@ export const resumeData: ResumeData = {
             name: "Rezme",
             description:
                 "Developed a web application that manages a white-label system for the Join Cherry Chrome extension, enabling seamless customization and integration for various clients",
-            technologies: ["MEAN Stack"],
+            technologies: ["Angular", "Node.js", "MongoDB"],
             url: "https://admin.rezme.com/login",
             _id: "31",
             type: "webTechnologies",
             image: "/assets/rezme.png",
-            techStack: "MEAN stack",
+            techStack: "Angular · Node/Express · MongoDB",
             responsibilities: [
                 "Developed a white-labeling system to automate Chrome extension customization for clients.",
                 "Managed daily communication with UK-based clients for project coordination",
@@ -375,12 +382,12 @@ export const resumeData: ResumeData = {
             name: "Join Cherry — Web Platform",
             description:
                 "Built a web and Chrome extension platform that helps users find hotel and flight deals while presenting relevant extension data in a clear dashboard.",
-            technologies: ["MEAN Stack"],
+            technologies: ["Angular", "Node.js", "MongoDB"],
             url: "https://www.joincherry.com/",
             _id: "32",
             type: "webTechnologies",
             image: "/assets/join-cherry-web.png",
-            techStack: "MEAN stack",
+            techStack: "Angular · Node/Express · MongoDB",
             responsibilities: [],
         },
         {
@@ -399,12 +406,12 @@ export const resumeData: ResumeData = {
             name: "Minimine",
             description:
                 "Built a web application and Chrome extension that help users save and manage job opportunities from LinkedIn.",
-            technologies: ["MEAN Stack"],
+            technologies: ["Angular", "Node.js", "MongoDB"],
             url: "",
             _id: "34",
             type: "webTechnologies",
             image: "/assets/minimine.png",
-            techStack: "MEAN stack",
+            techStack: "Angular · Node/Express · MongoDB",
             responsibilities: [],
         },
         {
@@ -447,12 +454,12 @@ export const resumeData: ResumeData = {
             name: "Web Resume",
             description:
                 "The current resume site with admin panel to update resume",
-            technologies: ["MERN Stack"],
+            technologies: ["React", "TypeScript", "Material UI"],
             url: "https://mohit7th.github.io/resume/",
             _id: "38",
             type: "webTechnologies",
             image: "/assets/web-resume.png",
-            techStack: "MERN Stack",
+            techStack: "React · TypeScript · Vite",
             responsibilities: [],
         },
         {

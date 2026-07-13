@@ -103,8 +103,9 @@ export default function TitleHeader() {
                                 mb: 2,
                             }}
                         >
-                            I build scalable web applications, browser
-                            extensions, and data products from idea to delivery.
+                            I build scalable web applications, AI-powered
+                            products, and browser extensions from idea to
+                            delivery.
                         </Typography>
                         <Typography
                             sx={{

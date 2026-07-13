@@ -25,10 +25,12 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import { Link as RouterLink } from "react-router-dom";
 
-import { useUserData, useUserDataDispatch } from "../../context/UserContext";
+import { useUserDataDispatch } from "../../context/UserContext";
 import { useAuth } from "../../context/AuthContext";
 import {
     getSeedData,
+    loadResumeData,
+    saveResumeData,
     clearResumeData,
     serializeResumeData,
     parseResumeData,
@@ -48,25 +50,32 @@ const SECTIONS = [
 ];
 
 export default function AdminPanel() {
-    const current = useUserData();
+    // Dispatch is used only to preview the draft on the public pages within the
+    // current session — the public site itself always loads the committed seed.
     const dispatch = useUserDataDispatch();
     const { logout } = useAuth();
 
-    const [draft, updateDraft] = useImmer(current);
+    // `baseline` is the last-saved draft (from local storage) or the seed.
+    // `draft` is the live editable copy; "dirty" = draft differs from baseline.
+    const [baseline, setBaseline] = useState(() => loadResumeData());
+    const [draft, updateDraft] = useImmer(baseline);
     const [expanded, setExpanded] = useState<string | false>("header");
     const [snackbar, setSnackbar] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const isDirty = JSON.stringify(draft) !== JSON.stringify(current);
+    const isDirty = JSON.stringify(draft) !== JSON.stringify(baseline);
 
     function handleSave() {
+        saveResumeData(draft);
+        setBaseline(draft);
+        // Preview in this session; publish for everyone via Export → commit.
         dispatch({ type: "SET_RESUME", payload: draft });
-        setSnackbar("Changes saved to this browser.");
+        setSnackbar("Draft saved. Export and commit to publish for everyone.");
     }
 
     function handleDiscard() {
-        updateDraft(current);
-        setSnackbar("Reverted to last saved version.");
+        updateDraft(() => baseline);
+        setSnackbar("Reverted to last saved draft.");
     }
 
     function handleExport() {
@@ -116,7 +125,8 @@ export default function AdminPanel() {
 
         const seed = getSeedData();
         clearResumeData();
-        updateDraft(seed);
+        setBaseline(seed);
+        updateDraft(() => seed);
         dispatch({ type: "SET_RESUME", payload: seed });
         setSnackbar("Content reset to defaults.");
     }
@@ -219,9 +229,10 @@ export default function AdminPanel() {
                         fontSize: "0.85rem",
                     }}
                 >
-                    Edits are saved to <strong>this browser</strong> only. To
-                    publish changes for everyone, use <strong>Export</strong> and
-                    commit the JSON to the repository.
+                    Edits here are a <strong>local draft</strong> saved to this
+                    browser. The public site always shows the committed content —
+                    to publish for everyone, use <strong>Export</strong> and
+                    commit the JSON (or paste it into <code>src/components/data.tsx</code>).
                 </Box>
 
                 {SECTIONS.map((section) => (
